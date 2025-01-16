@@ -9,6 +9,8 @@ const CompanyDetailsForm = ({ phoneNumber, otp }) => {
   const [customIndustryType, setCustomIndustryType] = useState('');
   const [numberOfEmployees, setNumberOfEmployees] = useState(''); // Default value set here
   const [userId, setUserId] = useState('');
+  const [stakeholdersName, setStakeholdersName] = useState('');
+
 
   // Load user ID from the token when the component mounts
   useEffect(() => {
@@ -69,6 +71,7 @@ const CompanyDetailsForm = ({ phoneNumber, otp }) => {
         customIndustryType:
           industryType === 'Others' ? customIndustryType : undefined, // Send customIndustryType only if "Others"
         numberOfEmployees,
+        stakeholdersName,
       },
       otp, // Ensure otp is passed if required
     };
@@ -102,6 +105,17 @@ const CompanyDetailsForm = ({ phoneNumber, otp }) => {
           required
         />
       </div>
+      <div>
+        <label htmlFor='stakeholdersName'>Stakeholders Name:</label>
+        <input
+          type='text'
+          id='stakeholdersName'
+          value={stakeholdersName}
+          onChange={(e) => setStakeholdersName(e.target.value)}
+          required
+        />
+      </div>
+
       <div className='w-full flex justify-between items-center gap-3'>
         <label htmlFor='industryType'>Industry Type:</label>
         <select

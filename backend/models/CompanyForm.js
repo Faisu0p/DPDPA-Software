@@ -29,6 +29,10 @@ const companyFormSchema = new mongoose.Schema({
       type: String,
       enum: ['0-10', '10-100', '100-10000', 'Others'],
       required: true
+    },
+    stakeholdersName: { // Added field
+      type: String,
+      required: true
     }
   },
   otp: {
