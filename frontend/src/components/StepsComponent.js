@@ -94,7 +94,15 @@ const StepsComponent = ({ onClose }) => {
         icon: '👤',
       },
       {
-        title: 'Step 2',
+        title: 'Step 2',  // New Step 2
+        heading: 'Preliminary questions',
+        description: 'Answer some preliminary questions.',
+        imageUrl: 'assets/preliminaryQuestions.png',  // Update this image URL as needed
+        linkUrl: '/preliminary-questions',  // Link for the new step
+        icon: '❓',  // Icon for the new step
+      },
+      {
+        title: 'Step 3',
         heading: 'Asset Management',
         description: 'Declare and manage company assets efficiently.',
         imageUrl: 'assets/2.png',
@@ -102,13 +110,13 @@ const StepsComponent = ({ onClose }) => {
         icon: '📦',
       },
       {
-        title: 'Step 3',
+        title: 'Step 4',
         heading: 'Product Declaration',
         description: 'Open the product family page to declare products.',
         imageUrl: 'assets/3.png',
         linkUrl: '/product-family',
         icon: '📝',
-      },
+      }
     ],
     []
   );
