@@ -1,15 +1,38 @@
 import React, { useState } from 'react';
-import { Container, Typography, Box, FormControl, InputLabel, Select, MenuItem, TextField, FormControlLabel, Checkbox, Button } from '@mui/material';
+import { Container, Typography, Box, TextField, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Checkbox, Button, Autocomplete, Chip } from '@mui/material';
+
+const countries = [
+  'United States',
+  'India',
+  'Canada',
+  'Australia',
+  'Germany',
+  'France',
+  'Japan',
+  'United Kingdom',
+  'Brazil',
+  'China',
+  // Add more countries as needed
+];
+
+const applications = [
+  'App1',
+  'App2',
+  'App3',
+  'App4',
+  'App5',
+  // Add more applications as needed
+];
 
 const PreliminaryQuestions = () => {
   const [processPreservedData, setProcessPreservedData] = useState('');
-  const [serviceBoundaries, setServiceBoundaries] = useState('');
+  const [serviceCountries, setServiceCountries] = useState([]); // Renamed to hold multiple countries
   const [supportFunctionalities, setSupportFunctionalities] = useState('');
-  const [processingApplications, setProcessingApplications] = useState('');
+  const [processingApplications, setProcessingApplications] = useState([]); // Renamed to hold multiple applications
   const [pii, setPii] = useState('');
-  const [internalAudits, setInternalAudits] = useState(false);
-  const [dpiA, setDpiA] = useState(false);
-  const [isoStatus, setIsoStatus] = useState(false);
+  const [internalAudits, setInternalAudits] = useState('');
+  const [dpiA, setDpiA] = useState('');
+  const [isoStatus, setIsoStatus] = useState('');
 
   return (
     <Container maxWidth="sm">
@@ -30,21 +53,18 @@ const PreliminaryQuestions = () => {
           </Select>
         </FormControl>
 
-        <FormControl fullWidth>
-          <InputLabel>In which boundaries do you provide services?</InputLabel>
-          <Select
-            value={serviceBoundaries}
-            onChange={(e) => setServiceBoundaries(e.target.value)}
-            label="In which boundaries do you provide services?"
-          >
-            <MenuItem value="Global">Global</MenuItem>
-            <MenuItem value="Local">Local</MenuItem>
-            <MenuItem value="Regional">Regional</MenuItem>
-          </Select>
-        </FormControl>
+        <Autocomplete
+          multiple
+          options={countries}
+          getOptionLabel={(option) => option}
+          value={serviceCountries}
+          onChange={(event, newValue) => setServiceCountries(newValue)}
+          renderInput={(params) => <TextField {...params} label="In which countries do you provide services?" variant="outlined" />}
+          fullWidth
+        />
 
         <FormControl fullWidth>
-          <InputLabel>Business and Support Functionalities</InputLabel>
+          <InputLabel>Business and Support Functionality</InputLabel>
           <Select
             value={supportFunctionalities}
             onChange={(e) => setSupportFunctionalities(e.target.value)}
@@ -57,18 +77,15 @@ const PreliminaryQuestions = () => {
           </Select>
         </FormControl>
 
-        <FormControl fullWidth>
-          <InputLabel>Application(s) which process personal data</InputLabel>
-          <Select
-            value={processingApplications}
-            onChange={(e) => setProcessingApplications(e.target.value)}
-            label="Application(s) which process personal data"
-          >
-            <MenuItem value="App1">App1</MenuItem>
-            <MenuItem value="App2">App2</MenuItem>
-            <MenuItem value="App3">App3</MenuItem>
-          </Select>
-        </FormControl>
+        <Autocomplete
+          multiple
+          options={applications}
+          getOptionLabel={(option) => option}
+          value={processingApplications}
+          onChange={(event, newValue) => setProcessingApplications(newValue)}
+          renderInput={(params) => <TextField {...params} label="Application(s) which process personal data" variant="outlined" />}
+          fullWidth
+        />
 
         {processPreservedData === "Yes" && (
           <TextField
@@ -80,38 +97,42 @@ const PreliminaryQuestions = () => {
           />
         )}
 
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={internalAudits}
-              onChange={(e) => setInternalAudits(e.target.checked)}
-              color="primary"
-            />
-          }
-          label="Do you perform Internal audits?"
-        />
+        {/* Changed to Select with Yes/No options */}
+        <FormControl fullWidth>
+          <InputLabel>Do you perform Internal audits?</InputLabel>
+          <Select
+            value={internalAudits}
+            onChange={(e) => setInternalAudits(e.target.value)}
+            label="Do you perform Internal audits?"
+          >
+            <MenuItem value="Yes">Yes</MenuItem>
+            <MenuItem value="No">No</MenuItem>
+          </Select>
+        </FormControl>
 
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={dpiA}
-              onChange={(e) => setDpiA(e.target.checked)}
-              color="primary"
-            />
-          }
-          label="Do you perform DPIA?"
-        />
+        <FormControl fullWidth>
+          <InputLabel>Do you perform DPIA?</InputLabel>
+          <Select
+            value={dpiA}
+            onChange={(e) => setDpiA(e.target.value)}
+            label="Do you perform DPIA?"
+          >
+            <MenuItem value="Yes">Yes</MenuItem>
+            <MenuItem value="No">No</MenuItem>
+          </Select>
+        </FormControl>
 
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={isoStatus}
-              onChange={(e) => setIsoStatus(e.target.checked)}
-              color="primary"
-            />
-          }
-          label="Is your Ongoing ISO A or B?"
-        />
+        <FormControl fullWidth>
+          <InputLabel>Is your Ongoing ISO A or B?</InputLabel>
+          <Select
+            value={isoStatus}
+            onChange={(e) => setIsoStatus(e.target.value)}
+            label="Is your Ongoing ISO A or B?"
+          >
+            <MenuItem value="Yes">Yes</MenuItem>
+            <MenuItem value="No">No</MenuItem>
+          </Select>
+        </FormControl>
 
         <Button variant="contained" color="primary" sx={{ marginTop: 2 }}>
           Submit
