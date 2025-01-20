@@ -40,6 +40,10 @@ import userAnswerRoutes from './routes/userAnswerRoutes.js'; // Import user answ
 
 import swaggerDocs from './swagger.js'; // Import the Swagger setup
 
+
+import preliminaryQuestionsRoutes from './routes/preliminaryQRoute.js'; // Import the preliminary questions route
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -89,6 +93,9 @@ app.use('/api/assignments', userAnswerRoutes); // Assignment routes
 app.use('/api/user-responses', userResponseRoutes);
 app.use('/api/users', userRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+app.use('/api/v1/preliminary-questions', preliminaryQuestionsRoutes); // Add this line to handle preliminary questions form submission
+
 
 app.get('/:filename', async (req, res) => {
   const { filename } = req.params;
