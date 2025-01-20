@@ -272,7 +272,8 @@ const PreliminaryQuestions = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
+    // The data to be submitted is collected from your state variables
     const dataToSubmit = {
       processPreservedData,
       serviceCountries,
@@ -302,22 +303,26 @@ const PreliminaryQuestions = () => {
       selectedPurposes,
       justification,
     };
-  
+
     try {
-      // Make the POST request to the backend route for submitting data
-      const response = await axios.post('/api/v1/preliminary-questions', dataToSubmit); // Adjust the route as per your API
-  
-      if (response.status === 201) { // Check if the data was saved successfully (201 is the status for resource creation)
+      // Send POST request to backend
+      const response = await axios.post('http://localhost:8021/api/v1/preliminary-questions/submit', dataToSubmit); 
+
+      // Handle successful response
+      if (response.status === 201) {
         console.log('Data submitted successfully', response.data);
-        // Optionally, display a success message or redirect the user
+        // Optionally show a success message or redirect
       } else {
         console.error('Unexpected response status:', response.status);
       }
     } catch (error) {
+      // Handle error response
       console.error('Error submitting data', error.response ? error.response.data : error.message);
-      // Optionally, display an error message to the user
+      console.log('Data to submit:', dataToSubmit);
+      // Optionally show an error message to the user
     }
   };
+
   
   
 
