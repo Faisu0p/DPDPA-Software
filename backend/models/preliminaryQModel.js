@@ -6,7 +6,7 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
     required: true,
     riskLevel: {
       type: String,
-      enum: ['Low', 'Medium', 'High', 'Critical'],
+      enum: ['Low', 'Medium', 'High'],
       default: 'Medium',  
     },
   },
@@ -17,20 +17,11 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
   supportFunctionalities: {
     type: String,
     required: true,
-    riskLevel: {
-      type: String,
-      enum: ['Low', 'Medium', 'High', 'Critical'],
-      default: 'Medium',
-      },
   },
   processingApplications: [{
     type: String,
     required: true,
-    riskLevel: {
-      type: String,
-      enum: ['Low', 'Medium', 'High', 'Critical'],
-      default: 'Medium',
-  },}],
+}],
   pii: {
     type: String,
     default: '',
@@ -40,7 +31,7 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
     required: true,
     riskLevel: {
       type: String,
-      enum: ['Low', 'Medium', 'High', 'Critical'],
+      enum: ['Low', 'Medium', 'High'],
       default: 'Medium',
   },},
   dpiA: {
@@ -48,7 +39,7 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
     required: true,
     riskLevel: {
       type: String,
-      enum: ['Low', 'Medium', 'High', 'Critical'],
+      enum: ['Low', 'Medium', 'High'],
       default: 'Medium',
   },},
   isoStatus: {
@@ -56,7 +47,7 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
     required: true,
     riskLevel: {
       type: String,
-      enum: ['Low', 'Medium', 'High', 'Critical'],
+      enum: ['Low', 'Medium', 'High'],
       default: 'Medium',
   },},
   processPersonalData: {
@@ -64,7 +55,7 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
     required: true,
     riskLevel: {
       type: String,
-      enum: ['Low', 'Medium', 'High', 'Critical'],
+      enum: ['Low', 'Medium', 'High'],
       default: 'Medium',
   },},
   selectedBackgroundChecks: [{
@@ -124,6 +115,12 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
       default: '', 
     },
   },
+  overallRiskLevel: { // Added field to store overall risk
+    type: String,
+    enum: ['Low', 'Medium', 'High'],
+    default: 'Low',
+  },
+
 }, { timestamps: true });
 
 const PreliminaryQuestions = mongoose.model('PreliminaryQuestions', preliminaryQuestionsSchema);
