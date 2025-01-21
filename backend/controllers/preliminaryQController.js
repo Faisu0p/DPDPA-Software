@@ -124,3 +124,26 @@ export const submitPreliminaryQuestions = async (req, res) => {
     });
   }
 };
+
+
+
+// New function to fetch risk analysis
+export const getRiskAnalysis = async (req, res) => {
+  try {
+    const data = await PreliminaryQuestions.findOne({}); // Or you can modify this to find specific user data
+    if (!data) {
+      return res.status(404).json({ message: 'No risk analysis data found' });
+    }
+    return res.status(200).json({
+      riskLevel: data.overallRiskLevel, // Assuming the risk level is stored as 'overallRiskLevel'
+    });
+  } catch (err) {
+    console.error('Error while fetching risk analysis:', err);
+    return res.status(500).json({
+      message: 'Failed to fetch risk analysis data',
+      error: err.message || 'Unknown error',
+    });
+  }
+};
+
+

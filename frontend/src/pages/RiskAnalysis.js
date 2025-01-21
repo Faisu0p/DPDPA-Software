@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { Container, Typography, Paper, Box } from '@mui/material';
-import RiskDashboard from '../components/RiskDashboard'; // Adjust the path if necessary
+import RiskDashboard from '../components/RiskDashboard';
+import RiskAnalysisPQ from '../components/RiskAnalysisPQ';
 
 const RiskAnalysis = () => {
   return (
@@ -13,6 +14,7 @@ const RiskAnalysis = () => {
       <Paper sx={{ padding: 2 }}>
         <Box>
           <RiskDashboard />
+          <RiskAnalysisPQ />
         </Box>
       </Paper>
     </Container>
