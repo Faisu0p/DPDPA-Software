@@ -284,6 +284,7 @@ const PreliminaryQuestions = () => {
       dpiA,
       isoStatus,
       processPersonalData,
+
       selectedBackgroundChecks,
       selectedBiometrics,
       selectedBrowsingInformation,
@@ -300,8 +301,11 @@ const PreliminaryQuestions = () => {
       selectedTravelAndExpense,
       selectedUserAccountInformation,
       selectedWorkplaceWelfare,
-      selectedPurposes,
-      justification,
+
+      processingPurposes:{
+        puposes: selectedPurposes,
+        justification: justification,
+      }
     };
 
     try {

@@ -28,8 +28,7 @@ export const submitPreliminaryQuestions = async (req, res) => {
       selectedTravelAndExpense,
       selectedUserAccountInformation,
       selectedWorkplaceWelfare,
-      selectedPurposes,
-      justification,
+      processingPurposes, // This will now include 'purposes' and 'justification'
     } = req.body;
 
     // You might want to do some validation here before creating the document
@@ -59,8 +58,7 @@ export const submitPreliminaryQuestions = async (req, res) => {
       selectedTravelAndExpense,
       selectedUserAccountInformation,
       selectedWorkplaceWelfare,
-      selectedPurposes,
-      justification,
+      processingPurposes, // directly assign the processingPurposes object
     });
 
     // Save the new document in the database

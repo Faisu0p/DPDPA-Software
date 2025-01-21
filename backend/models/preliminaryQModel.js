@@ -7,7 +7,7 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
   },
   serviceCountries: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
+    required: true,
   }],
   supportFunctionalities: {
     type: String,
@@ -15,11 +15,11 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
   },
   processingApplications: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
+    required: true,
   }],
   pii: {
     type: String,
-    default: '', // Optional: Can be left blank
+    default: '',
   },
   internalAudits: {
     type: String,
@@ -39,75 +39,60 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
   },
   selectedBackgroundChecks: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
   selectedBiometrics: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
   selectedBrowsingInformation: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
   selectedContactInformation: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
   selectedEducationAndSkills: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
   selectedEmploymentInformation: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
   selectedFamilyInformation: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
   selectedFinancialInformation: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
   selectedGeneticInformation: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
   selectedGovernmentIdentifiers: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
   selectedPersonalIdentification: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
   selectedProfessionalExperience: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
   selectedSocialInformation: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
   selectedTravelAndExpense: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
   selectedUserAccountInformation: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
   selectedWorkplaceWelfare: [{
     type: String,
-    required: true,  // Optional: Remove if empty array is allowed
   }],
-  selectedPurposes: [{
-    type: String,
-    required: true,  // Optional: Remove if empty array is allowed
-  }],
-  justification: {
-    type: String,
-    default: '', // Optional: Make it default to an empty string if no justification is provided
+  processingPurposes: {
+    purposes: [{
+      type: String,
+    }],
+    justification: {
+      type: String,
+      default: '', 
+    },
   },
 }, { timestamps: true });
 
