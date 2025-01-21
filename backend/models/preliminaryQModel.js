@@ -4,6 +4,11 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
   processPreservedData: {
     type: String,
     required: true,
+    riskLevel: {
+      type: String,
+      enum: ['Low', 'Medium', 'High', 'Critical'],
+      default: 'Medium',  
+    },
   },
   serviceCountries: [{
     type: String,
@@ -12,11 +17,20 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
   supportFunctionalities: {
     type: String,
     required: true,
+    riskLevel: {
+      type: String,
+      enum: ['Low', 'Medium', 'High', 'Critical'],
+      default: 'Medium',
+      },
   },
   processingApplications: [{
     type: String,
     required: true,
-  }],
+    riskLevel: {
+      type: String,
+      enum: ['Low', 'Medium', 'High', 'Critical'],
+      default: 'Medium',
+  },}],
   pii: {
     type: String,
     default: '',
@@ -24,19 +38,35 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
   internalAudits: {
     type: String,
     required: true,
-  },
+    riskLevel: {
+      type: String,
+      enum: ['Low', 'Medium', 'High', 'Critical'],
+      default: 'Medium',
+  },},
   dpiA: {
     type: String,
     required: true,
-  },
+    riskLevel: {
+      type: String,
+      enum: ['Low', 'Medium', 'High', 'Critical'],
+      default: 'Medium',
+  },},
   isoStatus: {
     type: String,
     required: true,
-  },
+    riskLevel: {
+      type: String,
+      enum: ['Low', 'Medium', 'High', 'Critical'],
+      default: 'Medium',
+  },},
   processPersonalData: {
     type: String,
     required: true,
-  },
+    riskLevel: {
+      type: String,
+      enum: ['Low', 'Medium', 'High', 'Critical'],
+      default: 'Medium',
+  },},
   selectedBackgroundChecks: [{
     type: String,
   }],

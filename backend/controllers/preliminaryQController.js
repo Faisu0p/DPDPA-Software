@@ -31,19 +31,19 @@ export const submitPreliminaryQuestions = async (req, res) => {
       processingPurposes, // This will now include 'purposes' and 'justification'
     } = req.body;
 
-    // You might want to do some validation here before creating the document
+    // You don't need to manually handle risk levels here because they are predefined in the model
     const newPreliminaryQuestions = new PreliminaryQuestions({
-      processPreservedData,
-      serviceCountries,
-      supportFunctionalities,
-      processingApplications,
-      pii,
-      internalAudits,
-      dpiA,
-      isoStatus,
-      processPersonalData,
+      processPreservedData,  // Risk level predefined in the schema
+      serviceCountries,       // No risk level here
+      supportFunctionalities, // No risk level here
+      processingApplications, // Risk level predefined in the schema
+      pii,                    // Risk level predefined in the schema
+      internalAudits,         // No risk level here
+      dpiA,                   // Risk level predefined in the schema
+      isoStatus,              // No risk level here
+      processPersonalData,    // Risk level predefined in the schema
       selectedBackgroundChecks,
-      selectedBiometrics,
+      selectedBiometrics,     // Risk level predefined in the schema
       selectedBrowsingInformation,
       selectedContactInformation,
       selectedEducationAndSkills,
@@ -58,7 +58,7 @@ export const submitPreliminaryQuestions = async (req, res) => {
       selectedTravelAndExpense,
       selectedUserAccountInformation,
       selectedWorkplaceWelfare,
-      processingPurposes, // directly assign the processingPurposes object
+      processingPurposes,     // directly assign the processingPurposes object
     });
 
     // Save the new document in the database
