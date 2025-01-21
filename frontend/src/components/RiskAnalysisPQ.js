@@ -1,6 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Container, Typography, Paper, Box, CircularProgress, Grid, Card, CardContent, LinearProgress } from '@mui/material';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+import {
+  Container,
+  Typography,
+  Paper,
+  Box,
+  CircularProgress,
+  Grid,
+  Card,
+  CardContent,
+  LinearProgress,
+  Button,
+} from '@mui/material';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import { CheckCircle, Warning, Error } from '@mui/icons-material'; // Icons for risk levels
 
@@ -8,13 +21,14 @@ const RiskAnalysisPQ = () => {
   const [riskLevel, setRiskLevel] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const reportRef = useRef(); // Reference for the component to be captured
 
   // Fetch risk analysis data from backend
   useEffect(() => {
     const fetchRiskAnalysis = async () => {
       try {
         const response = await axios.get('http://localhost:8021/api/v1/preliminary-questions/risk-analysis'); // Adjust with the correct endpoint
-        setRiskLevel(response.data.riskLevel);  // Assuming backend returns the riskLevel field
+        setRiskLevel(response.data.riskLevel); // Assuming backend returns the riskLevel field
       } catch (err) {
         setError('Error fetching risk level');
       } finally {
@@ -33,6 +47,19 @@ const RiskAnalysisPQ = () => {
 
   const COLORS = ['#008000', '#FFA500', '#FF0000']; // Green for Low, Orange for Medium, Red for High
 
+  const handleDownloadPDF = async () => {
+    const element = reportRef.current;
+    const canvas = await html2canvas(element, { scale: 2 });
+    const imgData = canvas.toDataURL('image/png');
+
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('RiskAnalysisReport.pdf');
+  };
+
   if (loading) return <CircularProgress />;
   if (error) return <Typography color="error">{error}</Typography>;
 
@@ -41,7 +68,32 @@ const RiskAnalysisPQ = () => {
       <Typography variant="h4" gutterBottom>
         Risk Analysis Dashboard
       </Typography>
-      <Paper sx={{ padding: 2, boxShadow: 3 }}>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={handleDownloadPDF}
+        sx={{
+          marginBottom: 2,
+          padding: '10px 20px',
+          fontSize: '1rem',
+          fontWeight: 'bold',
+          textTransform: 'uppercase',
+          borderRadius: '30px',
+          boxShadow: '0 5px 15px rgba(0,0,0,0.3)',
+          backgroundImage: 'linear-gradient(to right, #ff416c, #ff4b2b)',
+          color: '#fff',
+          transition: 'all 0.3s ease',
+          '&:hover': {
+            backgroundImage: 'linear-gradient(to right, #ff4b2b, #ff416c)',
+            transform: 'scale(1.05)',
+            boxShadow: '0 8px 20px rgba(0,0,0,0.4)',
+          },
+        }}
+      >
+        🚀 Download Risk Report
+      </Button>
+
+      <Paper sx={{ padding: 2, boxShadow: 3 }} ref={reportRef}>
         <Box>
           <Grid container spacing={3}>
             {/* Risk Level Summary */}
