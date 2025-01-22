@@ -126,9 +126,22 @@ const CompanyDetailsForm = ({ phoneNumber, otp }) => {
           className='w-full py-2'
         >
           <option value=''>Select...</option>
-          <option value='Healthcare'>Healthcare</option>
+          <option value='Consulting'>Consulting</option>
           <option value='Finance'>Finance</option>
+          <option value='Banking'>Banking</option>
+          <option value='Ecommerce'>Ecommerce</option>
+          <option value='Cloud Service Provider'>Cloud Service Provider</option>
+          <option value='Gaming'>Gaming</option>
+          <option value='IT/ITeS'>IT/ITeS</option>
+          <option value='Healthcare'>Healthcare</option>
+          <option value='Insurance'>Insurance</option>
           <option value='Education'>Education</option>
+          <option value='Analytics'>Analytics</option>
+          <option value='OEMs'>OEMs</option>
+          <option value='Defense'>Defense</option>
+          <option value='Health Service Provider'>Health Service Provider</option>
+          <option value='AI'>AI</option>
+          <option value='Tech'>Tech</option>
           <option value='Others'>Others</option>
         </select>
       </div>
@@ -153,12 +166,14 @@ const CompanyDetailsForm = ({ phoneNumber, otp }) => {
           className='w-full py-2'
         >
           <option value=''>Select...</option>
-          <option value='0-10'>0-10</option>
-          <option value='10-100'>10-100</option>
-          <option value='100-10000'>100-10000</option>
-          <option value='Others'>Others</option>
+          <option value='10-50'>10-50</option>
+          <option value='50-100'>50-100</option>
+          <option value='100-500'>100-500</option>
+          <option value='1000-5000'>1000-5000</option>
+          <option value='5000+'>5000+</option>
         </select>
       </div>
+
       <button type='submit'>Submit</button>
     </form>
   );

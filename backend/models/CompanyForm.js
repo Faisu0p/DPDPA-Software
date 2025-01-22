@@ -18,16 +18,35 @@ const companyFormSchema = new mongoose.Schema({
     },
     industryType: {
       type: String,
-      enum: ['Healthcare', 'Finance', 'Education', 'Others'],
+      enum: [
+        'Consulting', 
+        'Finance', 
+        'Banking', 
+        'Ecommerce', 
+        'Cloud Service Provider', 
+        'Gaming', 
+        'IT/ITeS', 
+        'Healthcare', 
+        'Insurance', 
+        'Education', 
+        'Analytics', 
+        'OEMs', 
+        'Defense', 
+        'Health Service Provider', 
+        'AI', 
+        'Tech', 
+        'Others'
+      ],
       required: true
     },
+    
     customIndustryType: {
       type: String,
       required: function() { return this.companyDetails.industryType === 'Others'; }
     },
     numberOfEmployees: {
       type: String,
-      enum: ['0-10', '10-100', '100-10000', 'Others'],
+      enum: ['10-50', '50-100', '100-500', '1000-5000', '5000+'],
       required: true
     },
     stakeholdersName: { // Added field

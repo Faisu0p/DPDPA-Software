@@ -50,14 +50,14 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
       enum: ['Low', 'Medium', 'High'],
       default: 'Medium',
   },},
-  processPersonalData: {
+  processPersonalData: [{
     type: String,
     required: true,
     riskLevel: {
       type: String,
       enum: ['Low', 'Medium', 'High'],
       default: 'Medium',
-  },},
+  },}],
   selectedBackgroundChecks: [{
     type: String,
   }],
