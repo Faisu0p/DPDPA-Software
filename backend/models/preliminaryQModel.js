@@ -22,10 +22,10 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
     type: String,
     required: true,
 }],
-  pii: {
+  pii: [{
     type: String,
     default: '',
-  },
+  }],
   internalAudits: {
     type: String,
     required: true,
