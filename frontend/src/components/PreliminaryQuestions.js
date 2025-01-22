@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, Box, TextField, FormControl, 
   InputLabel, Select, MenuItem, FormControlLabel, Checkbox, 
-  Button, Autocomplete, Chip, FormGroup } from '@mui/material';
+  Button, Autocomplete, Chip, FormGroup, Grid } from '@mui/material';
 
 const countries = [
   'United States',
@@ -15,16 +15,13 @@ const countries = [
   'United Kingdom',
   'Brazil',
   'China',
-  // Add more countries as needed
 ];
 
 const applications = [
-  'App1',
-  'App2',
-  'App3',
-  'App4',
-  'App5',
-  // Add more applications as needed
+  'OneDrive',
+  'Sharepoint',
+  'Oracle',
+  'HR Databases',
 ];
 
 const backgroundChecks = [
@@ -223,9 +220,9 @@ const processingPurposes = [
 const PreliminaryQuestions = () => {
   const [processPreservedData, setProcessPreservedData] = useState('');
   const [serviceCountries, setServiceCountries] = useState([]); 
-  const [supportFunctionalities, setSupportFunctionalities] = useState('');
+  const [supportFunctionalities, setSupportFunctionalities] = useState([]);
   const [processingApplications, setProcessingApplications] = useState([]);
-  const [pii, setPii] = useState('');
+  const [pii, setPii] = useState([]);
   const [internalAudits, setInternalAudits] = useState('');
   const [dpiA, setDpiA] = useState('');
   const [isoStatus, setIsoStatus] = useState('');
@@ -303,7 +300,7 @@ const PreliminaryQuestions = () => {
       selectedWorkplaceWelfare,
 
       processingPurposes:{
-        puposes: selectedPurposes,
+        purposes: selectedPurposes,
         justification: justification,
       }
     };
@@ -364,16 +361,30 @@ const PreliminaryQuestions = () => {
             <FormControl fullWidth>
               <InputLabel>Q3. Business and Support Functionality</InputLabel>
               <Select
+                multiple
                 value={supportFunctionalities}
                 onChange={(e) => setSupportFunctionalities(e.target.value)}
                 label="Business and Support Functionalities"
+                renderValue={(selected) => selected.join(', ')} // Display selected items as a comma-separated string
               >
-                <MenuItem value="IT Support">IT Support</MenuItem>
-                <MenuItem value="Customer Service">Customer Service</MenuItem>
+                <MenuItem value="Design">Design</MenuItem>
                 <MenuItem value="Marketing">Marketing</MenuItem>
+                <MenuItem value="Product">Product</MenuItem>
+                <MenuItem value="Product Communications">Product Communications</MenuItem>
+                <MenuItem value="Product Marketing">Product Marketing</MenuItem>
+                <MenuItem value="Product Operations">Product Operations</MenuItem>
+                <MenuItem value="SportsOps">SportsOps</MenuItem>
+                <MenuItem value="Technology">Technology</MenuItem>
+                <MenuItem value="Sales">Sales</MenuItem>
+                <MenuItem value="Ad Sales">Ad Sales</MenuItem>
+                <MenuItem value="Alliances and Partnerships">Alliances and Partnerships</MenuItem>
+                <MenuItem value="Data">Data</MenuItem>
                 <MenuItem value="HR">HR</MenuItem>
+                <MenuItem value="Admin">Admin</MenuItem>
               </Select>
             </FormControl>
+
+
 
             <Autocomplete
               multiple
@@ -384,16 +395,6 @@ const PreliminaryQuestions = () => {
               renderInput={(params) => <TextField {...params} label="Q4. Application(s) which process personal data" variant="outlined" />}
               fullWidth
             />
-
-            {processPreservedData === "Yes" && (
-              <TextField
-                fullWidth
-                label="What kind of PII?"
-                value={pii}
-                onChange={(e) => setPii(e.target.value)}
-                variant="outlined"
-              />
-            )}
 
             {/* Internal Audits */}
             <FormControl fullWidth>
@@ -447,15 +448,37 @@ const PreliminaryQuestions = () => {
               </Select>
             </FormControl>
 
+            {processPreservedData === 'Yes' && (
+              <FormControl fullWidth>
+                <InputLabel>Q 1.1 What kind of PII?</InputLabel>
+                <Select
+                  multiple
+                  value={pii}
+                  onChange={(e) => setPii(e.target.value)}
+                  label="What kind of PII?"
+                >
+                  <MenuItem value="Name">Name</MenuItem>
+                  <MenuItem value="Email">Email</MenuItem>
+                  <MenuItem value="Phone Number">Phone Number</MenuItem>
+                  <MenuItem value="Address">Address</MenuItem>
+                  <MenuItem value="Other">Other</MenuItem>
+                </Select>
+              </FormControl>
+            )}
+
             <Typography variant="h6" sx={{ marginBottom: 2 }}>
               Q9. Please select the types of individuals and data elements that are associated with this Business Process whether by collecting, storing, accessing, etc. 
             </Typography>
 
+
+
+
+
+
             {/* Background Checks */}
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <Typography variant="h6">Background Checks</Typography>
               <FormGroup>
-                {/* Select All Checkbox */}
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -465,8 +488,7 @@ const PreliminaryQuestions = () => {
                   }
                   label="Select All"
                 />
-                
-                {/* Individual Background Checks */}
+
                 {backgroundChecks.map((check) => (
                   <FormControlLabel
                     control={
@@ -481,11 +503,11 @@ const PreliminaryQuestions = () => {
                   />
                 ))}
               </FormGroup>
-            </FormControl>
+            </FormControl> */}
 
 
             {/* Biometrics */}
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <Typography variant="h6">Biometrics</Typography>
               <FormGroup>
                 <FormControlLabel
@@ -511,11 +533,85 @@ const PreliminaryQuestions = () => {
                   />
                 ))}
               </FormGroup>
-            </FormControl>
+            </FormControl> */}
+
+
+
+
+
+            <Grid container spacing={2}>
+              {/* Background Checks Section */}
+              <Grid item xs={12} sm={6}>
+                <FormControl fullWidth>
+                  <Typography variant="h6">Background Checks</Typography>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={selectedBackgroundChecks.length === backgroundChecks.length}
+                          onChange={(e) => handleSelectAll(e, backgroundChecks, setSelectedBackgroundChecks)}
+                        />
+                      }
+                      label="Select All"
+                    />
+                    {backgroundChecks.map((check) => (
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            value={check}
+                            checked={selectedBackgroundChecks.includes(check)}
+                            onChange={(e) => handleChange(e, setSelectedBackgroundChecks)}
+                          />
+                        }
+                        label={check}
+                        key={check}
+                      />
+                    ))}
+                  </FormGroup>
+                </FormControl>
+              </Grid>
+
+              {/* Biometrics Section */}
+              <Grid item xs={12} sm={6}>
+                <FormControl fullWidth>
+                  <Typography variant="h6">Biometrics</Typography>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={selectedBiometrics.length === biometrics.length}
+                          onChange={(e) => handleSelectAll(e, biometrics, setSelectedBiometrics)}
+                        />
+                      }
+                      label="Select All"
+                    />
+                    {biometrics.map((check) => (
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            value={check}
+                            checked={selectedBiometrics.includes(check)}
+                            onChange={(e) => handleChange(e, setSelectedBiometrics)}
+                          />
+                        }
+                        label={check}
+                        key={check}
+                      />
+                    ))}
+                  </FormGroup>
+                </FormControl>
+              </Grid>
+            </Grid>
+
+
+
+
+
+            
 
 
             {/* Browsing Information */}
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <Typography variant="h6">Browsing Information</Typography>
               <FormGroup>
                 <FormControlLabel
@@ -541,11 +637,11 @@ const PreliminaryQuestions = () => {
                   />
                 ))}
               </FormGroup>
-            </FormControl>
+            </FormControl> */}
 
 
             {/* Contact Information */}
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <Typography variant="h6">Contact Information</Typography>
               <FormGroup>
                 <FormControlLabel
@@ -571,41 +667,81 @@ const PreliminaryQuestions = () => {
                   />
                 ))}
               </FormGroup>
-            </FormControl>
+            </FormControl> */}
 
 
-            {/* Education & Skills */}
-            <FormControl fullWidth>
-              <Typography variant="h6">Education & Skills</Typography>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={selectedEducationAndSkills.length === educationAndSkills.length}
-                      onChange={(e) => handleSelectAll(e, educationAndSkills, setSelectedEducationAndSkills)}
+
+
+            <Grid container spacing={2}>
+              {/* Browsing Information Section */}
+              <Grid item xs={12} sm={6}>
+                <FormControl fullWidth>
+                  <Typography variant="h6">Browsing Information</Typography>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={selectedBrowsingInformation.length === browsingInformation.length}
+                          onChange={(e) => handleSelectAll(e, browsingInformation, setSelectedBrowsingInformation)}
+                        />
+                      }
+                      label="Select All"
                     />
-                  }
-                  label="Select All"
-                />
-                {educationAndSkills.map((check) => (
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        value={check}
-                        checked={selectedEducationAndSkills.includes(check)}
-                        onChange={(e) => handleChange(e, setSelectedEducationAndSkills)}
+                    {browsingInformation.map((check) => (
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            value={check}
+                            checked={selectedBrowsingInformation.includes(check)}
+                            onChange={(e) => handleChange(e, setSelectedBrowsingInformation)}
+                          />
+                        }
+                        label={check}
+                        key={check}
                       />
-                    }
-                    label={check}
-                    key={check}
-                  />
-                ))}
-              </FormGroup>
-            </FormControl>
+                    ))}
+                  </FormGroup>
+                </FormControl>
+              </Grid>
+
+              {/* Contact Information Section */}
+              <Grid item xs={12} sm={6}>
+                <FormControl fullWidth>
+                  <Typography variant="h6">Contact Information</Typography>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={selectedContactInformation.length === contactInformation.length}
+                          onChange={(e) => handleSelectAll(e, contactInformation, setSelectedContactInformation)}
+                        />
+                      }
+                      label="Select All"
+                    />
+                    {contactInformation.map((check) => (
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            value={check}
+                            checked={selectedContactInformation.includes(check)}
+                            onChange={(e) => handleChange(e, setSelectedContactInformation)}
+                          />
+                        }
+                        label={check}
+                        key={check}
+                      />
+                    ))}
+                  </FormGroup>
+                </FormControl>
+              </Grid>
+            </Grid>
+
+
+
 
 
             {/* Employment Information */}
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <Typography variant="h6">Employment Information</Typography>
               <FormGroup>
                 <FormControlLabel
@@ -631,41 +767,10 @@ const PreliminaryQuestions = () => {
                   />
                 ))}
               </FormGroup>
-            </FormControl>
-
-
-            {/* Family Information */}
-            <FormControl fullWidth>
-              <Typography variant="h6">Family Information</Typography>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={selectedFamilyInformation.length === familyInformation.length}
-                      onChange={(e) => handleSelectAll(e, familyInformation, setSelectedFamilyInformation)}
-                    />
-                  }
-                  label="Select All"
-                />
-                {familyInformation.map((check) => (
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        value={check}
-                        checked={selectedFamilyInformation.includes(check)}
-                        onChange={(e) => handleChange(e, setSelectedFamilyInformation)}
-                      />
-                    }
-                    label={check}
-                    key={check}
-                  />
-                ))}
-              </FormGroup>
-            </FormControl>
-
+            </FormControl> */}
 
             {/* Financial */}
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <Typography variant="h6">Financial</Typography>
               <FormGroup>
                 <FormControlLabel
@@ -691,29 +796,98 @@ const PreliminaryQuestions = () => {
                   />
                 ))}
               </FormGroup>
-            </FormControl>
+            </FormControl> */}
 
 
-            {/* Genetic Information */}
-            <FormControl fullWidth>
-              <Typography variant="h6">Genetic Information</Typography>
+
+
+<Grid container spacing={2}>
+  {/* Employment Information Section */}
+  <Grid item xs={12} sm={6}>
+    <FormControl fullWidth>
+      <Typography variant="h6">Employment Information</Typography>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={selectedEmploymentInformation.length === employmentInformation.length}
+              onChange={(e) => handleSelectAll(e, employmentInformation, setSelectedEmploymentInformation)}
+            />
+          }
+          label="Select All"
+        />
+        {employmentInformation.map((check) => (
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={check}
+                checked={selectedEmploymentInformation.includes(check)}
+                onChange={(e) => handleChange(e, setSelectedEmploymentInformation)}
+              />
+            }
+            label={check}
+            key={check}
+          />
+        ))}
+      </FormGroup>
+    </FormControl>
+  </Grid>
+
+  {/* Financial Section */}
+  <Grid item xs={12} sm={6}>
+    <FormControl fullWidth>
+      <Typography variant="h6">Financial</Typography>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={selectedFinancialInformation.length === financialInformation.length}
+              onChange={(e) => handleSelectAll(e, financialInformation, setSelectedFinancialInformation)}
+            />
+          }
+          label="Select All"
+        />
+        {financialInformation.map((check) => (
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={check}
+                checked={selectedFinancialInformation.includes(check)}
+                onChange={(e) => handleChange(e, setSelectedFinancialInformation)}
+              />
+            }
+            label={check}
+            key={check}
+          />
+        ))}
+      </FormGroup>
+    </FormControl>
+  </Grid>
+</Grid>
+
+
+
+            
+            {/* Education & Skills */}
+            {/* <FormControl fullWidth>
+              <Typography variant="h6">Education & Skills</Typography>
               <FormGroup>
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={selectedGeneticInformation.length === geneticInformation.length}
-                      onChange={(e) => handleSelectAll(e, geneticInformation, setSelectedGeneticInformation)}
+                      checked={selectedEducationAndSkills.length === educationAndSkills.length}
+                      onChange={(e) => handleSelectAll(e, educationAndSkills, setSelectedEducationAndSkills)}
                     />
                   }
                   label="Select All"
                 />
-                {geneticInformation.map((check) => (
+                {educationAndSkills.map((check) => (
                   <FormControlLabel
                     control={
                       <Checkbox
                         value={check}
-                        checked={selectedGeneticInformation.includes(check)}
-                        onChange={(e) => handleChange(e, setSelectedGeneticInformation)}
+                        checked={selectedEducationAndSkills.includes(check)}
+                        onChange={(e) => handleChange(e, setSelectedEducationAndSkills)}
                       />
                     }
                     label={check}
@@ -721,11 +895,10 @@ const PreliminaryQuestions = () => {
                   />
                 ))}
               </FormGroup>
-            </FormControl>
-
+            </FormControl> */}
 
             {/* Government Identifiers */}
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <Typography variant="h6">Government Identifiers</Typography>
               <FormGroup>
                 <FormControlLabel
@@ -751,29 +924,96 @@ const PreliminaryQuestions = () => {
                   />
                 ))}
               </FormGroup>
-            </FormControl>
+            </FormControl> */}
 
 
-            {/* Personal Identification */}
-            <FormControl fullWidth>
-              <Typography variant="h6">Personal Identification</Typography>
+
+<Grid container spacing={2}>
+  {/* Education & Skills Section */}
+  <Grid item xs={12} sm={6}>
+    <FormControl fullWidth>
+      <Typography variant="h6">Education & Skills</Typography>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={selectedEducationAndSkills.length === educationAndSkills.length}
+              onChange={(e) => handleSelectAll(e, educationAndSkills, setSelectedEducationAndSkills)}
+            />
+          }
+          label="Select All"
+        />
+        {educationAndSkills.map((check) => (
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={check}
+                checked={selectedEducationAndSkills.includes(check)}
+                onChange={(e) => handleChange(e, setSelectedEducationAndSkills)}
+              />
+            }
+            label={check}
+            key={check}
+          />
+        ))}
+      </FormGroup>
+    </FormControl>
+  </Grid>
+
+  {/* Government Identifiers Section */}
+  <Grid item xs={12} sm={6}>
+    <FormControl fullWidth>
+      <Typography variant="h6">Government Identifiers</Typography>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={selectedGovernmentIdentifiers.length === governmentIdentifiers.length}
+              onChange={(e) => handleSelectAll(e, governmentIdentifiers, setSelectedGovernmentIdentifiers)}
+            />
+          }
+          label="Select All"
+        />
+        {governmentIdentifiers.map((check) => (
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={check}
+                checked={selectedGovernmentIdentifiers.includes(check)}
+                onChange={(e) => handleChange(e, setSelectedGovernmentIdentifiers)}
+              />
+            }
+            label={check}
+            key={check}
+          />
+        ))}
+      </FormGroup>
+    </FormControl>
+  </Grid>
+</Grid>
+
+
+
+            {/* Family Information */}
+            {/* <FormControl fullWidth>
+              <Typography variant="h6">Family Information</Typography>
               <FormGroup>
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={selectedPersonalIdentification.length === personalIdentification.length}
-                      onChange={(e) => handleSelectAll(e, personalIdentification, setSelectedPersonalIdentification)}
+                      checked={selectedFamilyInformation.length === familyInformation.length}
+                      onChange={(e) => handleSelectAll(e, familyInformation, setSelectedFamilyInformation)}
                     />
                   }
                   label="Select All"
                 />
-                {personalIdentification.map((check) => (
+                {familyInformation.map((check) => (
                   <FormControlLabel
                     control={
                       <Checkbox
                         value={check}
-                        checked={selectedPersonalIdentification.includes(check)}
-                        onChange={(e) => handleChange(e, setSelectedPersonalIdentification)}
+                        checked={selectedFamilyInformation.includes(check)}
+                        onChange={(e) => handleChange(e, setSelectedFamilyInformation)}
                       />
                     }
                     label={check}
@@ -781,11 +1021,110 @@ const PreliminaryQuestions = () => {
                   />
                 ))}
               </FormGroup>
-            </FormControl>
+            </FormControl> */}
+
+
+            {/* Genetic Information */}
+            {/* <FormControl fullWidth>
+              <Typography variant="h6">Genetic Information</Typography>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={selectedGeneticInformation.length === geneticInformation.length}
+                      onChange={(e) => handleSelectAll(e, geneticInformation, setSelectedGeneticInformation)}
+                    />
+                  }
+                  label="Select All"
+                />
+                {geneticInformation.map((check) => (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        value={check}
+                        checked={selectedGeneticInformation.includes(check)}
+                        onChange={(e) => handleChange(e, setSelectedGeneticInformation)}
+                      />
+                    }
+                    label={check}
+                    key={check}
+                  />
+                ))}
+              </FormGroup>
+            </FormControl> */}
+
+
+
+<Grid container spacing={2}>
+  {/* Family Information Section */}
+  <Grid item xs={12} sm={6}>
+    <FormControl fullWidth>
+      <Typography variant="h6">Family Information</Typography>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={selectedFamilyInformation.length === familyInformation.length}
+              onChange={(e) => handleSelectAll(e, familyInformation, setSelectedFamilyInformation)}
+            />
+          }
+          label="Select All"
+        />
+        {familyInformation.map((check) => (
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={check}
+                checked={selectedFamilyInformation.includes(check)}
+                onChange={(e) => handleChange(e, setSelectedFamilyInformation)}
+              />
+            }
+            label={check}
+            key={check}
+          />
+        ))}
+      </FormGroup>
+    </FormControl>
+  </Grid>
+
+  {/* Genetic Information Section */}
+  <Grid item xs={12} sm={6}>
+    <FormControl fullWidth>
+      <Typography variant="h6">Genetic Information</Typography>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={selectedGeneticInformation.length === geneticInformation.length}
+              onChange={(e) => handleSelectAll(e, geneticInformation, setSelectedGeneticInformation)}
+            />
+          }
+          label="Select All"
+        />
+        {geneticInformation.map((check) => (
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={check}
+                checked={selectedGeneticInformation.includes(check)}
+                onChange={(e) => handleChange(e, setSelectedGeneticInformation)}
+              />
+            }
+            label={check}
+            key={check}
+          />
+        ))}
+      </FormGroup>
+    </FormControl>
+  </Grid>
+</Grid>
+
+
+
 
 
             {/* Professional Experience */}
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <Typography variant="h6">Professional Experience</Typography>
               <FormGroup>
                 <FormControlLabel
@@ -811,11 +1150,11 @@ const PreliminaryQuestions = () => {
                   />
                 ))}
               </FormGroup>
-            </FormControl>
+            </FormControl> */}
 
 
             {/* Social Information */}
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <Typography variant="h6">Social Information</Typography>
               <FormGroup>
                 <FormControlLabel
@@ -841,11 +1180,82 @@ const PreliminaryQuestions = () => {
                   />
                 ))}
               </FormGroup>
-            </FormControl>
+            </FormControl> */}
+
+
+
+<Grid container spacing={2}>
+  {/* Professional Experience Section */}
+  <Grid item xs={12} sm={6}>
+    <FormControl fullWidth>
+      <Typography variant="h6">Professional Experience</Typography>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={selectedProfessionalExperience.length === professionalExperience.length}
+              onChange={(e) => handleSelectAll(e, professionalExperience, setSelectedProfessionalExperience)}
+            />
+          }
+          label="Select All"
+        />
+        {professionalExperience.map((check) => (
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={check}
+                checked={selectedProfessionalExperience.includes(check)}
+                onChange={(e) => handleChange(e, setSelectedProfessionalExperience)}
+              />
+            }
+            label={check}
+            key={check}
+          />
+        ))}
+      </FormGroup>
+    </FormControl>
+  </Grid>
+
+  {/* Social Information Section */}
+  <Grid item xs={12} sm={6}>
+    <FormControl fullWidth>
+      <Typography variant="h6">Social Information</Typography>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={selectedSocialInformation.length === socialInformation.length}
+              onChange={(e) => handleSelectAll(e, socialInformation, setSelectedSocialInformation)}
+            />
+          }
+          label="Select All"
+        />
+        {socialInformation.map((check) => (
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={check}
+                checked={selectedSocialInformation.includes(check)}
+                onChange={(e) => handleChange(e, setSelectedSocialInformation)}
+              />
+            }
+            label={check}
+            key={check}
+          />
+        ))}
+      </FormGroup>
+    </FormControl>
+  </Grid>
+</Grid>
+
+
+
+
+
 
 
             {/* Travel And Expense */}
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <Typography variant="h6">Travel And Expense</Typography>
               <FormGroup>
                 <FormControlLabel
@@ -871,11 +1281,11 @@ const PreliminaryQuestions = () => {
                   />
                 ))}
               </FormGroup>
-            </FormControl>
+            </FormControl> */}
 
 
             {/* User Account Information */}
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <Typography variant="h6">User Account Information</Typography>
               <FormGroup>
                 <FormControlLabel
@@ -901,64 +1311,166 @@ const PreliminaryQuestions = () => {
                   />
                 ))}
               </FormGroup>
-            </FormControl>
+            </FormControl> */}
 
 
-            {/* Workplace Welfare */}
-            <FormControl fullWidth>
-              <Typography variant="h6">Workplace Welfare</Typography>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={selectedWorkplaceWelfare.length === workplaceWelfare.length}
-                      onChange={(e) => handleSelectAll(e, workplaceWelfare, setSelectedWorkplaceWelfare)}
+
+            <Grid container spacing={2}>
+              {/* Professional Experience Section */}
+              <Grid item xs={12} sm={6}>
+                <FormControl fullWidth>
+                  <Typography variant="h6">Professional Experience</Typography>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={selectedProfessionalExperience.length === professionalExperience.length}
+                          onChange={(e) => handleSelectAll(e, professionalExperience, setSelectedProfessionalExperience)}
+                        />
+                      }
+                      label="Select All"
                     />
-                  }
-                  label="Select All"
-                />
-                {workplaceWelfare.map((check) => (
+                    {professionalExperience.map((check) => (
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            value={check}
+                            checked={selectedProfessionalExperience.includes(check)}
+                            onChange={(e) => handleChange(e, setSelectedProfessionalExperience)}
+                          />
+                        }
+                        label={check}
+                        key={check}
+                      />
+                    ))}
+                  </FormGroup>
+                </FormControl>
+              </Grid>
+
+              {/* Social Information Section */}
+              <Grid item xs={12} sm={6}>
+                <FormControl fullWidth>
+                  <Typography variant="h6">Social Information</Typography>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={selectedSocialInformation.length === socialInformation.length}
+                          onChange={(e) => handleSelectAll(e, socialInformation, setSelectedSocialInformation)}
+                        />
+                      }
+                      label="Select All"
+                    />
+                    {socialInformation.map((check) => (
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            value={check}
+                            checked={selectedSocialInformation.includes(check)}
+                            onChange={(e) => handleChange(e, setSelectedSocialInformation)}
+                          />
+                        }
+                        label={check}
+                        key={check}
+                      />
+                    ))}
+                  </FormGroup>
+                </FormControl>
+              </Grid>
+            </Grid>
+
+
+
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              {/* Personal Identification */}
+              <FormControl fullWidth>
+                <Typography variant="h6">Personal Identification</Typography>
+                <FormGroup>
                   <FormControlLabel
                     control={
                       <Checkbox
-                        value={check}
-                        checked={selectedWorkplaceWelfare.includes(check)}
-                        onChange={(e) => handleChange(e, setSelectedWorkplaceWelfare)}
+                        checked={selectedPersonalIdentification.length === personalIdentification.length}
+                        onChange={(e) => handleSelectAll(e, personalIdentification, setSelectedPersonalIdentification)}
                       />
                     }
-                    label={check}
-                    key={check}
+                    label="Select All"
                   />
-                ))}
-              </FormGroup>
-            </FormControl>
+                  {personalIdentification.map((check) => (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          value={check}
+                          checked={selectedPersonalIdentification.includes(check)}
+                          onChange={(e) => handleChange(e, setSelectedPersonalIdentification)}
+                        />
+                      }
+                      label={check}
+                      key={check}
+                    />
+                  ))}
+                </FormGroup>
+              </FormControl>
+
+              </Grid>
+
+
+              <Grid item xs={12} sm={6}>
+              {/* Workplace Welfare */}
+              <FormControl fullWidth>
+                <Typography variant="h6">Workplace Welfare</Typography>
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={selectedWorkplaceWelfare.length === workplaceWelfare.length}
+                        onChange={(e) => handleSelectAll(e, workplaceWelfare, setSelectedWorkplaceWelfare)}
+                      />
+                    }
+                    label="Select All"
+                  />
+                  {workplaceWelfare.map((check) => (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          value={check}
+                          checked={selectedWorkplaceWelfare.includes(check)}
+                          onChange={(e) => handleChange(e, setSelectedWorkplaceWelfare)}
+                        />
+                      }
+                      label={check}
+                      key={check}
+                    />
+                  ))}
+                </FormGroup>
+              </FormControl>
+              </Grid>
+            </Grid>
 
 
             {/* Purposes of Processing */}
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <Typography variant="h6" sx={{ marginBottom: 2 }}>
                 Q10. What are the Purposes of Processing? <br /> Select all that apply:
               </Typography>
               <FormGroup>
-                {/* Select All Checkbox */}
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={selectedPurposes.length === processingPurposes.length} // Check if all items are selected
-                      onChange={(e) => handleSelectAll(e, processingPurposes, setSelectedPurposes)} // Pass correct setSelected
+                      checked={selectedPurposes.length === processingPurposes.length}
+                      onChange={(e) => handleSelectAll(e, processingPurposes, setSelectedPurposes)} 
                     />
                   }
                   label="Select All"
                 />
 
-                {/* Individual Purpose Checkboxes */}
                 {processingPurposes.map((purpose) => (
                   <FormControlLabel
                     control={
                       <Checkbox
                         value={purpose}
-                        checked={selectedPurposes.includes(purpose)} // Check if this purpose is selected
-                        onChange={(e) => handleChange(e, setSelectedPurposes)} // Handle individual change
+                        checked={selectedPurposes.includes(purpose)} 
+                        onChange={(e) => handleChange(e, setSelectedPurposes)} 
                       />
                     }
                     label={purpose}
@@ -966,7 +1478,45 @@ const PreliminaryQuestions = () => {
                   />
                 ))}
               </FormGroup>
-            </FormControl>
+            </FormControl> */}
+
+
+<FormControl fullWidth>
+  <Typography variant="h6" sx={{ marginBottom: 2 }}>
+    Q10. What are the Purposes of Processing? <br /> Select all that apply:
+  </Typography>
+  <FormGroup>
+    {/* Select All Checkbox */}
+    <FormControlLabel
+      control={
+        <Checkbox
+          checked={selectedPurposes.length === processingPurposes.length} // Check if all items are selected
+          onChange={(e) => handleSelectAll(e, processingPurposes, setSelectedPurposes)} // Pass correct setSelected
+        />
+      }
+      label="Select All"
+    />
+
+    {/* Grid to Split the Items into Two Columns */}
+    <Grid container spacing={2}>
+      {processingPurposes.map((purpose, index) => (
+        <Grid item xs={12} sm={6} key={purpose}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={purpose}
+                checked={selectedPurposes.includes(purpose)} // Check if this purpose is selected
+                onChange={(e) => handleChange(e, setSelectedPurposes)} // Handle individual change
+              />
+            }
+            label={purpose}
+          />
+        </Grid>
+      ))}
+    </Grid>
+  </FormGroup>
+</FormControl>
+
 
 
             {/* Justification Text Area */}

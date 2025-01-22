@@ -14,10 +14,10 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
     type: String,
     required: true,
   }],
-  supportFunctionalities: {
+  supportFunctionalities: [{
     type: String,
     required: true,
-  },
+  }],
   processingApplications: [{
     type: String,
     required: true,
