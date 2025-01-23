@@ -15,6 +15,10 @@ import Login from './pages/Login';
 import AssetList from './pages/asset/AssetsList';
 import ListOfActions from './pages/ListOfActions';
 import PreliminaryQuestions from './components/PreliminaryQuestions';
+
+import AiModel from './components/AiModel';
+
+
 // import AlertManagement from "./pages/AlertManagement";
 import ControlFamiliesPage from './pages/ControlFamiliesPage';
 import ControlsPage from './pages/ControlsPage';
@@ -191,6 +195,26 @@ const App = () => {
             </MiscLayout>
           }
         />
+
+<Route
+          path='/ai-model'
+          element={
+            <MiscLayout
+              authToken={authToken}
+              error={error}
+              handleLogout={handleLogout}
+              handleSidebarClick={handleSidebarClick}
+              selectedItem={selectedItem}
+              user={user}
+            >
+              <PrivateRoute>
+                <AiModel />
+              </PrivateRoute>
+            </MiscLayout>
+          }
+        />
+
+
 
         <Route
           path='/asset-management'

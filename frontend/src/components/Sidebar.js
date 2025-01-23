@@ -17,6 +17,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import SchoolIcon from '@mui/icons-material/School';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import AddModeratorIcon from '@mui/icons-material/AddModerator';
+import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
+
 import {
   Box,
   Drawer,
@@ -126,6 +128,26 @@ const Sidebar = ({ onSelect }) => {
               {open && <ListItemText primary='Home' sx={{ color: 'white' }} />}
             </ListItem>
           )}
+
+{hasAccess(['Admin','Compliance Team']) && (
+  <ListItem
+  button
+  component={Link}
+  to='/ai-model'
+  className={clsx({ active: activePath === '/ai-model' })}
+  aria-label='AI Model'
+  onClick={() => onSelect('AI Model')}
+  sx={{ width: '100%' }}
+>
+  <ListItemIcon>
+    <SmartToyOutlinedIcon sx={{ color: 'white' }} /> {/* AI model icon */}
+  </ListItemIcon>
+  {open && <ListItemText primary='AI Model' sx={{ color: 'white' }} />}
+</ListItem>
+
+)}
+
+
           {hasAccess(['Compliance Team', 'Executive', 'IT Team']) && (
             <ListItem
               button
