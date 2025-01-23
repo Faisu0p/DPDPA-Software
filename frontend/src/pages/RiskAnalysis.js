@@ -15,7 +15,7 @@ const RiskAnalysis = () => {
       <Paper sx={{ padding: 2 }}>
         <Box>
           <RiskDashboard />
-          {/* <RiskAnalysisPQ /> */}
+          <RiskAnalysisPQ />
           <RiskAnalysisPQ2 />
         </Box>
       </Paper>
