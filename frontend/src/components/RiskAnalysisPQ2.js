@@ -1,27 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const RiskDashboard = () => {
-  // Sample data
-  const riskLevel = 'Medium';
-  const riskScore = 55;
-  const timestamp = Date.now();
-  const highlights = [
-    'High number of empty lists',
-    'DPIA is not conducted',
-    'ISO compliance missing',
-  ];
-  const recommendations = [
-    'Conduct DPIA immediately',
-    'Implement ISO standards',
-    'Improve background checks',
-  ];
-  const inputs = [
-    { name: 'Process Personal Data', value: 'Yes', riskStatus: 'Low' },
-    { name: 'Internal Audits', value: 'No', riskStatus: 'High' },
-    { name: 'DPIA', value: 'No', riskStatus: 'High' },
-    { name: 'ISO Status', value: 'Yes', riskStatus: 'Low' },
-    { name: 'Selected Biometrics', value: 'Empty', riskStatus: 'Medium' },
-  ];
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchRiskData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('http://localhost:8021/api/v1/preliminary-questions/risk-analysis'); // Replace with your actual API endpoint
+        if (!response.ok) throw new Error('Failed to fetch data');
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRiskData();
+  }, []);
 
   const handleDownload = () => {
     alert('Report downloading...');
@@ -42,6 +42,16 @@ const RiskDashboard = () => {
         return 'gray';
     }
   };
+
+  if (loading) {
+    return <div>Loading Risk Analysis...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  const { riskLevel, riskScore, timestamp, highlights, recommendations, inputs } = data;
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', padding: '20px' }}>

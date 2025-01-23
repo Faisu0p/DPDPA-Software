@@ -304,17 +304,116 @@ export const submitPreliminaryQuestions = async (req, res) => {
   }
 };
 
-// Function to fetch risk analysis (unchanged)
+// // Function to fetch risk analysis (unchanged)
+// export const getRiskAnalysis = async (req, res) => {
+//   try {
+//     const data = await PreliminaryQuestions.findOne({}); // Or modify to fetch specific user data
+//     if (!data) {
+//       return res.status(404).json({ message: 'No risk analysis data found' });
+//     }
+//     return res.status(200).json({
+//       riskLevel: data.overallRiskLevel,
+//       riskScore: data.riskScore, // Include riskScore in response
+//     });
+//   } catch (err) {
+//     console.error('Error while fetching risk analysis:', err);
+//     return res.status(500).json({
+//       message: 'Failed to fetch risk analysis data',
+//       error: err.message || 'Unknown error',
+//     });
+//   }
+// };
+
+
+
+
+// Function to fetch risk analysis
 export const getRiskAnalysis = async (req, res) => {
   try {
-    const data = await PreliminaryQuestions.findOne({}); // Or modify to fetch specific user data
+    const data = await PreliminaryQuestions.findOne({}); // Adjust query as needed for user-specific data
+
     if (!data) {
       return res.status(404).json({ message: 'No risk analysis data found' });
     }
-    return res.status(200).json({
+
+    // Prepare detailed response for the dashboard
+    const response = {
       riskLevel: data.overallRiskLevel,
-      riskScore: data.riskScore, // Include riskScore in response
-    });
+      riskScore: data.riskScore || 75, // Default score if not calculated
+      timestamp: data.createdAt || new Date(),
+      highlights: [
+        "Critical fields are empty.",
+        "Less than 50% of lists have data.",
+        "High potential risk in certain areas.",
+      ],
+      recommendations: [
+        "Conduct DPIA for missing critical fields.",
+        "Increase audits to ensure compliance.",
+        "Populate missing fields in data lists.",
+      ],
+      inputs: [
+        {
+          name: "Process Personal Data",
+          value: data.processPersonalData,
+          riskStatus: data.processPersonalData === 'Yes' ? 'Low' : 'High',
+        },
+        {
+          name: "Internal Audits",
+          value: data.internalAudits,
+          riskStatus: data.internalAudits === 'Yes' ? 'Low' : 'High',
+        },
+        {
+          name: "DPIA",
+          value: data.dpiA,
+          riskStatus: data.dpiA === 'Yes' ? 'Low' : 'Medium',
+        },
+        {
+          name: "ISO Status",
+          value: data.isoStatus,
+          riskStatus: data.isoStatus === 'Yes' ? 'Low' : 'Medium',
+        },
+        ...[
+          {
+            list: data.selectedBackgroundChecks,
+            label: "Background Checks",
+          },
+          {
+            list: data.selectedBiometrics,
+            label: "Biometrics",
+          },
+          {
+            list: data.selectedBrowsingInformation,
+            label: "Browsing Information",
+          },
+          {
+            list: data.selectedGovernmentIdentifiers,
+            label: "Government Identifiers",
+          },
+          {
+            list: data.selectedGeneticInformation,
+            label: "Genetic Information",
+          },
+          {
+            list: data.selectedProfessionalExperience,
+            label: "Professional Experience",
+          },
+          {
+            list: data.selectedSocialInformation,
+            label: "Social Information",
+          },
+          {
+            list: data.selectedhealthcare,
+            label: "Healthcare",
+          },
+        ].map(({ list, label }) => ({
+          name: label,
+          value: list.length > 0 ? `${list.length} items` : "Empty",
+          riskStatus: list.length > 0 ? "Low" : "High",
+        })),
+      ],
+    };
+
+    return res.status(200).json(response);
   } catch (err) {
     console.error('Error while fetching risk analysis:', err);
     return res.status(500).json({
@@ -323,6 +422,7 @@ export const getRiskAnalysis = async (req, res) => {
     });
   }
 };
+
 
 
 
