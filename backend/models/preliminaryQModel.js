@@ -1,23 +1,35 @@
 import mongoose from 'mongoose';
 
 const preliminaryQuestionsSchema = new mongoose.Schema({
+
+
+  //Yes/No questions
   processPersonalData: {
     type: String,
     required: true,
-    riskLevel: {
-      type: String,
-      enum: ['Low', 'Medium', 'High'],
-      default: 'Medium',  
-    },
+    enum: ['Yes', 'No'],
   },
+  internalAudits: {
+    type: String,
+    required: true,
+    enum: ['Yes', 'No'],
+  },
+  dpiA: {
+    type: String,
+    required: true,
+    enum: ['Yes', 'No'],
+  },
+  isoStatus: {
+    type: String,
+    required: true,
+    enum: ['Yes', 'No'],
+  },
+
+  //Others
   individualData: [{
     type: String,
     required: true,
-    riskLevel: {
-      type: String,
-      enum: ['Low', 'Medium', 'High'],
-      default: 'Medium',
-  },}],
+}],
   serviceCountries: [{
     type: String,
     required: true,
@@ -40,32 +52,18 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
       type: String,
     }],
   },
+  processingPurposes: {
+    purposes: [{
+      type: String,
+    }],
+    justification: {
+      type: String,
+      default: '', 
+    },
+  },
 
-  internalAudits: {
-    type: String,
-    required: true,
-    riskLevel: {
-      type: String,
-      enum: ['Low', 'Medium', 'High'],
-      default: 'Medium',
-  },},
-  dpiA: {
-    type: String,
-    required: true,
-    riskLevel: {
-      type: String,
-      enum: ['Low', 'Medium', 'High'],
-      default: 'Medium',
-  },},
-  isoStatus: {
-    type: String,
-    required: true,
-    riskLevel: {
-      type: String,
-      enum: ['Low', 'Medium', 'High'],
-      default: 'Medium',
-  },},
 
+  //Lists
   selectedBackgroundChecks: [{
     type: String,
   }],
@@ -117,19 +115,17 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
   selectedWorkplaceWelfare: [{
     type: String,
   }],
-  processingPurposes: {
-    purposes: [{
-      type: String,
-    }],
-    justification: {
-      type: String,
-      default: '', 
-    },
-  },
-  overallRiskLevel: { // Added field to store overall risk
+
+
+  //Risk fields
+  overallRiskLevel: { 
     type: String,
-    enum: ['Low', 'Medium', 'High'],
+    enum: ['Low', 'Medium', 'High', 'Critical'],
     default: 'Low',
+  },
+  riskScore: { 
+    type: Number,
+    default: 0,
   },
 
 }, { timestamps: true });
