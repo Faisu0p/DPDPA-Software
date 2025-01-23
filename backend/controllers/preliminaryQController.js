@@ -3,15 +3,14 @@ import PreliminaryQuestions from '../models/preliminaryQModel.js';
 export const submitPreliminaryQuestions = async (req, res) => {
   try {
     const {
-      processPreservedData,
+      processPersonalData,
       serviceCountries,
       supportFunctionalities,
-      processingApplications,
-      pii,
+      processingApplications, 
       internalAudits,
       dpiA,
       isoStatus,
-      processPersonalData,
+      individualData,
       selectedBackgroundChecks,
       selectedBiometrics,
       selectedBrowsingInformation,
@@ -23,6 +22,7 @@ export const submitPreliminaryQuestions = async (req, res) => {
       selectedGeneticInformation,
       selectedGovernmentIdentifiers,
       selectedPersonalIdentification,
+      selectedhealthcare,
       selectedProfessionalExperience,
       selectedSocialInformation,
       selectedTravelAndExpense,
@@ -47,11 +47,11 @@ export const submitPreliminaryQuestions = async (req, res) => {
     
       // Define risk fields based on the Yes/No answers
       const riskFields = [
-        { field: answers.processPreservedData, critical: false },
+        { field: answers.processPersonalData, critical: false },
         { field: answers.internalAudits, critical: true },
         { field: answers.dpiA, critical: true },
         { field: answers.isoStatus, critical: false },
-        { field: answers.processPersonalData, critical: true },
+        { field: answers.individualData, critical: true },
       ];
     
       // Loop through the risk fields and check for "Yes" answers
@@ -80,15 +80,14 @@ export const submitPreliminaryQuestions = async (req, res) => {
 
     // You don't need to manually handle risk levels here because they are predefined in the model
     const newPreliminaryQuestions = new PreliminaryQuestions({
-      processPreservedData,  
+      processPersonalData,  
       serviceCountries,       
       supportFunctionalities,
-      processingApplications, 
-      pii,                    
+      processingApplications,                   
       internalAudits,         
       dpiA,                   
       isoStatus,              
-      processPersonalData,    
+      individualData,    
       selectedBackgroundChecks,
       selectedBiometrics,     
       selectedBrowsingInformation,
@@ -100,6 +99,7 @@ export const submitPreliminaryQuestions = async (req, res) => {
       selectedGeneticInformation,
       selectedGovernmentIdentifiers,
       selectedPersonalIdentification,
+      selectedhealthcare,
       selectedProfessionalExperience,
       selectedSocialInformation,
       selectedTravelAndExpense,

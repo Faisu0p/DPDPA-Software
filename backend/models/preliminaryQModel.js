@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const preliminaryQuestionsSchema = new mongoose.Schema({
-  processPreservedData: {
+  processPersonalData: {
     type: String,
     required: true,
     riskLevel: {
@@ -10,22 +10,37 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
       default: 'Medium',  
     },
   },
+  individualData: [{
+    type: String,
+    required: true,
+    riskLevel: {
+      type: String,
+      enum: ['Low', 'Medium', 'High'],
+      default: 'Medium',
+  },}],
   serviceCountries: [{
     type: String,
     required: true,
   }],
-  supportFunctionalities: [{
-    type: String,
-    required: true,
-  }],
-  processingApplications: [{
-    type: String,
-    required: true,
-}],
-  pii: [{
-    type: String,
-    default: '',
-  }],
+  supportFunctionalities: {
+    functionalities: [{
+      type: String,
+      required: true,
+    }],
+    otherFunctionality: [{
+      type: String,
+    }],
+  },
+  processingApplications: {
+    applications: [{
+      type: String,
+      required: true,
+    }],
+    otherApplication: [{
+      type: String,
+    }],
+  },
+
   internalAudits: {
     type: String,
     required: true,
@@ -50,14 +65,7 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
       enum: ['Low', 'Medium', 'High'],
       default: 'Medium',
   },},
-  processPersonalData: [{
-    type: String,
-    required: true,
-    riskLevel: {
-      type: String,
-      enum: ['Low', 'Medium', 'High'],
-      default: 'Medium',
-  },}],
+
   selectedBackgroundChecks: [{
     type: String,
   }],
@@ -89,6 +97,9 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
     type: String,
   }],
   selectedPersonalIdentification: [{
+    type: String,
+  }],
+  selectedhealthcare: [{
     type: String,
   }],
   selectedProfessionalExperience: [{

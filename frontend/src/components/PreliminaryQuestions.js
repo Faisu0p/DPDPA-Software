@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Container, Typography, Box, TextField, FormControl, 
   InputLabel, Select, MenuItem, FormControlLabel, Checkbox, 
   Button, Autocomplete, Chip, FormGroup, Grid } from '@mui/material';
+import { indigo } from '@mui/material/colors';
 
 const countries = [
   'United States',
@@ -22,6 +23,7 @@ const applications = [
   'Sharepoint',
   'Oracle',
   'HR Databases',
+  'Others',
 ];
 
 const backgroundChecks = [
@@ -129,27 +131,33 @@ const governmentIdentifiers = [
   'Passport Information'
 ];
 
+
 const personalIdentification = [
-  'Age',
-  'Date of Birth',
-  'Dietary Restrictions or Allergies',
   'First Name',
-  'Gender',
   'Hobbies and Interests',
   'Marital Status',
-  'Racial or Ethnic Origin',
   'Sexual Orientation',
-  'Weight',
-  'Blood Type',
   'Demographic Information',
   'Email Address',
   'Full Name',
-  'Height',
   'Last Name',
   'Nationality',
   'Religion/Religious Beliefs',
   'Signature'
 ];
+
+
+const healthcare = [
+  'Age',
+  'Date of Birth',
+  'Dietary Restrictions or Allergies',
+  'Gender',
+  'Weight',
+  'Blood Type',
+  'Height',
+  'Racial or Ethnic Origin'
+];
+
 
 const professionalExperience = [
   'Professional Memberships',
@@ -218,16 +226,14 @@ const processingPurposes = [
 
 
 const PreliminaryQuestions = () => {
-  const [processPreservedData, setProcessPreservedData] = useState('');
-  const [serviceCountries, setServiceCountries] = useState([]); 
-  const [supportFunctionalities, setSupportFunctionalities] = useState([]);
-  const [processingApplications, setProcessingApplications] = useState([]);
-  const [pii, setPii] = useState([]);
-  const [internalAudits, setInternalAudits] = useState('');
-  const [dpiA, setDpiA] = useState('');
-  const [isoStatus, setIsoStatus] = useState('');
-  const [processPersonalData, setProcessPersonalData] = useState([]);
-  
+
+  {/* Q1 */}
+  const [processPersonalData, setprocessPersonalData] = useState('');
+
+  {/* Q1.1 */}
+  const [individualData, setindividualData] = useState([]);
+
+  {/* Q2 */}
   const [selectedBackgroundChecks, setSelectedBackgroundChecks] = useState([]);
   const [selectedBiometrics, setSelectedBiometrics] = useState([]);
   const [selectedBrowsingInformation, setSelectedBrowsingInformation] = useState([]);
@@ -239,12 +245,35 @@ const PreliminaryQuestions = () => {
   const [selectedGeneticInformation, setSelectedGeneticInformation] = useState([]);
   const [selectedGovernmentIdentifiers, setSelectedGovernmentIdentifiers] = useState([]);
   const [selectedPersonalIdentification, setSelectedPersonalIdentification] = useState([]);
+  const [selectedhealthcare, setSelectedHealthcare] = useState([]);
   const [selectedProfessionalExperience, setSelectedProfessionalExperience] = useState([]);
   const [selectedSocialInformation, setSelectedSocialInformation] = useState([]);
   const [selectedTravelAndExpense, setSelectedTravelAndExpense] = useState([]);
   const [selectedUserAccountInformation, setSelectedUserAccountInformation] = useState([]);
   const [selectedWorkplaceWelfare, setSelectedWorkplaceWelfare] = useState([]);
 
+  
+  {/* Q3 */}  
+  const [serviceCountries, setServiceCountries] = useState([]); 
+
+  {/* Q4 */}
+  const [supportFunctionalities, setSupportFunctionalities] = useState([]);
+  const [otherSupportFunctionality, setOtherSupportFunctionality] = useState('');
+
+  {/* Q5 */}
+  const [processingApplications, setProcessingApplications] = useState([]);
+  const [otherApplications, setOtherApplications] = useState('');
+
+  {/* Q6 */}
+  const [internalAudits, setInternalAudits] = useState('');
+
+  {/* Q7 */}  
+  const [dpiA, setDpiA] = useState('');
+
+  {/* Q8 */}
+  const [isoStatus, setIsoStatus] = useState('');
+
+  {/* Q9 */}
   const [selectedPurposes, setSelectedPurposes] = useState([]);
   const [justification, setJustification] = useState('');
 
@@ -266,21 +295,32 @@ const PreliminaryQuestions = () => {
     }
   };
 
+  
+  // Q4
+  const handleSupportFunctionalitiesChange = (event) => {
+    setSupportFunctionalities(event.target.value);
+  };
+  const handleOtherSupportFunctionalityChange = (e) => {
+    setOtherSupportFunctionality(e.target.value);
+  };
+
+  // Q5
+  const handleApplicationsChange = (event, newValue) => {
+    setProcessingApplications(newValue);
+  };
+
+  const handleOtherApplicationsChange = (e) => {
+    setOtherApplications(e.target.value);
+  };
+  
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // The data to be submitted is collected from your state variables
     const dataToSubmit = {
-      processPreservedData,
-      serviceCountries,
-      supportFunctionalities,
-      processingApplications,
-      pii,
-      internalAudits,
-      dpiA,
-      isoStatus,
       processPersonalData,
+      individualData,
 
       selectedBackgroundChecks,
       selectedBiometrics,
@@ -293,11 +333,30 @@ const PreliminaryQuestions = () => {
       selectedGeneticInformation,
       selectedGovernmentIdentifiers,
       selectedPersonalIdentification,
+      selectedhealthcare,
       selectedProfessionalExperience,
       selectedSocialInformation,
       selectedTravelAndExpense,
       selectedUserAccountInformation,
       selectedWorkplaceWelfare,
+
+      serviceCountries,
+
+      supportFunctionalities: {
+        functionalities: supportFunctionalities,
+        otherFunctionality: otherSupportFunctionality.split(',').map(item => item.trim())  // Split "Others" into an array
+      },
+
+      processingApplications: {
+        applications: processingApplications,
+        otherApplications: otherApplications.split(',').map(item => item.trim()),
+      },
+
+      internalAudits,
+
+      dpiA,
+
+      isoStatus,
 
       processingPurposes:{
         purposes: selectedPurposes,
@@ -338,13 +397,13 @@ const PreliminaryQuestions = () => {
 
 
 
-
+            {/* Q1 and Q1.1*/}
 
             <FormControl fullWidth>
               <InputLabel>Q1. Do you process personal data as part of your processing activity?</InputLabel>
               <Select
-                value={processPreservedData}
-                onChange={(e) => setProcessPreservedData(e.target.value)}
+                value={processPersonalData}
+                onChange={(e) => setprocessPersonalData(e.target.value)}
                 label="Do you Process Preserved Data?"
               >
                 <MenuItem value="Yes">Yes</MenuItem>
@@ -353,7 +412,7 @@ const PreliminaryQuestions = () => {
             </FormControl>
 
             
-            {processPreservedData === 'Yes' && (
+            {processPersonalData === 'Yes' && (
               <FormControl fullWidth sx={{ maxWidth: '100%' }}>
                 <Typography>Q 1.1 Please select the types of individuals for whom you are processing personal data?</Typography>
                 <InputLabel sx={{ whiteSpace: 'normal', maxWidth: '100%' }}>
@@ -361,25 +420,35 @@ const PreliminaryQuestions = () => {
                 </InputLabel>
                 <Select
                   multiple
-                  value={processPersonalData}
-                  onChange={(e) => setProcessPersonalData(e.target.value)}
+                  value={individualData}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value.includes("Not Applicable")) {
+                      setindividualData(["Not Applicable"]);
+                    } else {
+                      setindividualData(value.filter((item) => item !== "Not Applicable")); 
+                    }
+                  }}
+                  
                   label="Please select the types of individuals for whom you are processing personal data?"
-                  sx={{ width: '100%' }}  // Ensure the Select component takes up full width
+                  sx={{ width: '100%' }} 
                 >
                   <MenuItem value="Board Members">Board Members</MenuItem>
                   <MenuItem value="Former Employees/Retirees">Former Employees/Retirees</MenuItem>
                   <MenuItem value="Contractor Employees">Contractor Employees</MenuItem>
-                  <MenuItem value="Not Applicable">Not Applicable</MenuItem>
                   <MenuItem value="Customers">Customers</MenuItem>
                   <MenuItem value="Prospective Employees">Prospective Employees</MenuItem>
                   <MenuItem value="Employees">Employees</MenuItem>
                   <MenuItem value="Suppliers/Third Parties">Suppliers/Third Parties</MenuItem>
+                  <MenuItem value="Not Applicable">Not Applicable</MenuItem>
                 </Select>
               </FormControl>
             )}
 
-           
 
+
+
+            {/* Q2 */}
 
             <Typography variant="h6" sx={{ marginBottom: 2 }}>
               Q2. Please select the data elements that are associated with this Business Process.
@@ -519,22 +588,23 @@ const PreliminaryQuestions = () => {
 
 
 
-              <Grid container spacing={2}>
-                {/* Employment Information Section */}
-                <Grid item xs={12} sm={6}>
-                  <FormControl fullWidth>
-                    <Typography variant="h6">Employment Information</Typography>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={selectedEmploymentInformation.length === employmentInformation.length}
-                            onChange={(e) => handleSelectAll(e, employmentInformation, setSelectedEmploymentInformation)}
-                          />
-                        }
-                        label="Select All"
+              
+              {/* Employment Information Section */}
+              <FormControl fullWidth>
+                <Typography variant="h6">Employment Information</Typography>
+                <FormGroup sx={{ marginTop: 2, marginBottom: 2 }}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={selectedEmploymentInformation.length === employmentInformation.length}
+                        onChange={(e) => handleSelectAll(e, employmentInformation, setSelectedEmploymentInformation)}
                       />
-                      {employmentInformation.map((check) => (
+                    }
+                    label="Select All"
+                  />
+                  <Grid container spacing={2}>
+                    {employmentInformation.map((check) => (
+                      <Grid item xs={6} key={check}>
                         <FormControlLabel
                           control={
                             <Checkbox
@@ -544,44 +614,17 @@ const PreliminaryQuestions = () => {
                             />
                           }
                           label={check}
-                          key={check}
                         />
-                      ))}
-                    </FormGroup>
-                  </FormControl>
-                </Grid>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </FormGroup>
+              </FormControl>
 
-                {/* Financial Section */}
-                <Grid item xs={12} sm={6}>
-                  <FormControl fullWidth>
-                    <Typography variant="h6">Financial</Typography>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={selectedFinancialInformation.length === financialInformation.length}
-                            onChange={(e) => handleSelectAll(e, financialInformation, setSelectedFinancialInformation)}
-                          />
-                        }
-                        label="Select All"
-                      />
-                      {financialInformation.map((check) => (
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              value={check}
-                              checked={selectedFinancialInformation.includes(check)}
-                              onChange={(e) => handleChange(e, setSelectedFinancialInformation)}
-                            />
-                          }
-                          label={check}
-                          key={check}
-                        />
-                      ))}
-                    </FormGroup>
-                  </FormControl>
-                </Grid>
-              </Grid>
+
+
+               
+              
 
 
               <Grid container spacing={2}>
@@ -851,6 +894,144 @@ const PreliminaryQuestions = () => {
             </Grid>
 
 
+          {/* Travel and Func */}
+            
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              {/* Travel And Expense */}
+              <FormControl fullWidth>
+                <Typography variant="h6">Travel And Expense</Typography>
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={selectedTravelAndExpense.length === travelAndExpense.length}
+                        onChange={(e) => handleSelectAll(e, travelAndExpense, setSelectedTravelAndExpense)}
+                      />
+                    }
+                    label="Select All"
+                  />
+                  {travelAndExpense.map((check) => (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          value={check}
+                          checked={selectedTravelAndExpense.includes(check)}
+                          onChange={(e) => handleChange(e, setSelectedTravelAndExpense)}
+                        />
+                      }
+                      label={check}
+                      key={check}
+                    />
+                  ))}
+                </FormGroup>
+              </FormControl>
+
+              </Grid>
+
+
+              <Grid item xs={12} sm={6}>
+              {/* User Account Information  */}
+              <FormControl fullWidth>
+                <Typography variant="h6">User Account Information</Typography>
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={selectedUserAccountInformation.length === userAccountInformation.length}
+                        onChange={(e) => handleSelectAll(e, userAccountInformation, setSelectedUserAccountInformation)}
+                      />
+                    }
+                    label="Select All"
+                  />
+                  {userAccountInformation.map((check) => (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          value={check}
+                          checked={selectedUserAccountInformation.includes(check)}
+                          onChange={(e) => handleChange(e, setSelectedUserAccountInformation)}
+                        />
+                      }
+                      label={check}
+                      key={check}
+                    />
+                  ))}
+                </FormGroup>
+              </FormControl>
+              </Grid>
+            </Grid>
+
+          <Grid container spacing={2}> 
+            {/* Financial Section */}
+              <Grid item xs={12} sm={6}>
+                <FormControl fullWidth>
+                  <Typography variant="h6">Financial</Typography>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={selectedFinancialInformation.length === financialInformation.length}
+                          onChange={(e) => handleSelectAll(e, financialInformation, setSelectedFinancialInformation)}
+                        />
+                      }
+                      label="Select All"
+                    />
+                    {financialInformation.map((check) => (
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            value={check}
+                            checked={selectedFinancialInformation.includes(check)}
+                            onChange={(e) => handleChange(e, setSelectedFinancialInformation)}
+                          />
+                        }
+                        label={check}
+                        key={check}
+                      />
+                    ))}
+                  </FormGroup>
+                </FormControl>
+              </Grid>
+
+            {/* Healthcare */}
+            <Grid item xs={12} sm={6}>
+            <FormControl fullWidth>
+              <Typography variant="h6">Healthcare</Typography>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={selectedhealthcare.length === healthcare.length}
+                      onChange={(e) => handleSelectAll(e, healthcare, setSelectedHealthcare)}
+                    />
+                  }
+                  label="Select All"
+                />
+                {healthcare.map((check) => (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        value={check}
+                        checked={selectedhealthcare.includes(check)}
+                        onChange={(e) => handleChange(e, setSelectedHealthcare)}
+                      />
+                    }
+                    label={check}
+                    key={check}
+                  />
+                ))}
+              </FormGroup>
+            </FormControl>
+            </Grid>
+          </Grid>
+
+
+
+
+            {/* Q3 */}
+
+
             <Autocomplete
               multiple
               options={countries}
@@ -862,12 +1043,14 @@ const PreliminaryQuestions = () => {
             />
 
 
+            {/* Q4 */}
+
             <FormControl fullWidth>
               <InputLabel>Q4. Business and Support Functionality</InputLabel>
               <Select
                 multiple
                 value={supportFunctionalities}
-                onChange={(e) => setSupportFunctionalities(e.target.value)}
+                onChange={handleSupportFunctionalitiesChange}
                 label="Business and Support Functionalities"
                 renderValue={(selected) => selected.join(', ')} // Display selected items as a comma-separated string
               >
@@ -885,25 +1068,55 @@ const PreliminaryQuestions = () => {
                 <MenuItem value="Data">Data</MenuItem>
                 <MenuItem value="HR">HR</MenuItem>
                 <MenuItem value="Admin">Admin</MenuItem>
+                <MenuItem value="Others">Others</MenuItem>
               </Select>
+
+              {supportFunctionalities.includes("Others") && (
+                <TextField
+                  label="Specify Other Functionalities"
+                  variant="outlined"
+                  fullWidth
+                  value={otherSupportFunctionality}
+                  onChange={handleOtherSupportFunctionalityChange}
+                  placeholder="Item1, Item2, ..."
+                  margin="normal"
+                />
+              )}
             </FormControl>
 
 
 
 
+{/* Q5 */}
+<FormControl fullWidth>
+        <Autocomplete
+          multiple
+          options={applications}
+          getOptionLabel={(option) => option}
+          value={processingApplications}
+          onChange={handleApplicationsChange}
+          renderInput={(params) => <TextField {...params} label="Q5. Application(s) which process personal data" variant="outlined" />}
+          fullWidth
+        />
+
+        {processingApplications.includes("Others") && (
+          <TextField
+            label="Specify Other Applications"
+            variant="outlined"
+            fullWidth
+            value={otherApplications}
+            onChange={handleOtherApplicationsChange}
+            placeholder="Item1, Item2, ..."
+            margin="normal"
+          />
+        )}
+      </FormControl>
 
 
-            <Autocomplete
-              multiple
-              options={applications}
-              getOptionLabel={(option) => option}
-              value={processingApplications}
-              onChange={(event, newValue) => setProcessingApplications(newValue)}
-              renderInput={(params) => <TextField {...params} label="Q5. Application(s) which process personal data" variant="outlined" />}
-              fullWidth
-            />
 
-            {/* Internal Audits */}
+
+            {/* Q6 */}
+
             <FormControl fullWidth>
               <InputLabel>Q6. Do you perform Internal audits?</InputLabel>
               <Select
@@ -916,7 +1129,9 @@ const PreliminaryQuestions = () => {
               </Select>
             </FormControl>
 
-            {/* DPIA */}
+
+            {/* Q7 */}
+
             <FormControl fullWidth>
               <InputLabel>Q7. Do you perform DPIA?</InputLabel>
               <Select
@@ -929,13 +1144,15 @@ const PreliminaryQuestions = () => {
               </Select>
             </FormControl>
 
-            {/* ISO Status */}
+
+            {/* Q8 */}
+
             <FormControl fullWidth>
-              <InputLabel>Q8. Is your Ongoing ISO A or B?</InputLabel>
+              <InputLabel>Q8. Is your Organisation ISO 27001 or ISO 27701 Certified ?</InputLabel>
               <Select
                 value={isoStatus}
                 onChange={(e) => setIsoStatus(e.target.value)}
-                label="Is your Ongoing ISO A or B?"
+                label="Is your Organisation ISO 27001 or ISO 27701 Certified ?"
               >
                 <MenuItem value="Yes">Yes</MenuItem>
                 <MenuItem value="No">No</MenuItem>
@@ -944,6 +1161,7 @@ const PreliminaryQuestions = () => {
 
 
 
+            {/* Q9 */}
 
             <FormControl fullWidth>
               <Typography variant="h6" sx={{ marginBottom: 2 }}>
