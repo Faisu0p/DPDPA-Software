@@ -413,8 +413,10 @@ const PreliminaryQuestions = () => {
 
             
             {processPersonalData === 'Yes' && (
+
+              <>
               <FormControl fullWidth sx={{ maxWidth: '100%' }}>
-                <Typography>Q 1.1 Please select the types of individuals for whom you are processing personal data?</Typography>
+                <Typography>Q 1.1 Please select the types of individuals for whom you are processing personal data (multiple selections allowed).</Typography>
                 <InputLabel sx={{ whiteSpace: 'normal', maxWidth: '100%' }}>
                   
                 </InputLabel>
@@ -433,6 +435,7 @@ const PreliminaryQuestions = () => {
                   label="Please select the types of individuals for whom you are processing personal data?"
                   sx={{ width: '100%' }} 
                 >
+                  
                   <MenuItem value="Board Members">Board Members</MenuItem>
                   <MenuItem value="Former Employees/Retirees">Former Employees/Retirees</MenuItem>
                   <MenuItem value="Contractor Employees">Contractor Employees</MenuItem>
@@ -443,117 +446,119 @@ const PreliminaryQuestions = () => {
                   <MenuItem value="Not Applicable">Not Applicable</MenuItem>
                 </Select>
               </FormControl>
-            )}
+            
+                
 
 
 
 
-            {/* Q2 */}
-
+            {/* Q1.2 */}
             <Typography variant="h6" sx={{ marginBottom: 2 }}>
-              Q2. Please select the data elements that are associated with this Business Process.
+              Q1.2 Please select the data elements that are associated with this Business Process.
             </Typography>
 
 
 
-            <Grid container spacing={2}>
-              {/* Background Checks Section */}
-              <Grid item xs={12} sm={6}>
-                <FormControl fullWidth>
-                  <Typography variant="h6">Background Checks</Typography>
-                  <FormGroup>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={selectedBackgroundChecks.length === backgroundChecks.length}
-                          onChange={(e) => handleSelectAll(e, backgroundChecks, setSelectedBackgroundChecks)}
-                        />
-                      }
-                      label="Select All"
-                    />
-                    {backgroundChecks.map((check) => (
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            value={check}
-                            checked={selectedBackgroundChecks.includes(check)}
-                            onChange={(e) => handleChange(e, setSelectedBackgroundChecks)}
-                          />
-                        }
-                        label={check}
-                        key={check}
-                      />
-                    ))}
-                  </FormGroup>
-                </FormControl>
-              </Grid>
-
-              {/* Biometrics Section */}
-              <Grid item xs={12} sm={6}>
-                <FormControl fullWidth>
-                  <Typography variant="h6">Biometrics</Typography>
-                  <FormGroup>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={selectedBiometrics.length === biometrics.length}
-                          onChange={(e) => handleSelectAll(e, biometrics, setSelectedBiometrics)}
-                        />
-                      }
-                      label="Select All"
-                    />
-                    {biometrics.map((check) => (
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            value={check}
-                            checked={selectedBiometrics.includes(check)}
-                            onChange={(e) => handleChange(e, setSelectedBiometrics)}
-                          />
-                        }
-                        label={check}
-                        key={check}
-                      />
-                    ))}
-                  </FormGroup>
-                </FormControl>
-              </Grid>
-            </Grid>
-
-
 
             <Grid container spacing={2}>
-              {/* Browsing Information Section */}
-              <Grid item xs={12} sm={6}>
-                <FormControl fullWidth>
-                  <Typography variant="h6">Browsing Information</Typography>
-                  <FormGroup>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={selectedBrowsingInformation.length === browsingInformation.length}
-                          onChange={(e) => handleSelectAll(e, browsingInformation, setSelectedBrowsingInformation)}
-                        />
-                      }
-                      label="Select All"
-                    />
-                    {browsingInformation.map((check) => (
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            value={check}
-                            checked={selectedBrowsingInformation.includes(check)}
-                            onChange={(e) => handleChange(e, setSelectedBrowsingInformation)}
-                          />
-                        }
-                        label={check}
-                        key={check}
-                      />
-                    ))}
-                  </FormGroup>
-                </FormControl>
-              </Grid>
+  {/* Background Checks Section */}
+  <Grid item xs={12} sm={4}>
+    <FormControl fullWidth>
+      <Typography variant="h6">Background Checks</Typography>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={selectedBackgroundChecks.length === backgroundChecks.length}
+              onChange={(e) => handleSelectAll(e, backgroundChecks, setSelectedBackgroundChecks)}
+            />
+          }
+          label="Select All"
+        />
+        {backgroundChecks.map((check) => (
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={check}
+                checked={selectedBackgroundChecks.includes(check)}
+                onChange={(e) => handleChange(e, setSelectedBackgroundChecks)}
+              />
+            }
+            label={check}
+            key={check}
+          />
+        ))}
+      </FormGroup>
+    </FormControl>
+  </Grid>
 
+  {/* Biometrics Section */}
+  <Grid item xs={12} sm={4}>
+    <FormControl fullWidth>
+      <Typography variant="h6">Biometrics</Typography>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={selectedBiometrics.length === biometrics.length}
+              onChange={(e) => handleSelectAll(e, biometrics, setSelectedBiometrics)}
+            />
+          }
+          label="Select All"
+        />
+        {biometrics.map((check) => (
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={check}
+                checked={selectedBiometrics.includes(check)}
+                onChange={(e) => handleChange(e, setSelectedBiometrics)}
+              />
+            }
+            label={check}
+            key={check}
+          />
+        ))}
+      </FormGroup>
+    </FormControl>
+  </Grid>
+
+  {/* Browsing Information Section */}
+  <Grid item xs={12} sm={4}>
+    <FormControl fullWidth>
+      <Typography variant="h6">Browsing Information</Typography>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={selectedBrowsingInformation.length === browsingInformation.length}
+              onChange={(e) => handleSelectAll(e, browsingInformation, setSelectedBrowsingInformation)}
+            />
+          }
+          label="Select All"
+        />
+        {browsingInformation.map((check) => (
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={check}
+                checked={selectedBrowsingInformation.includes(check)}
+                onChange={(e) => handleChange(e, setSelectedBrowsingInformation)}
+              />
+            }
+            label={check}
+            key={check}
+          />
+        ))}
+      </FormGroup>
+    </FormControl>
+  </Grid>
+</Grid>
+
+
+
+
+            <Grid container spacing={2}>
               {/* Contact Information Section */}
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth>
@@ -1028,147 +1033,12 @@ const PreliminaryQuestions = () => {
 
 
 
-
-            {/* Q3 */}
-
-
-            <Autocomplete
-              multiple
-              options={countries}
-              getOptionLabel={(option) => option}
-              value={serviceCountries}
-              onChange={(event, newValue) => setServiceCountries(newValue)}
-              renderInput={(params) => <TextField {...params} label="Q3. In which countries do you provide services?" variant="outlined" />}
-              fullWidth
-            />
-
-
-            {/* Q4 */}
-
-            <FormControl fullWidth>
-              <InputLabel>Q4. Business and Support Functionality</InputLabel>
-              <Select
-                multiple
-                value={supportFunctionalities}
-                onChange={handleSupportFunctionalitiesChange}
-                label="Business and Support Functionalities"
-                renderValue={(selected) => selected.join(', ')} // Display selected items as a comma-separated string
-              >
-                <MenuItem value="Design">Design</MenuItem>
-                <MenuItem value="Marketing">Marketing</MenuItem>
-                <MenuItem value="Product">Product</MenuItem>
-                <MenuItem value="Product Communications">Product Communications</MenuItem>
-                <MenuItem value="Product Marketing">Product Marketing</MenuItem>
-                <MenuItem value="Product Operations">Product Operations</MenuItem>
-                <MenuItem value="SportsOps">SportsOps</MenuItem>
-                <MenuItem value="Technology">Technology</MenuItem>
-                <MenuItem value="Sales">Sales</MenuItem>
-                <MenuItem value="Ad Sales">Ad Sales</MenuItem>
-                <MenuItem value="Alliances and Partnerships">Alliances and Partnerships</MenuItem>
-                <MenuItem value="Data">Data</MenuItem>
-                <MenuItem value="HR">HR</MenuItem>
-                <MenuItem value="Admin">Admin</MenuItem>
-                <MenuItem value="Others">Others</MenuItem>
-              </Select>
-
-              {supportFunctionalities.includes("Others") && (
-                <TextField
-                  label="Specify Other Functionalities"
-                  variant="outlined"
-                  fullWidth
-                  value={otherSupportFunctionality}
-                  onChange={handleOtherSupportFunctionalityChange}
-                  placeholder="Item1, Item2, ..."
-                  margin="normal"
-                />
-              )}
-            </FormControl>
-
-
-
-
-{/* Q5 */}
-<FormControl fullWidth>
-        <Autocomplete
-          multiple
-          options={applications}
-          getOptionLabel={(option) => option}
-          value={processingApplications}
-          onChange={handleApplicationsChange}
-          renderInput={(params) => <TextField {...params} label="Q5. Application(s) which process personal data" variant="outlined" />}
-          fullWidth
-        />
-
-        {processingApplications.includes("Others") && (
-          <TextField
-            label="Specify Other Applications"
-            variant="outlined"
-            fullWidth
-            value={otherApplications}
-            onChange={handleOtherApplicationsChange}
-            placeholder="Item1, Item2, ..."
-            margin="normal"
-          />
-        )}
-      </FormControl>
-
-
-
-
-            {/* Q6 */}
-
-            <FormControl fullWidth>
-              <InputLabel>Q6. Do you perform Internal audits?</InputLabel>
-              <Select
-                value={internalAudits}
-                onChange={(e) => setInternalAudits(e.target.value)}
-                label="Do you perform Internal audits?"
-              >
-                <MenuItem value="Yes">Yes</MenuItem>
-                <MenuItem value="No">No</MenuItem>
-              </Select>
-            </FormControl>
-
-
-            {/* Q7 */}
-
-            <FormControl fullWidth>
-              <InputLabel>Q7. Do you perform DPIA?</InputLabel>
-              <Select
-                value={dpiA}
-                onChange={(e) => setDpiA(e.target.value)}
-                label="Do you perform DPIA?"
-              >
-                <MenuItem value="Yes">Yes</MenuItem>
-                <MenuItem value="No">No</MenuItem>
-              </Select>
-            </FormControl>
-
-
-            {/* Q8 */}
-
-            <FormControl fullWidth>
-              <InputLabel>Q8. Is your Organisation ISO 27001 or ISO 27701 Certified ?</InputLabel>
-              <Select
-                value={isoStatus}
-                onChange={(e) => setIsoStatus(e.target.value)}
-                label="Is your Organisation ISO 27001 or ISO 27701 Certified ?"
-              >
-                <MenuItem value="Yes">Yes</MenuItem>
-                <MenuItem value="No">No</MenuItem>
-              </Select>
-            </FormControl>
-
-
-
-            {/* Q9 */}
-
+            {/* Q1.3 */}
             <FormControl fullWidth>
               <Typography variant="h6" sx={{ marginBottom: 2 }}>
-                Q9. What are the Purposes of Processing? <br /> Select all that apply:
+                Q1.3 What are the Purposes of Processing? <br /> Select all that apply:
               </Typography>
               <FormGroup>
-                {/* Select All Checkbox */}
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -1178,8 +1048,6 @@ const PreliminaryQuestions = () => {
                   }
                   label="Select All"
                 />
-
-                {/* Grid to Split the Items into Two Columns */}
                 <Grid container spacing={2}>
                   {processingPurposes.map((purpose, index) => (
                     <Grid item xs={12} sm={6} key={purpose}>
@@ -1199,8 +1067,6 @@ const PreliminaryQuestions = () => {
               </FormGroup>
             </FormControl>
 
-
-
             {/* Justification Text Area */}
             <TextField
               fullWidth
@@ -1211,6 +1077,148 @@ const PreliminaryQuestions = () => {
               multiline
               rows={4}
             />
+
+                  
+</>)}
+
+
+
+
+
+            {/* Q2 */}
+
+
+            <Autocomplete
+              multiple
+              options={countries}
+              getOptionLabel={(option) => option}
+              value={serviceCountries}
+              onChange={(event, newValue) => setServiceCountries(newValue)}
+              renderInput={(params) => <TextField {...params} label="Q2. In which countries do you provide services?" variant="outlined" />}
+              fullWidth
+            />
+
+
+            {/* Q3 */}
+
+            <FormControl fullWidth>
+  <InputLabel style={{ whiteSpace: 'normal', wordWrap: 'break-word' }}>
+    Q3. Which of these in your organization read, process, store, or change the data you have selected above?
+  </InputLabel>
+  <Select
+    multiple
+    value={supportFunctionalities}
+    onChange={handleSupportFunctionalitiesChange}
+    label="Business and Support Functionalities"
+    renderValue={(selected) => selected.join(', ')}
+    sx={{ height: '80px' }}
+  >
+    <MenuItem value="Design">Design</MenuItem>
+    <MenuItem value="Marketing">Marketing</MenuItem>
+    <MenuItem value="Product">Product</MenuItem>
+    <MenuItem value="Product Communications">Product Communications</MenuItem>
+    <MenuItem value="Product Marketing">Product Marketing</MenuItem>
+    <MenuItem value="Product Operations">Product Operations</MenuItem>
+    <MenuItem value="SportsOps">SportsOps</MenuItem>
+    <MenuItem value="Technology">Technology</MenuItem>
+    <MenuItem value="Sales">Sales</MenuItem>
+    <MenuItem value="Ad Sales">Ad Sales</MenuItem>
+    <MenuItem value="Alliances and Partnerships">Alliances and Partnerships</MenuItem>
+    <MenuItem value="Data">Data</MenuItem>
+    <MenuItem value="HR">HR</MenuItem>
+    <MenuItem value="Admin">Admin</MenuItem>
+    <MenuItem value="Others">Others</MenuItem>
+  </Select>
+
+  {supportFunctionalities.includes("Others") && (
+    <TextField
+      label="Specify Other Functionalities"
+      variant="outlined"
+      fullWidth
+      value={otherSupportFunctionality}
+      onChange={handleOtherSupportFunctionalityChange}
+      placeholder="Item1, Item2, ..."
+      margin="normal"
+    />
+  )}
+</FormControl>
+
+
+
+
+
+{/* Q4 */}
+<FormControl fullWidth>
+        <Autocomplete
+          multiple
+          options={applications}
+          getOptionLabel={(option) => option}
+          value={processingApplications}
+          onChange={handleApplicationsChange}
+          renderInput={(params) => <TextField {...params} label="Q4. Application(s) which process personal data" variant="outlined" />}
+          fullWidth
+        />
+
+        {processingApplications.includes("Others") && (
+          <TextField
+            label="Specify Other Applications"
+            variant="outlined"
+            fullWidth
+            value={otherApplications}
+            onChange={handleOtherApplicationsChange}
+            placeholder="Item1, Item2, ..."
+            margin="normal"
+          />
+        )}
+      </FormControl>
+
+
+
+
+            {/* Q5 */}
+
+            <FormControl fullWidth>
+              <InputLabel>Q5. Do you perform Internal or external audits?</InputLabel>
+              <Select
+                value={internalAudits}
+                onChange={(e) => setInternalAudits(e.target.value)}
+                label="Do you perform Internal audits?"
+              >
+                <MenuItem value="Yes">Yes</MenuItem>
+                <MenuItem value="No">No</MenuItem>
+              </Select>
+            </FormControl>
+
+
+            {/* Q6 */}
+
+            <FormControl fullWidth>
+              <InputLabel>Q6. In the context of the DPDPA Act 2023, have you performed a DPIA?</InputLabel>
+              <Select
+                value={dpiA}
+                onChange={(e) => setDpiA(e.target.value)}
+                label="Do you perform DPIA?"
+              >
+                <MenuItem value="Yes">Yes</MenuItem>
+                <MenuItem value="No">No</MenuItem>
+              </Select>
+            </FormControl>
+
+
+            {/* Q7 */}
+
+            <FormControl fullWidth>
+              <InputLabel>Q7. Does your organization follow any global standards like ISO, NIST, etc.?</InputLabel>
+              <Select
+                value={isoStatus}
+                onChange={(e) => setIsoStatus(e.target.value)}
+                label="Is your Organisation ISO 27001 or ISO 27701 Certified ?"
+              >
+                <MenuItem value="Yes">Yes</MenuItem>
+                <MenuItem value="No">No</MenuItem>
+              </Select>
+            </FormControl>
+
 
 
             <Button type="submit" variant="contained" color="primary" sx={{ marginTop: 2 }}>

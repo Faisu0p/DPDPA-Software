@@ -7,9 +7,9 @@ const Footer = () => {
         {/* Designed and Developed Section (Centered) */}
         <div className='text-center mb-4'>
           <p className='text-sm text-gray-400'>
-            Designed and developed by{' '}
+            {/* Designed and developed by{' '} */}
             <span className='font-semibold text-white'>
-              Pink Unicorn Algorithm
+              {/* Pink Unicorn Algorithm */}
             </span>
           </p>
         </div>

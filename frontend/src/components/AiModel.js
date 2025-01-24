@@ -3,8 +3,8 @@ import React from 'react';
 const AiModel = () => {
   return (
     <div>
-      <h1>New Page</h1>
-      <p>This is the content of the new page.</p>
+      <h1>Ai Model </h1>
+      <p>This Ai Model will train itself.</p>
     </div>
   );
 };
