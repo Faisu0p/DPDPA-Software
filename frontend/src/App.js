@@ -18,6 +18,7 @@ import PreliminaryQuestions from './components/PreliminaryQuestions';
 
 import AiModel from './components/AiModel';
 import RiskPagePQ from './pages/RiskAnalysisPagePQ';
+import PDFTemplatePage from './components/PDFTemplatePage.js';
 
 
 // import AlertManagement from "./pages/AlertManagement";
@@ -142,6 +143,7 @@ const App = () => {
             >
               <PrivateRoute>
                 <Dashboard />
+                
               </PrivateRoute>
             </MiscLayout>
           }
@@ -229,6 +231,24 @@ const App = () => {
             >
               <PrivateRoute>
                 <RiskPagePQ />
+              </PrivateRoute>
+            </MiscLayout>
+          }
+        />
+
+        <Route
+          path='/pdf-template'
+          element={
+            <MiscLayout
+              authToken={authToken}
+              error={error}
+              handleLogout={handleLogout}
+              handleSidebarClick={handleSidebarClick}
+              selectedItem={selectedItem}
+              user={user}
+            >
+              <PrivateRoute>
+                <PDFTemplatePage />
               </PrivateRoute>
             </MiscLayout>
           }
