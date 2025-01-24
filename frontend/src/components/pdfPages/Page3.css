@@ -48,22 +48,29 @@
     width: 600px;
     height: 600px;
     margin: 0 auto;
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
 }
 
 .pdf-page3-box {
     position: absolute;
-    width: 60px;
-    height: 40px;
+    width: 120px; /* Adjusted width for better text fitting */
+    height: 60px; /* Adjusted height for better text fitting */
     border: 2px solid #000;
     display: flex;
     align-items: center;
     justify-content: center;
     background: white;
     font-weight: bold;
-    transform-origin: 50% 50%; /* Make the rotation happen from the center */
+    font-size: 14px; /* Adjusted font size for better readability */
+    text-align: center;
+    padding: 5px; /* Padding to give some space around the text */
+    box-sizing: border-box; /* To include padding in the width/height */
+    transform-origin: 50% 50%;
 }
 
-/* Use rotate and translate to evenly spread the boxes in a circle */
+/* Positioning the boxes around the globe */
 .pdf-page3-box-a { transform: rotate(0deg) translate(230px) rotate(0deg); }
 .pdf-page3-box-b { transform: rotate(45deg) translate(230px) rotate(-45deg); }
 .pdf-page3-box-c { transform: rotate(90deg) translate(230px) rotate(-90deg); }
@@ -83,6 +90,7 @@
     border-radius: 50%;
     overflow: hidden;
 }
+
 
 .pdf-page3-globe-image {
     width: 100%;

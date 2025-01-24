@@ -18,14 +18,14 @@ const Page3 = () => {
 
         <div className="pdf-page3-diagram-container">
           {/* Boxes arranged in a circle */}
-          <div className="pdf-page3-box pdf-page3-box-a">A</div>
-          <div className="pdf-page3-box pdf-page3-box-b">B</div>
-          <div className="pdf-page3-box pdf-page3-box-c">C</div>
-          <div className="pdf-page3-box pdf-page3-box-d">D</div>
-          <div className="pdf-page3-box pdf-page3-box-e">E</div>
-          <div className="pdf-page3-box pdf-page3-box-f">F</div>
-          <div className="pdf-page3-box pdf-page3-box-g">G</div>
-          <div className="pdf-page3-box pdf-page3-box-h">H</div>
+          <div className="pdf-page3-box pdf-page3-box-a">Background Checks</div>
+          <div className="pdf-page3-box pdf-page3-box-b">Biometrics</div>
+          <div className="pdf-page3-box pdf-page3-box-c">Browsing Information</div>
+          <div className="pdf-page3-box pdf-page3-box-d">Government Identifiers</div>
+          <div className="pdf-page3-box pdf-page3-box-e">Genetic Information</div>
+          <div className="pdf-page3-box pdf-page3-box-f">Professional Experience</div>
+          <div className="pdf-page3-box pdf-page3-box-g">Social Information</div>
+          <div className="pdf-page3-box pdf-page3-box-h">Healthcare</div>
 
           {/* Central globe image */}
           <div className="pdf-page3-globe-container">
