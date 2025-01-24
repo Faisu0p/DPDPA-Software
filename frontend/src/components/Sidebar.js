@@ -152,14 +152,14 @@ const Sidebar = ({ onSelect }) => {
   component={Link}
   to='/risk-page-pq'
   className={clsx({ active: activePath === '/risk-page-pq' })}
-  aria-label='Risk Analysis PQ'
-  onClick={() => onSelect('Risk Analysis PQ')}
+  aria-label='Preliminary Risk Analysis'
+  onClick={() => onSelect('Preliminary Risk Analysis')}
   sx={{ width: '100%' }}
 >
   <ListItemIcon>
     <SmartToyOutlinedIcon sx={{ color: 'white' }} /> {/* AI model icon */}
   </ListItemIcon>
-  {open && <ListItemText primary='Risk Analysis PQ' sx={{ color: 'white' }} />}
+  {open && <ListItemText primary='Preliminary Risk Analysis' sx={{ color: 'white' }} />}
 </ListItem>
 )}
 

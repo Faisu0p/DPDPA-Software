@@ -79,7 +79,7 @@ const RiskDashboard = () => {
             marginBottom: '20px',
           }}
         >
-          <h1>Risk Analysis Dashboard</h1>
+          <h1>Preliminary Risk Report</h1>
           <div
             style={{
               fontSize: '24px',

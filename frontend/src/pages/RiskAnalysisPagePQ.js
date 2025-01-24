@@ -9,7 +9,7 @@ const RiskAnalysisPagePQ = () => {
   return (
     <Container>
       <Typography variant='h4' gutterBottom>
-        Risk Analysis
+        
       </Typography>
       <Paper sx={{ padding: 2 }}>
         <Box>
