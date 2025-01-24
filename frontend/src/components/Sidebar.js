@@ -144,7 +144,23 @@ const Sidebar = ({ onSelect }) => {
   </ListItemIcon>
   {open && <ListItemText primary='AI Model' sx={{ color: 'white' }} />}
 </ListItem>
+)}
 
+{hasAccess(['Admin','Compliance Team']) && (
+  <ListItem
+  button
+  component={Link}
+  to='/risk-page-pq'
+  className={clsx({ active: activePath === '/risk-page-pq' })}
+  aria-label='Risk Analysis PQ'
+  onClick={() => onSelect('Risk Analysis PQ')}
+  sx={{ width: '100%' }}
+>
+  <ListItemIcon>
+    <SmartToyOutlinedIcon sx={{ color: 'white' }} /> {/* AI model icon */}
+  </ListItemIcon>
+  {open && <ListItemText primary='Risk Analysis PQ' sx={{ color: 'white' }} />}
+</ListItem>
 )}
 
 

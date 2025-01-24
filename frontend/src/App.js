@@ -17,6 +17,7 @@ import ListOfActions from './pages/ListOfActions';
 import PreliminaryQuestions from './components/PreliminaryQuestions';
 
 import AiModel from './components/AiModel';
+import RiskPagePQ from './pages/RiskAnalysisPagePQ';
 
 
 // import AlertManagement from "./pages/AlertManagement";
@@ -36,6 +37,7 @@ import { msalInstance } from './components/msalInstance'; // Assuming you have a
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import RiskAnalysisPagePQ from './pages/RiskAnalysisPagePQ.js';
 
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem('token');
@@ -196,7 +198,7 @@ const App = () => {
           }
         />
 
-<Route
+        <Route
           path='/ai-model'
           element={
             <MiscLayout
@@ -209,6 +211,24 @@ const App = () => {
             >
               <PrivateRoute>
                 <AiModel />
+              </PrivateRoute>
+            </MiscLayout>
+          }
+        />
+
+        <Route
+          path='/risk-page-pq'
+          element={
+            <MiscLayout
+              authToken={authToken}
+              error={error}
+              handleLogout={handleLogout}
+              handleSidebarClick={handleSidebarClick}
+              selectedItem={selectedItem}
+              user={user}
+            >
+              <PrivateRoute>
+                <RiskPagePQ />
               </PrivateRoute>
             </MiscLayout>
           }
