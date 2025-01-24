@@ -1,0 +1,246 @@
+/* Wrapper for all pages */
+.pdf-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Container for each individual page */
+.pdf-page-container {
+  width: 210mm;    /* A4 width */
+  height: 297mm;   /* A4 height */
+  margin-bottom: 10mm; /* Space between pages */
+  padding: 0;
+  box-sizing: border-box;
+  background: white;
+  position: relative;
+}
+
+
+/*____________________________________________________________________*/
+
+/* Header container */
+.pdf-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10mm;
+  background-color: #002F6C; /* Deep Blue */
+  color: white;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  border-bottom: 3px solid #28A745; /* Accent Green */
+}
+
+/* Left section for logo */
+.pdf-page-header-left {
+  flex: 1;
+}
+
+.pdf-page-header-logo {
+  max-width: 40mm; /* Adjust logo size */
+  height: auto;
+}
+
+/* Right section for company name */
+.pdf-page-header-right {
+  flex: 2;
+  text-align: right;
+}
+
+.pdf-page-header-right h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+
+/*____________________________________________________________________*/
+
+
+/* Footer section */
+.pdf-page-footer {
+  width: 100%;
+  text-align: center;
+  padding: 10mm 0;
+  background-color: #002F6C;
+  color: white;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  border-top: 3px solid #28A745;
+}
+
+/* Footer paragraph styling */
+.pdf-page-footer p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/*____________________________________________________________________*/
+
+
+/* Content Section */
+.pdf-page-content {
+  position: relative;
+  /* margin-top: 30mm;  */
+  margin-bottom: 30mm;
+  padding: 0 10mm; 
+  box-sizing: border-box;
+  height: 100%;
+}
+
+/* Background Layer for the Cover Page */
+.pdf-cover-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+      135deg,
+      rgba(0, 47, 108, 0.9), /* Deep Blue */
+      rgba(40, 167, 69, 0.7)  /* Accent Green */
+    ),
+    url(''); /* Optional background image */
+  background-size: cover;
+  background-position: center;
+  opacity: 0.9;
+  z-index: 0;
+}
+
+/* Content Layer */
+.pdf-cover-content {
+  position: relative;
+  z-index: 1;
+  color: white;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 20mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Header Section (Logo) */
+.pdf-cover-header {
+  margin-bottom: 10mm;
+}
+
+.pdf-cover-logo {
+  max-width: 50mm;
+  height: auto;
+}
+
+/* Main Section (Title and Subtitle) */
+.pdf-cover-main h1 {
+  font-size: 36px;
+  margin: 10mm 0 5mm;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.pdf-cover-main p {
+  font-size: 16px;
+  margin: 0;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+}
+
+/* Footer Section */
+.pdf-cover-footer {
+  font-size: 12px;
+  text-align: center;
+  opacity: 0.8;
+  margin-top: 20mm;
+}
+
+
+/*____________________________________________________________________*/
+
+
+/* Content Section */
+.pdf-page-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  margin-top: 30mm;  /* Space for the header */
+  margin-bottom: 30mm;  /* Space for the footer */
+  padding: 0 10mm; /* Optional padding for content */
+  box-sizing: border-box;
+  height: calc(100% - 60mm); /* Adjust height to prevent overflow */
+}
+
+/* Content styling */
+.pdf-cover-content {
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.pdf-cover-content h1, .pdf-cover-content h2 {
+  color: #002F6C;  /* Deep Blue */
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.pdf-cover-content p {
+  font-size: 14px;
+  margin: 10mm 0;
+}
+
+.pdf-cover-content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.pdf-cover-content ul li {
+  font-size: 14px;
+  margin-bottom: 5mm;
+}
+
+.pdf-cover-content ul li strong {
+  color: #28A745;  /* Accent Green */
+}
+
+/* Header Section (Logo) */
+.pdf-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10mm;
+  background-color: #002F6C; /* Deep Blue */
+  color: white;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  border-bottom: 3px solid #28A745; /* Accent Green */
+}
+
+/* Footer Section */
+.pdf-page-footer {
+  width: 100%;
+  text-align: center;
+  padding: 10mm 0;
+  background-color: #002F6C;
+  color: white;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  border-top: 3px solid #28A745;
+}
+
+/* Footer paragraph styling */
+.pdf-page-footer p {
+  margin: 0;
+  line-height: 1.5;
+}
