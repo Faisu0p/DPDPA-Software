@@ -1,0 +1,107 @@
+.pdf-page3-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+/* Header section */
+.pdf-page3-header {
+    background-color: #00a19c;
+    padding: 2rem 2rem;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    border-bottom: 2px solid #ddd; /* Divider for header */
+  }
+  
+  /* Logo styling */
+  .pdf-page3-logo img {
+    max-height: 50px;
+    width: auto;
+  }
+  
+  /* Header text */
+  .pdf-page3-header-text {
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+.pdf-page3-main-content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pdf-page3-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+.pdf-page3-diagram-container {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+}
+
+.pdf-page3-box {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    font-weight: bold;
+    transform-origin: 50% 50%; /* Make the rotation happen from the center */
+}
+
+/* Use rotate and translate to evenly spread the boxes in a circle */
+.pdf-page3-box-a { transform: rotate(0deg) translate(230px) rotate(0deg); }
+.pdf-page3-box-b { transform: rotate(45deg) translate(230px) rotate(-45deg); }
+.pdf-page3-box-c { transform: rotate(90deg) translate(230px) rotate(-90deg); }
+.pdf-page3-box-d { transform: rotate(135deg) translate(230px) rotate(-135deg); }
+.pdf-page3-box-e { transform: rotate(180deg) translate(230px) rotate(-180deg); }
+.pdf-page3-box-f { transform: rotate(225deg) translate(230px) rotate(-225deg); }
+.pdf-page3-box-g { transform: rotate(270deg) translate(230px) rotate(-270deg); }
+.pdf-page3-box-h { transform: rotate(315deg) translate(230px) rotate(-315deg); }
+
+.pdf-page3-globe-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.pdf-page3-globe-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* Footer section */
+.pdf-page3-footer {
+    background-color: #00a19c;
+    color: white;
+    padding: 1rem 2rem;
+    text-align: center;
+    margin-top: auto;
+    border-top: 2px solid #ddd; /* Divider above footer */
+  }
+  
+  /* Footer text */
+  .pdf-page3-footer p {
+    margin: 0.5rem 0;
+  }

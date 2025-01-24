@@ -1,0 +1,130 @@
+.pdf-page2-report-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+/* Header section */
+.pdf-page2-header {
+  background-color: #00a19c;
+  padding: 2rem 2rem;
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  border-bottom: 2px solid #ddd; /* Divider for header */
+}
+
+/* Logo styling */
+.pdf-page2-logo img {
+  max-height: 50px;
+  width: auto;
+}
+
+/* Header text */
+.pdf-page2-header-text {
+  font-family: 'Georgia', serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.pdf-page2-report-content {
+  padding: 20px;
+}
+
+.pdf-page2-report-title {
+  color: #00A19C;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.pdf-page2-report-subtitle {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.pdf-page2-description {
+  margin: 20px 0;
+  line-height: 1.5;
+}
+
+.pdf-page2-section-intro {
+  margin: 20px 0;
+  line-height: 1.5;
+  color: #444;
+}
+
+.pdf-page2-report-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pdf-page2-section-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.pdf-page2-section-content {
+  flex: 1;
+}
+
+.pdf-page2-section-content h3 {
+  color: #00A19C;
+  margin-bottom: 10px;
+}
+
+.pdf-page2-section-content p {
+  color: #666;
+  line-height: 1.5;
+}
+
+.pdf-page2-section-icon {
+  width: 50px;
+  height: 50px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.pdf-page2-health-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300A19C'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+}
+
+.pdf-page2-chart-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300A19C'%3E%3Cpath d='M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z'/%3E%3C/svg%3E");
+}
+
+.pdf-page2-lab-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300A19C'%3E%3Cpath d='M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z'/%3E%3C/svg%3E");
+}
+
+.pdf-page2-advisory-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300A19C'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E");
+}
+
+.pdf-page2-recommendations-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300A19C'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E");
+}
+
+
+/* Footer section */
+.pdf-page2-footer {
+  background-color: #00a19c;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+  margin-top: auto;
+  border-top: 2px solid #ddd; /* Divider above footer */
+}
+
+/* Footer text */
+.pdf-page2-footer p {
+  margin: 0.5rem 0;
+}

@@ -18,7 +18,7 @@ import PreliminaryQuestions from './components/PreliminaryQuestions';
 
 import AiModel from './components/AiModel';
 import RiskPagePQ from './pages/RiskAnalysisPagePQ';
-import PDFTemplatePage from './components/PDFTemplatePage.js';
+import PDFTemplatePage from './components/pdfPages/PDFTemplatePage.js';
 
 
 // import AlertManagement from "./pages/AlertManagement";

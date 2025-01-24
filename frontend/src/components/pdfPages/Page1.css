@@ -1,0 +1,155 @@
+/* General container for the PDF page */
+.pdf-page1-report-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #f0f0f0, #ffffff); /* Soft background gradient */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header section */
+.pdf-page1-header {
+  background-color: #00a19c;
+  padding: 2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  border-bottom: 2px solid #ddd; /* Divider for header */
+}
+
+/* Logo styling */
+.pdf-page1-logo img {
+  max-height: 50px;
+  width: auto;
+}
+
+/* Header text */
+.pdf-page1-header-text {
+  font-family: 'Georgia', serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* Main content section */
+.pdf-page1-main-content {
+  padding: 2rem;
+  flex-grow: 1;
+}
+
+/* Hero section */
+.pdf-page1-hero-section {
+  margin-bottom: 3rem;
+}
+
+/* Hero section text styling */
+.pdf-page1-hero-text h1 {
+  font-size: 2.5rem;
+  margin: 0.2rem 0;
+}
+
+/* Highlight text styling */
+.pdf-page1-highlight {
+  color: #00a19c;
+}
+
+/* Booking details section */
+.pdf-page1-booking-details {
+  margin: 2rem 0;
+}
+
+/* Booking ID text */
+.pdf-page1-booking-id {
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+/* Company name text */
+.pdf-page1-company-name {
+  font-size: 1.8rem;
+  margin: 0.5rem 0;
+}
+
+/* Company details */
+.pdf-page1-company-details {
+  color: #666;
+}
+
+/* Report title section */
+.pdf-page1-report-title {
+  margin: 3rem 0;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  background-color: #f9f9f9; /* Subtle background color */
+}
+
+/* Report title text */
+.pdf-page1-title-text {
+  font-family: 'Merriweather', serif;
+  font-size: 2rem;
+  margin: 0.2rem 0;
+}
+
+/* Highlighted text in the report */
+.pdf-page1-highlight-text {
+  color: #00a19c;
+  font-size: 2rem;
+  margin: 0.2rem 0;
+}
+
+/* Subtitle text */
+.pdf-page1-subtitle {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.1rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+/* Verification section */
+.pdf-page1-verification-section {
+  display: flex;
+  gap: 2rem;
+  margin: 3rem 0;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9; /* Background for the verification box */
+}
+
+/* QR Code styling */
+.pdf-page1-qr-code {
+  width: 150px;
+  height: 150px;
+  background-color: #f0f0f0;
+  border-radius: 5px; /* Rounded corners */
+}
+
+/* Verification text */
+.pdf-page1-verification-text h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+/* Verification options */
+.pdf-page1-verify-options {
+  margin-top: 1rem;
+  color: #666;
+}
+
+/* Footer section */
+.pdf-page1-footer {
+  background-color: #00a19c;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+  margin-top: auto;
+  border-top: 2px solid #ddd; /* Divider above footer */
+}
+
+/* Footer text */
+.pdf-page1-footer p {
+  margin: 0.5rem 0;
+}
