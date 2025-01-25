@@ -1121,9 +1121,9 @@ const PreliminaryQuestions = () => {
             />
 
 
-            {/* Q3 */}
+{/* Q3 */}
 
-            <FormControl fullWidth>
+<FormControl fullWidth>
   <InputLabel style={{ whiteSpace: 'normal', wordWrap: 'break-word' }}>
     Q3. Which of these in your organization read, process, store, or change the data you have selected above?
   </InputLabel>
@@ -1135,20 +1135,17 @@ const PreliminaryQuestions = () => {
     renderValue={(selected) => selected.join(', ')}
     sx={{ height: '80px' }}
   >
-    <MenuItem value="Design">Design</MenuItem>
-    <MenuItem value="Marketing">Marketing</MenuItem>
-    <MenuItem value="Product">Product</MenuItem>
-    <MenuItem value="Product Communications">Product Communications</MenuItem>
-    <MenuItem value="Product Marketing">Product Marketing</MenuItem>
-    <MenuItem value="Product Operations">Product Operations</MenuItem>
-    <MenuItem value="SportsOps">SportsOps</MenuItem>
-    <MenuItem value="Technology">Technology</MenuItem>
+    <MenuItem value="Human Resources (HR)">Human Resources (HR)</MenuItem>
+    <MenuItem value="Finance">Finance</MenuItem>
+    <MenuItem value="Legal">Legal</MenuItem>
+    <MenuItem value="Information Technology (IT)">Information Technology (IT)</MenuItem>
+    <MenuItem value="Operations">Operations</MenuItem>
     <MenuItem value="Sales">Sales</MenuItem>
-    <MenuItem value="Ad Sales">Ad Sales</MenuItem>
-    <MenuItem value="Alliances and Partnerships">Alliances and Partnerships</MenuItem>
-    <MenuItem value="Data">Data</MenuItem>
-    <MenuItem value="HR">HR</MenuItem>
-    <MenuItem value="Admin">Admin</MenuItem>
+    <MenuItem value="Marketing">Marketing</MenuItem>
+    <MenuItem value="Customer Support/Service">Customer Support/Service</MenuItem>
+    <MenuItem value="Strategy/Corporate Development">Strategy/Corporate Development</MenuItem>
+    <MenuItem value="Engineering">Engineering</MenuItem>
+    <MenuItem value="R&D">R&D</MenuItem>
     <MenuItem value="Others">Others</MenuItem>
   </Select>
 
@@ -1164,6 +1161,7 @@ const PreliminaryQuestions = () => {
     />
   )}
 </FormControl>
+
 
 
 

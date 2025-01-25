@@ -1,14 +1,66 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Page3.css';
-import globe from "./images/globe.jpg";
-import logo from "./images/dp-logo.jpg";
+import globe from './images/globe.jpg';
+import logo from './images/dp-logo.jpg';
 
 const Page3 = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchRiskData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          'http://localhost:8021/api/v1/preliminary-questions/risk-analysis'
+        );
+        if (!response.ok) throw new Error('Failed to fetch data');
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRiskData();
+  }, []);
+
+  const { inputs } = data || {};
+  console.log(inputs);
+
+  const businessFunctions = [
+    'Human Resources (HR)',
+    'Finance',
+    'Legal',
+    'Information Technology (IT)',
+    'Operations',
+    'Sales',
+    'Marketing',
+    'Customer Support/Service',
+    'Strategy/Corporate Development',
+    'Engineering',
+    'R&D',
+  ];
+
+    // Extract support functionalities from the response
+  const supportFunctionalitiesInData =
+  inputs?.find((input) => input.name === "Support Functionalities")?.value
+    .split(",") || [];
+
+  // Function to check if a support functionality is present
+  const isSupportFunctionalityPresent = (func) => {
+  return supportFunctionalitiesInData.includes(func);
+  };
+  console.log(supportFunctionalitiesInData);
+
   return (
     <div className="pdf-page3-page-container">
       <header className="pdf-page3-header">
         <div className="pdf-page3-logo">
-            <img src={logo} alt="Healthians Logo" />
+          <img src={logo} alt="Healthians Logo" />
         </div>
         <div className="pdf-page3-header-text">Smart Report</div>
       </header>
@@ -17,21 +69,21 @@ const Page3 = () => {
         <h1 className="pdf-page3-title">Business and Support Functionalities</h1>
 
         <div className="pdf-page3-diagram-container">
-          {/* Boxes arranged in a circle */}
-          <div className="pdf-page3-box pdf-page3-box-a">Background Checks</div>
-          <div className="pdf-page3-box pdf-page3-box-b">Biometrics</div>
-          <div className="pdf-page3-box pdf-page3-box-c">Browsing Information</div>
-          <div className="pdf-page3-box pdf-page3-box-d">Government Identifiers</div>
-          <div className="pdf-page3-box pdf-page3-box-e">Genetic Information</div>
-          <div className="pdf-page3-box pdf-page3-box-f">Professional Experience</div>
-          <div className="pdf-page3-box pdf-page3-box-g">Social Information</div>
-          <div className="pdf-page3-box pdf-page3-box-h">Healthcare</div>
+          {/* Render boxes for each business function */}
+          {businessFunctions.map((functionName, index) => (
+            <div
+              key={index}
+              className={`pdf-page3-box pdf-page3-box-${String.fromCharCode(97 + index)}`}
+            >
+              {functionName}
+            </div>
+          ))}
 
           {/* Central globe image */}
           <div className="pdf-page3-globe-container">
-            <img 
-              src={globe} 
-              alt="Digital globe with network connections" 
+            <img
+              src={globe}
+              alt="Digital globe with network connections"
               className="pdf-page3-globe-image"
             />
           </div>
