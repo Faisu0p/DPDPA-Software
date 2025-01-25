@@ -27,10 +27,12 @@ const Page1 = () => {
     fetchRiskData();
   }, []);
 
-  const { timestamp } = data || {}; // Destructure safely for timestamp
+  const { timestamp } = data || {};
 
   return (
     <div className="pdf-page1-report-container">
+
+      {/* Header Section */}
       <header className="pdf-page1-header">
         <div className="pdf-page1-logo">
           <img src={logo} alt="Healthians Logo" />
@@ -38,22 +40,25 @@ const Page1 = () => {
         <div className="pdf-page1-header-text">Smart Report</div>
       </header>
 
+      {/* Main Content */}
       <main className="pdf-page1-main-content">
+
+        {/* Header Section */}
         <div className="pdf-page1-hero-section">
-          <div className="pdf-page1-hero-text">
             <h1 className="pdf-page1-highlight">Preliminary Risk Report</h1>
-          </div>
+            <p>Your personalized AI-based analysis</p>
         </div>
 
         
+        {/* Report Title */}
         <div className="pdf-page1-report-title">
-          <h2 className="pdf-page1-title-text">A Comprehensive</h2>
+          <h2>A Comprehensive</h2>
           <h2 className="pdf-page1-highlight-text">Risk Analysis Report</h2>
-          <p className="pdf-page1-subtitle">
-            AI-Based Personalized Report for You
-          </p>
+          <p>Tailored insights for informed decision-making</p>
         </div>
 
+
+        {/* Booking Details */}
         <div className="pdf-page1-booking-details">
           <h2 className="pdf-page1-company-name">Pink Unicorn Algorithms</h2>
           <p className="pdf-page1-company-details">Industry Type: IT</p>
@@ -67,6 +72,7 @@ const Page1 = () => {
         </div>
 
 
+        {/* Verification Section */}
         <div className="pdf-page1-verification-section">
           <div className="pdf-page1-qr-code"></div>
           <div className="pdf-page1-verification-text">
@@ -76,19 +82,21 @@ const Page1 = () => {
             </h3>
             <p>Check the authenticity of your risk report with machine data</p>
             <div className="pdf-page1-verify-options">
-              <p>Go to dpdpa.com on your mobile</p>
+              <p>Go to security360.com on your mobile</p>
               <p>Scan the QR Code</p>
             </div>
           </div>
         </div>
       </main>
 
+
+      {/* Footer */}      
       <footer className="pdf-page1-footer">
         <p>
-          For any concern regarding this report, call our quality helpline at:
-          1234567890
+          For any concern regarding this report, contact our quality helpline at:
+          security360@gmail.com
         </p>
-        <p>www.dpdpasoftware.com</p>
+        <p>www.security360.com</p>
       </footer>
     </div>
   );
