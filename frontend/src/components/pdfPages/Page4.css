@@ -1,10 +1,10 @@
-.pdf-page4-page-container {
+.pdf-page4-container {
     max-width: 1200px;
     margin: 0 auto;
     font-family: Arial, sans-serif;
 }
 
-/* Header section */
+/* Header Section */
 .pdf-page4-header {
     background-color: #00a19c;
     padding: 2rem 2rem;
@@ -16,37 +16,139 @@
     border-bottom: 2px solid #ddd; /* Divider for header */
 }
 
+/* Logo Styling */
 .pdf-page4-logo img {
     max-height: 50px;
     width: auto;
 }
 
-/* Header text */
+/* Header Text */
 .pdf-page4-header-text {
     font-family: 'Georgia', serif;
     font-weight: bold;
     font-size: 1.5rem;
 }
 
-.pdf-page4-main-content {
-    flex: 1;
+/* Main Content Section */
+.pdf-page4-report-content {
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* No content here, keeping it empty */
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
-/* Footer section */
+/* Report Title */
+.pdf-page4-report-title {
+    color: #00a19c;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.pdf-page4-report-subtitle {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Risk Summary Section */
+.pdf-page4-risk-summary {
+    text-align: center;
+    margin: 20px 0;
+    color: #444;
+}
+
+.pdf-page4-risk-level {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.pdf-page4-risk-score,
+.pdf-page4-timestamp {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+/* Highlights and Recommendations */
+.pdf-page4-highlights,
+.pdf-page4-recommendations {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.pdf-page4-highlights h3,
+.pdf-page4-recommendations h3 {
+    color: #00a19c;
+    margin-bottom: 10px;
+}
+
+.pdf-page4-highlight-item,
+.pdf-page4-recommendation-item {
+    margin: 5px 0;
+    line-height: 1.5;
+    color: #666;
+}
+
+/* Detailed Analysis Table */
+.pdf-page4-detailed-analysis {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.pdf-page4-analysis-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.pdf-page4-analysis-table th,
+.pdf-page4-analysis-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.pdf-page4-analysis-table th {
+    background-color: #00a19c;
+    color: white;
+    font-weight: bold;
+}
+
+.pdf-page4-analysis-table td {
+    vertical-align: top;
+}
+
+/* Footer Section */
 .pdf-page4-footer {
     background-color: #00a19c;
     color: white;
     padding: 1rem 2rem;
     text-align: center;
     margin-top: auto;
-    border-top: 2px solid #ddd;
+    border-top: 2px solid #ddd; /* Divider above footer */
 }
 
+/* Footer Text */
 .pdf-page4-footer p {
     margin: 0.5rem 0;
+}
+
+.pdf-page4-footer-text {
+    font-size: 1rem;
+}
+
+.pdf-page4-footer-link {
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+
+.pdf-page4-footer-link:hover {
+    text-decoration: underline;
 }

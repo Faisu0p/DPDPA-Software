@@ -371,6 +371,7 @@ const PreliminaryQuestions = () => {
       // Handle successful response
       if (response.status === 201) {
         console.log('Data submitted successfully', response.data);
+        window.location.href = "http://localhost:3000/risk-page-pq";
         // Optionally show a success message or redirect
       } else {
         console.error('Unexpected response status:', response.status);
@@ -1057,7 +1058,7 @@ const PreliminaryQuestions = () => {
             {/* Q1.3 */}
             <FormControl fullWidth>
               <Typography variant="h6" sx={{ marginBottom: 2 }}>
-                Q1.3 What are the Purposes of Processing? <br /> Select all that apply:
+                Q1.3 What are the Purposes of Processing the personal data? <br /> Select all that apply:
               </Typography>
               <FormGroup>
                 <FormControlLabel

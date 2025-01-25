@@ -57,25 +57,54 @@
 
 /* Booking details section */
 .pdf-page1-booking-details {
-  margin: 2rem 0;
-}
-
-/* Booking ID text */
-.pdf-page1-booking-id {
-  color: #666;
-  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
 }
 
 /* Company name text */
 .pdf-page1-company-name {
-  font-size: 1.8rem;
-  margin: 0.5rem 0;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
 }
 
 /* Company details */
-.pdf-page1-company-details {
-  color: #666;
+.pdf-page1-company-details,
+.pdf-page1-booking-id,
+.pdf-page1-date-generated {
+  color: #555;
+  margin-bottom: 0.8rem;
 }
+
+/* Add spacing between lines */
+.pdf-page1-company-details {
+  font-size: 1.2rem;
+}
+
+.pdf-page1-booking-id,
+.pdf-page1-date-generated {
+  font-size: 1rem;
+}
+
+/* Add hover effect */
+.pdf-page1-booking-details:hover {
+  transform: translateY(-5px);
+  transition: all 0.3s ease-in-out;
+}
+
+
+
 
 /* Report title section */
 .pdf-page1-report-title {

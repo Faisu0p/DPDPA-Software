@@ -16,12 +16,13 @@ import {
 } from '@mui/material';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import { CheckCircle, Warning, Error } from '@mui/icons-material'; // Icons for risk levels
+import PDFTemplate from './pdfPages/PDFTemplatePage';
 
 const RiskAnalysisPQ = () => {
   const [riskLevel, setRiskLevel] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const reportRef = useRef(); // Reference for the component to be captured
+  const hiddenTemplateRef = useRef(); // Reference for the component to be captured
 
   // Fetch risk analysis data from backend
   useEffect(() => {
@@ -47,18 +48,32 @@ const RiskAnalysisPQ = () => {
 
   const COLORS = ['#008000', '#FFA500', '#FF0000']; // Green for Low, Orange for Medium, Red for High
 
+  // const handleDownloadPDF = async () => {
+  //   const element = reportRef.current;
+  //   const canvas = await html2canvas(element, { scale: 2 });
+  //   const imgData = canvas.toDataURL('image/png');
+
+  //   const pdf = new jsPDF('p', 'mm', 'a4');
+  //   const pdfWidth = pdf.internal.pageSize.getWidth();
+  //   const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+  //   pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  //   pdf.save('RiskAnalysisReport.pdf');
+  // };
+
   const handleDownloadPDF = async () => {
-    const element = reportRef.current;
-    const canvas = await html2canvas(element, { scale: 2 });
-    const imgData = canvas.toDataURL('image/png');
-
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-    pdf.save('RiskAnalysisReport.pdf');
+    const element = hiddenTemplateRef.current;  // Reference to the hidden PDFTemplate
+    const canvas = await html2canvas(element, { scale: 2 });  // Capture it as a canvas
+    const imgData = canvas.toDataURL('image/png');  // Convert canvas to image data
+  
+    const pdf = new jsPDF('p', 'mm', 'a4');  // Create a new PDF
+    const pdfWidth = pdf.internal.pageSize.getWidth();  // Get PDF page width
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;  // Calculate PDF height
+  
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);  // Add the image to the PDF
+    pdf.save('CustomTemplateReport.pdf');  // Save the PDF
   };
+  
 
   if (loading) return <CircularProgress />;
   if (error) return <Typography color="error">{error}</Typography>;
@@ -66,7 +81,7 @@ const RiskAnalysisPQ = () => {
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
-        Risk Analysis Dashboard
+        Prelimianry Risk Analysis Dashboard
       </Typography>
       <Button
         variant="contained"
@@ -93,7 +108,7 @@ const RiskAnalysisPQ = () => {
         🚀 Download Risk Report
       </Button>
 
-      <Paper sx={{ padding: 2, boxShadow: 3 }} ref={reportRef}>
+      <Paper sx={{ padding: 2, boxShadow: 3 }}>
         <Box>
           <Grid container spacing={3}>
             {/* Risk Level Summary */}
@@ -172,6 +187,11 @@ const RiskAnalysisPQ = () => {
           </Grid>
         </Box>
       </Paper>
+
+      <div ref={hiddenTemplateRef}>
+        <PDFTemplate />
+      </div>
+
     </Container>
   );
 };

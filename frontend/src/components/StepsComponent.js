@@ -97,7 +97,7 @@ const StepsComponent = ({ onClose }) => {
         title: 'Step 2',  // New Step 2
         heading: 'Preliminary questions',
         description: 'Answer some preliminary questions.',
-        imageUrl: 'assets/preliminaryQuestions.png',  // Update this image URL as needed
+        imageUrl: 'assets/PQ-image.png',  // Update this image URL as needed
         linkUrl: '/preliminary-questions',  // Link for the new step
         icon: '❓',  // Icon for the new step
       },
