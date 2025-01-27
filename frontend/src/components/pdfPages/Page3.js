@@ -1,7 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import './Page3.css';
-import globe from './images/globe.jpg';
-import logo from './images/dp-logo.jpg';
+import React, { useEffect, useState } from "react";
+import "./Page3.css";
+import logo from "./images/dp-logo.jpg";
+
+
+// icons for support functionalities
+import hrIcon from "./images/hr-icon.png";
+import financeIcon from "./images/finance-icon.png";
+import legalIcon from "./images/legal-icon.png";
+import itIcon from "./images/it-icon.png";
+import operationsIcon from "./images/operations-icon.png";
+import salesIcon from "./images/sales-icon.png";
+import marketingIcon from "./images/marketing-icon.png";
+import supportIcon from "./images/support-icon.png";
+import strategyIcon from "./images/strategy-icon.png";
+import engineeringIcon from "./images/engineering-icon.png";
+import rndIcon from "./images/rnd-icon.png";
+
+//icons for business functions
+import bgcheckicon from "./images/bgcheck-icon.png";
+import bioicon from "./images/bio-icon.png";
+import brinfoicon from "./images/brinfo-icon.png";
+import governmenticon from "./images/gov-icon.png";
+import geneticicon from "./images/genetic-icon.png";
+import experienceicon from "./images/exp-icon.png";
+import socialicon from "./images/social-icon.png";
+import healthcareicon from "./images/health-icon.png";
 
 const Page3 = () => {
   const [data, setData] = useState(null);
@@ -13,9 +36,9 @@ const Page3 = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          'http://localhost:8021/api/v1/preliminary-questions/risk-analysis'
+          "http://localhost:8021/api/v1/preliminary-questions/risk-analysis"
         );
-        if (!response.ok) throw new Error('Failed to fetch data');
+        if (!response.ok) throw new Error("Failed to fetch data");
         const result = await response.json();
         setData(result);
       } catch (err) {
@@ -28,33 +51,42 @@ const Page3 = () => {
     fetchRiskData();
   }, []);
 
-  const { inputs } = data || {};
-  console.log(inputs);
-
-  const businessFunctions = [
-    'Human Resources (HR)',
-    'Finance',
-    'Legal',
-    'Information Technology (IT)',
-    'Operations',
-    'Sales',
-    'Marketing',
-    'Customer Support/Service',
-    'Strategy/Corporate Development',
-    'Engineering',
-    'R&D',
+  const supportFunctionalities = [
+    { name: "Human Resources (HR)", icon: hrIcon },
+    { name: "Finance", icon: financeIcon },
+    { name: "Legal", icon: legalIcon },
+    { name: "Information Technology (IT)", icon: itIcon },
+    { name: "Operations", icon: operationsIcon },
+    { name: "Sales", icon: salesIcon },
+    { name: "Marketing", icon: marketingIcon },
+    { name: "Customer Support/Service", icon: supportIcon },
+    { name: "Strategy/Corporate Development", icon: strategyIcon },
+    { name: "Engineering", icon: engineeringIcon },
+    { name: "R&D", icon: rndIcon },
   ];
 
-    // Extract support functionalities from the response
-  const supportFunctionalitiesInData =
-  inputs?.find((input) => input.name === "Support Functionalities")?.value
-    .split(",") || [];
+  const businessFunctions = [
+    { name: "Background Checks", icon: bgcheckicon },
+    { name: "Biometrics", icon: bioicon },
+    { name: "Browsing Information", icon: brinfoicon },
+    { name: "Government Identifiers", icon: governmenticon },
+    { name: "Genetic Information", icon: geneticicon },
+    { name: "Professional Experience", icon: experienceicon },
+    { name: "Social Information", icon: socialicon },
+    { name: "Healthcare", icon: healthcareicon },
+  ];
 
-  // Function to check if a support functionality is present
-  const isSupportFunctionalityPresent = (func) => {
-  return supportFunctionalitiesInData.includes(func);
-  };
-  console.log(supportFunctionalitiesInData);
+  const renderList = (items) =>
+    items.map((item, index) => (
+      <div key={index} className="pdf-page3-item-box">
+        <img
+          src={item.icon}
+          alt={`${item.name} Icon`}
+          className="pdf-page3-item-icon"
+        />
+        <span>{item.name}</span>
+      </div>
+    ));
 
   return (
     <div className="pdf-page3-page-container">
@@ -66,26 +98,26 @@ const Page3 = () => {
       </header>
 
       <main className="pdf-page3-main-content">
-        <h1 className="pdf-page3-title">Business and Support Functionalities</h1>
-
-        <div className="pdf-page3-diagram-container">
-          {/* Render boxes for each business function */}
-          {businessFunctions.map((functionName, index) => (
-            <div
-              key={index}
-              className={`pdf-page3-box pdf-page3-box-${String.fromCharCode(97 + index)}`}
-            >
-              {functionName}
+        <div className="pdf-page3-content-container">
+          {/* Left List */}
+          <div className="pdf-page3-list-box">
+            <h3 className="pdf-page3-list-title">Support Functionalities</h3>
+            <div className="pdf-page3-list-content">
+              {renderList(supportFunctionalities)}
             </div>
-          ))}
+          </div>
 
-          {/* Central globe image */}
-          <div className="pdf-page3-globe-container">
-            <img
-              src={globe}
-              alt="Digital globe with network connections"
-              className="pdf-page3-globe-image"
-            />
+          {/* Center Logo */}
+          <div className="pdf-page3-center-logo">
+            <img src={logo} alt="Center Logo" />
+          </div>
+
+          {/* Right List */}
+          <div className="pdf-page3-list-box">
+            <h3 className="pdf-page3-list-title">Business Functions</h3>
+            <div className="pdf-page3-list-content">
+              {renderList(businessFunctions)}
+            </div>
           </div>
         </div>
       </main>

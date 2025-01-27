@@ -1,0 +1,72 @@
+.pdf-page5-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Header section */
+  .pdf-page5-header {
+    background-color: #00a19c;
+    padding: 2rem 2rem;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  .pdf-page5-logo img {
+    max-height: 50px;
+    width: auto;
+  }
+  
+  .pdf-page5-header-text {
+    font-family: "Georgia", serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  /* Main Content Section */
+  .pdf-page5-main-content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  
+  .pdf-page5-content {
+    width: 100%;
+  }
+  
+  .pdf-page5-content section {
+    margin-bottom: 2rem;
+  }
+  
+  .pdf-page5-content h2 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #00a19c;
+  }
+  
+  .pdf-page5-content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+  
+  /* Footer styling */
+  .pdf-page5-footer {
+    background-color: #00a19c;
+    color: white;
+    padding: 1rem 2rem;
+    text-align: center;
+    margin-top: auto;
+    border-top: 2px solid #ddd;
+  }
+  
+  .pdf-page5-footer p {
+    margin: 0.5rem 0;
+  }
+  
