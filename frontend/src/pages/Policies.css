@@ -1,0 +1,84 @@
+/* Policies Page Styles */
+.policy-page-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9fafb;
+    padding: 16px;
+  }
+  
+  .policy-page-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .policy-page-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333333;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .policy-page-dropdown-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .policy-page-dropdown {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .policy-page-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555555;
+    margin-bottom: 8px;
+  }
+  
+  .policy-page-select {
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333333;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .policy-page-select:focus {
+    border-color: #3b82f6;
+  }
+  
+  .policy-page-display {
+    margin-top: 24px;
+    background-color: #f3f4f6;
+    padding: 16px;
+    border-radius: 8px;
+  }
+  
+  .policy-page-display-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333333;
+  }
+  
+  .policy-page-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 12px;
+  }
+  
+  .policy-page-list-item {
+    font-size: 1rem;
+    color: #555555;
+    margin-bottom: 8px;
+  }
+  
