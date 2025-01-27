@@ -2,11 +2,7 @@
 .pdf-page1-report-container {
   max-width: 1200px;
   margin: 0 auto;
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #f0f0f0, #ffffff); /* Soft background gradient */
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  font-family: Arial, sans-serif;
 }
 
 /* Header section */
