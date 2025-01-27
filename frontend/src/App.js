@@ -40,6 +40,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import RiskAnalysisPagePQ from './pages/RiskAnalysisPagePQ.js';
 
+import Policies from './pages/Policies.js';
+
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem('token');
   return token ? children : <Navigate to='/login' />;
@@ -195,6 +197,24 @@ const App = () => {
             >
               <PrivateRoute>
                 <PreliminaryQuestions />
+              </PrivateRoute>
+            </MiscLayout>
+          }
+        />
+
+        <Route
+          path='/policies'
+          element={
+            <MiscLayout
+              authToken={authToken}
+              error={error}
+              handleLogout={handleLogout}
+              handleSidebarClick={handleSidebarClick}
+              selectedItem={selectedItem}
+              user={user}
+            >
+              <PrivateRoute>
+                <Policies />
               </PrivateRoute>
             </MiscLayout>
           }

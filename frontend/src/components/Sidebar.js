@@ -18,6 +18,8 @@ import SchoolIcon from '@mui/icons-material/School';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import AddModeratorIcon from '@mui/icons-material/AddModerator';
 import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
+import PolicyIcon from '@mui/icons-material/Policy';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 
 import {
   Box,
@@ -157,9 +159,26 @@ const Sidebar = ({ onSelect }) => {
   sx={{ width: '100%' }}
 >
   <ListItemIcon>
-    <SmartToyOutlinedIcon sx={{ color: 'white' }} /> {/* AI model icon */}
+    <AssessmentIcon sx={{ color: 'white' }} /> {/* AI model icon */}
   </ListItemIcon>
-  {open && <ListItemText primary='Preliminary Risk Analysis' sx={{ color: 'white' }} />}
+  {open && <ListItemText primary='Preliminary Risk Report' sx={{ color: 'white' }} />}
+</ListItem>
+)}
+
+{hasAccess(['Admin','Compliance Team']) && (
+  <ListItem
+  button
+  component={Link}
+  to='/policies'
+  className={clsx({ active: activePath === '/policies' })}
+  aria-label='Policies'
+  onClick={() => onSelect('Polcies')}
+  sx={{ width: '100%' }}
+>
+  <ListItemIcon>
+    <PolicyIcon sx={{ color: 'white' }} /> {/* AI model icon */}
+  </ListItemIcon>
+  {open && <ListItemText primary='Policies' sx={{ color: 'white' }} />}
 </ListItem>
 )}
 
