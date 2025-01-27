@@ -18,6 +18,12 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recha
 import { CheckCircle, Warning, Error } from '@mui/icons-material'; // Icons for risk levels
 import PDFTemplate from './pdfPages/PDFTemplatePage';
 
+import Page1 from './pdfPages/Page1';
+import Page2 from './pdfPages/Page2';
+import Page3 from './pdfPages/Page3';
+import Page4 from './pdfPages/Page4';
+import Page5 from './pdfPages/Page5';
+
 const RiskAnalysisPQ = () => {
   const [riskLevel, setRiskLevel] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -49,31 +55,65 @@ const RiskAnalysisPQ = () => {
   const COLORS = ['#008000', '#FFA500', '#FF0000']; // Green for Low, Orange for Medium, Red for High
 
   // const handleDownloadPDF = async () => {
-  //   const element = reportRef.current;
-  //   const canvas = await html2canvas(element, { scale: 2 });
-  //   const imgData = canvas.toDataURL('image/png');
-
-  //   const pdf = new jsPDF('p', 'mm', 'a4');
-  //   const pdfWidth = pdf.internal.pageSize.getWidth();
-  //   const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-  //   pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-  //   pdf.save('RiskAnalysisReport.pdf');
+  //   const element = hiddenTemplateRef.current;  // Reference to the hidden PDFTemplate
+  //   const canvas = await html2canvas(element, { scale: 2 });  // Capture it as a canvas
+  //   const imgData = canvas.toDataURL('image/png');  // Convert canvas to image data
+  
+  //   const pdf = new jsPDF('p', 'mm', 'a4');  // Create a new PDF
+  //   const pdfWidth = pdf.internal.pageSize.getWidth();  // Get PDF page width
+  //   const pdfHeight = (canvas.height * pdfWidth) / canvas.width;  // Calculate PDF height
+  
+  //   pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);  // Add the image to the PDF
+  //   pdf.save('CustomTemplateReport.pdf');  // Save the PDF
   // };
 
   const handleDownloadPDF = async () => {
-    const element = hiddenTemplateRef.current;  // Reference to the hidden PDFTemplate
-    const canvas = await html2canvas(element, { scale: 2 });  // Capture it as a canvas
-    const imgData = canvas.toDataURL('image/png');  // Convert canvas to image data
+    const element1 = document.querySelector("#page1");
+    const element2 = document.querySelector("#page2");
+    const element3 = document.querySelector("#page3");
+    const element4 = document.querySelector("#page4");
+    const element5 = document.querySelector("#page5");
   
     const pdf = new jsPDF('p', 'mm', 'a4');  // Create a new PDF
-    const pdfWidth = pdf.internal.pageSize.getWidth();  // Get PDF page width
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;  // Calculate PDF height
   
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);  // Add the image to the PDF
-    pdf.save('CustomTemplateReport.pdf');  // Save the PDF
+    // Capture Page 1 and add to PDF
+    const canvas1 = await html2canvas(element1, { scale: 2 });
+    const imgData1 = canvas1.toDataURL('image/png');
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+    pdf.addImage(imgData1, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  
+    // Add new page for Page 2
+    pdf.addPage();
+    const canvas2 = await html2canvas(element2, { scale: 2 });
+    const imgData2 = canvas2.toDataURL('image/png');
+    pdf.addImage(imgData2, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  
+    // Add new page for Page 3
+    pdf.addPage();
+    const canvas3 = await html2canvas(element3, { scale: 2 });
+    const imgData3 = canvas3.toDataURL('image/png');
+    pdf.addImage(imgData3, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  
+    // Add new page for Page 4
+    pdf.addPage();
+    const canvas4 = await html2canvas(element4, { scale: 2 });
+    const imgData4 = canvas4.toDataURL('image/png');
+    pdf.addImage(imgData4, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  
+    // Add new page for Page 5
+    pdf.addPage();
+    const canvas5 = await html2canvas(element5, { scale: 2 });
+    const imgData5 = canvas5.toDataURL('image/png');
+    pdf.addImage(imgData5, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  
+    // Save the PDF
+    pdf.save('MultiPageRiskReport.pdf');
   };
   
+  
+
+
 
   if (loading) return <CircularProgress />;
   if (error) return <Typography color="error">{error}</Typography>;
@@ -188,9 +228,33 @@ const RiskAnalysisPQ = () => {
         </Box>
       </Paper>
 
-      <div ref={hiddenTemplateRef}>
-        <PDFTemplate />
-      </div>
+      {/* <div ref={hiddenTemplateRef}>
+        <Page1/>
+        <Page2/>
+        <Page3/>
+        <Page4/>
+        <Page5/>
+      </div> */}
+
+
+<div ref={hiddenTemplateRef}>
+  <div id="page1">
+    <Page1 />
+  </div>
+  <div id="page2">
+    <Page2 />
+  </div>
+  <div id="page3">
+    <Page3 />
+  </div>
+  <div id="page4">
+    <Page4 />
+  </div>
+  <div id="page5">
+    <Page5 />
+  </div>
+</div>
+
 
     </Container>
   );
