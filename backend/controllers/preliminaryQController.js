@@ -173,7 +173,7 @@ export const getRiskAnalysis = async (req, res) => {
     // Prepare detailed response for the dashboard
     const response = {
       riskLevel: data.overallRiskLevel,
-      riskScore: data.riskScore || 75, // Default score if not calculated
+      riskScore: data.riskScore, // Default score if not calculated
       timestamp: data.createdAt || new Date(),
       highlights: [
         "Critical fields are empty.",

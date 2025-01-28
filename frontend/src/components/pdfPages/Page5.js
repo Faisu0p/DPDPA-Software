@@ -1,8 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Page5.css";
 import logo from "./images/dp-logo.jpg";
 
+// Define the Page5 component
 const Page5 = () => {
+  const [observations, setObservations] = useState([]);
+  const [recommendations, setRecommendations] = useState({
+    immediate: [],
+    mediumTerm: [],
+    longTerm: [],
+  });
+
+  // Fetch data from the API
+  useEffect(() => {
+    const fetchObservationsAndRecommendations = async () => {
+      try {
+        const response = await fetch('http://localhost:8021/api/v1/pdf-pages/yes-no-questions');  // Update with your actual API endpoint
+        const data = await response.json();
+
+        if (data.observations && data.recommendations) {
+          setObservations(data.observations);
+          setRecommendations(data.recommendations);
+        }
+      } catch (error) {
+        console.error('Error fetching observations and recommendations:', error);
+      }
+    };
+
+    fetchObservationsAndRecommendations();
+  }, []);
+
   return (
     <div className="pdf-page5-page-container">
       <header className="pdf-page5-header">
@@ -17,19 +44,13 @@ const Page5 = () => {
           <section className="key-observations">
             <h2>Key Observations & Narration</h2>
             <ul>
-              <li>
-                Your organization processes sensitive personal data without
-                conducting a DPIA (Data Protection Impact Assessment), exposing
-                it to regulatory penalties under DPDP Act 2023.
-              </li>
-              <li>
-                Global compliance gaps with ISO and NIST standards may hinder
-                international operations or client trust.
-              </li>
-              <li>
-                Identified lack of clear tracking for internal and external
-                audits, potentially leaving blind spots in data security.
-              </li>
+              {observations.length > 0 ? (
+                observations.map((observation, index) => (
+                  <li key={index}>{observation}</li>
+                ))
+              ) : (
+                <li>No observations available.</li>
+              )}
             </ul>
           </section>
 
@@ -38,21 +59,37 @@ const Page5 = () => {
             <div>
               <h3>1. Immediate Actions:</h3>
               <ul>
-                <li>Conduct a DPIA to identify and mitigate risks related to personal data.</li>
-                <li>Establish a global compliance framework aligned with ISO 27001 or NIST standards.</li>
+                {recommendations.immediate.length > 0 ? (
+                  recommendations.immediate.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))
+                ) : (
+                  <li>No immediate actions available.</li>
+                )}
               </ul>
             </div>
             <div>
               <h3>2. Medium-Term Goals:</h3>
               <ul>
-                <li>Automate data access controls and audit trails to strengthen accountability.</li>
-                <li>Enhance training for teams handling personal data to reduce operational risks.</li>
+                {recommendations.mediumTerm.length > 0 ? (
+                  recommendations.mediumTerm.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))
+                ) : (
+                  <li>No medium-term goals available.</li>
+                )}
               </ul>
             </div>
             <div>
               <h3>3. Long-Term Strategy:</h3>
               <ul>
-                <li>Build a compliance-first culture by integrating real-time monitoring tools like Compliance360.</li>
+                {recommendations.longTerm.length > 0 ? (
+                  recommendations.longTerm.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))
+                ) : (
+                  <li>No long-term strategies available.</li>
+                )}
               </ul>
             </div>
           </section>
