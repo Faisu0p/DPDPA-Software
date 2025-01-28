@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./Page3.css";
 import logo from "./images/dp-logo.jpg";
 
-
 // icons for support functionalities
 import hrIcon from "./images/hr-icon.png";
 import financeIcon from "./images/finance-icon.png";
@@ -36,21 +35,21 @@ const Page3 = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "http://localhost:8021/api/v1/preliminary-questions/risk-analysis"
+          "http://localhost:8021/api/v1/pdf-pages/support-and-lists"
         );
         if (!response.ok) throw new Error("Failed to fetch data");
         const result = await response.json();
-        setData(result);
+        setData(result.data);  // Updated to match the new structure
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchRiskData();
   }, []);
-
+  
   const supportFunctionalities = [
     { name: "Human Resources (HR)", icon: hrIcon },
     { name: "Finance", icon: financeIcon },
@@ -76,17 +75,27 @@ const Page3 = () => {
     { name: "Healthcare", icon: healthcareicon },
   ];
 
-  const renderList = (items) =>
-    items.map((item, index) => (
-      <div key={index} className="pdf-page3-item-box">
-        <img
-          src={item.icon}
-          alt={`${item.name} Icon`}
-          className="pdf-page3-item-icon"
-        />
-        <span>{item.name}</span>
-      </div>
-    ));
+  const renderList = (items, type) =>
+    items.map((item, index) => {
+      // Check if the item is present in the response data for support or business functions
+      const isDisabled = type === "support"
+        ? !data?.SupportFunctionalities?.includes(item.name)
+        : !data?.BusinessFunctionalities?.includes(item.name);
+  
+      return (
+        <div
+          key={index}
+          className={`pdf-page3-item-box ${isDisabled ? "disabled" : ""}`}
+        >
+          <img
+            src={item.icon}
+            alt={`${item.name} Icon`}
+            className="pdf-page3-item-icon"
+          />
+          <span>{item.name}</span>
+        </div>
+      );
+    });
 
   return (
     <div className="pdf-page3-page-container">
@@ -103,7 +112,7 @@ const Page3 = () => {
           <div className="pdf-page3-list-box">
             <h3 className="pdf-page3-list-title">Support Functionalities</h3>
             <div className="pdf-page3-list-content">
-              {renderList(supportFunctionalities)}
+              {renderList(supportFunctionalities, "support")}
             </div>
           </div>
 
@@ -116,7 +125,7 @@ const Page3 = () => {
           <div className="pdf-page3-list-box">
             <h3 className="pdf-page3-list-title">Business Functions</h3>
             <div className="pdf-page3-list-content">
-              {renderList(businessFunctions)}
+              {renderList(businessFunctions, "business")}
             </div>
           </div>
         </div>

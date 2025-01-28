@@ -78,6 +78,13 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+.pdf-page3-item-box.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+
+
 .pdf-page3-item-box:hover {
   background-color: #f0f0f0;
 }

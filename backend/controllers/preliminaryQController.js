@@ -1,4 +1,5 @@
 import PreliminaryQuestions from '../models/preliminaryQModel.js';
+import { v4 as uuidv4 } from 'uuid'; // Importing uuid to generate unique reportId
 
 export const submitPreliminaryQuestions = async (req, res) => {
   try {
@@ -101,6 +102,10 @@ export const submitPreliminaryQuestions = async (req, res) => {
 
     const { overallRiskLevel, riskScore } = calculateRisk(req.body);
 
+
+    // Generate a unique report ID
+    const reportId = uuidv4();
+
     // Create a new PreliminaryQuestions document
     const newPreliminaryQuestions = new PreliminaryQuestions({
       processPersonalData,
@@ -135,6 +140,8 @@ export const submitPreliminaryQuestions = async (req, res) => {
 
       overallRiskLevel,
       riskScore,
+
+      reportId,
     });
 
     // Save to the database

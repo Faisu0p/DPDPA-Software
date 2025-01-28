@@ -43,6 +43,8 @@ import swaggerDocs from './swagger.js'; // Import the Swagger setup
 
 import preliminaryQuestionsRoutes from './routes/preliminaryQRoute.js'; // Import the preliminary questions route
 
+import PdfPagesRoute from './routes/PdfPagesRoutes.js'; // Import the company form routes
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -95,6 +97,7 @@ app.use('/api/users', userRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/api/v1/preliminary-questions', preliminaryQuestionsRoutes); // Add this line to handle preliminary questions form submission
+app.use('/api/v1/pdf-pages/', PdfPagesRoute); // Add this line to handle company form data
 
 
 app.get('/:filename', async (req, res) => {

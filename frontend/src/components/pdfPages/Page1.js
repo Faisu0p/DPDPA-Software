@@ -8,24 +8,24 @@ const Page1 = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchRiskData = async () => {
+    const fetchCompanyData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          "http://localhost:8021/api/v1/preliminary-questions/risk-analysis"
-        );
-        if (!response.ok) throw new Error("Failed to fetch data");
+        const response = await fetch("http://localhost:8021/api/v1/pdf-pages/company-data"); // New API endpoint
+        if (!response.ok) throw new Error("Failed to fetch company data");
         const result = await response.json();
-        setData(result);
+        setData(result.data); // Use the 'data' from the response
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
-    fetchRiskData();
+  
+    fetchCompanyData();
   }, []);
+  
+  
 
   const { timestamp } = data || {};
 
@@ -60,15 +60,24 @@ const Page1 = () => {
 
         {/* Booking Details */}
         <div className="pdf-page1-booking-details">
-          <h2 className="pdf-page1-company-name">Pink Unicorn Algorithms</h2>
-          <p className="pdf-page1-company-details">Industry Type: IT</p>
-          <p className="pdf-page1-booking-id">Booking ID: 574127618</p>
+
+          {/* Replace hardcoded values with dynamic ones from the API response */}
+          <h2 className="pdf-page1-company-name">
+            {data && data.length > 0 ? data[0].organizationName : "Loading..."}
+          </h2>
+          <p className="pdf-page1-company-details">
+            Industry Type: {data && data.length > 0 ? data[0].industryType : "Loading..."}
+          </p>
+          <p className="pdf-page1-booking-id">
+            Report ID: {data && data.length > 0 ? data[0].reportId : "Loading..."}
+          </p>
           <p className="pdf-page1-date-generated">
             Generated on:{" "}
-            {timestamp
-              ? new Date(timestamp).toLocaleString()
+            {data && data.length > 0
+              ? new Date(data[0].timestamp).toLocaleString()
               : "Loading..."}
           </p>
+
         </div>
 
 

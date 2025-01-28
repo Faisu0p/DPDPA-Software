@@ -128,6 +128,12 @@ const preliminaryQuestionsSchema = new mongoose.Schema({
     default: 0,
   },
 
+  reportId: {
+    type: String,
+    required: true,
+    unique: true,  // Ensures uniqueness for each report
+  },
+
 }, { timestamps: true });
 
 const PreliminaryQuestions = mongoose.model('PreliminaryQuestions', preliminaryQuestionsSchema);
