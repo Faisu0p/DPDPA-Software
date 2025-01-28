@@ -187,12 +187,6 @@ export const getRiskAnalysis = async (req, res) => {
       ],
       inputs: [
         {
-          name: "Support Functionalities",
-          value: data.supportFunctionalities.functionalities.length > 0
-            ? data.supportFunctionalities.functionalities.join(', ')
-            : "None",
-        },
-        {
           name: "Process Personal Data",
           value: data.processPersonalData,
           riskStatus: data.processPersonalData === 'Yes' ? 'Low' : 'High',
