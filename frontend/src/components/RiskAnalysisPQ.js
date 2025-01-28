@@ -54,19 +54,6 @@ const RiskAnalysisPQ = () => {
 
   const COLORS = ['#008000', '#FFA500', '#FF0000']; // Green for Low, Orange for Medium, Red for High
 
-  // const handleDownloadPDF = async () => {
-  //   const element = hiddenTemplateRef.current;  // Reference to the hidden PDFTemplate
-  //   const canvas = await html2canvas(element, { scale: 2 });  // Capture it as a canvas
-  //   const imgData = canvas.toDataURL('image/png');  // Convert canvas to image data
-  
-  //   const pdf = new jsPDF('p', 'mm', 'a4');  // Create a new PDF
-  //   const pdfWidth = pdf.internal.pageSize.getWidth();  // Get PDF page width
-  //   const pdfHeight = (canvas.height * pdfWidth) / canvas.width;  // Calculate PDF height
-  
-  //   pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);  // Add the image to the PDF
-  //   pdf.save('CustomTemplateReport.pdf');  // Save the PDF
-  // };
-
   const handleDownloadPDF = async () => {
     const element1 = document.querySelector("#page1");
     const element2 = document.querySelector("#page2");
@@ -228,32 +215,24 @@ const RiskAnalysisPQ = () => {
         </Box>
       </Paper>
 
-      {/* <div ref={hiddenTemplateRef}>
-        <Page1/>
-        <Page2/>
-        <Page3/>
-        <Page4/>
-        <Page5/>
-      </div> */}
 
-
-<div ref={hiddenTemplateRef}>
-  <div id="page1">
-    <Page1 />
-  </div>
-  <div id="page2">
-    <Page2 />
-  </div>
-  <div id="page3">
-    <Page3 />
-  </div>
-  <div id="page4">
-    <Page4 />
-  </div>
-  <div id="page5">
-    <Page5 />
-  </div>
-</div>
+      <div ref={hiddenTemplateRef}>
+        <div id="page1">
+          <Page1 />
+        </div>
+        <div id="page2">
+          <Page2 />
+        </div>
+        <div id="page3">
+          <Page3 />
+        </div>
+        <div id="page4">
+          <Page4 />
+        </div>
+        <div id="page5">
+          <Page5 />
+        </div>
+      </div>
 
 
     </Container>
