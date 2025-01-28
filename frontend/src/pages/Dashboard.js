@@ -48,13 +48,17 @@ const Dashboard = () => {
   return (
     <div>
       {modalVisible && (
-        <div className='modal'>
-          <div className='modal-content'>
-            <h2>Please Complete the Company Form</h2>
-            <p>You must complete the company form before proceeding.</p>
-            <button onClick={handleFillForm}>Fill Form Now</button>
+        <div className="modern-modal">
+          <div className="modern-modal-content">
+            <h2 className="modern-modal-title">Please Complete the Company Form</h2>
+            <p className="modern-modal-description">You must complete the company form before proceeding.</p>
+            <button className="modern-modal-button" onClick={handleFillForm}>
+              Fill Form Now
+            </button>
           </div>
         </div>
+
+
       )}
       {showSteps ? <StepsComponent onClose={toggleSteps} /> : <Scoreboard />}
     </div>
@@ -63,53 +67,4 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-// import React, { useState, useEffect } from 'react';
-// import StepsComponent from '../components/StepsComponent';
-// import CompletionStatusPage from '../components/completionStatusPage';
-// import Scoreboard from '../components/Scoreboard';
-// import {
-//   updateFormCompletionStatus,
-//   fetchCurrentUser,
-//   checkFormCompletion,
-// } from '../api/userApi'; // Assume this gets the current logged-in user
-// import { useNavigate } from 'react-router-dom';
-// import './dashboard.css';
-// import RiskDashboard from '../components/RiskDashboard';
 
-// const Dashboard = () => {
-//   const [showSteps, setShowSteps] = useState(true);
-//   const buttonClass = showSteps ? 'show-steps' : 'hide-steps';
-//   const [first, setFirst] = useState(false);
-//   const navigate = useNavigate();
-
-//   const toggleSteps = () => {
-//     setShowSteps(!showSteps);
-//   };
-
-//   const isFirstTime = async () => {
-//     const currentUser = await fetchCurrentUser(
-//       window.localStorage.getItem('token')
-//     );
-//     setFirst(currentUser.data.hasCompletedCompanyForm);
-
-//     if (first) {
-//       navigate('/onboarding');
-
-//       return;
-//     } else {
-//       return;
-//     }
-//   };
-
-//   useEffect(() => {
-//     isFirstTime();
-//   }, []);
-
-//   return (
-//     <div>
-//       {showSteps ? <StepsComponent onClose={toggleSteps} /> : <Scoreboard />}
-//     </div>
-//   );
-// };
-
-// export default Dashboard;

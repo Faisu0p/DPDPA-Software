@@ -27,42 +27,88 @@
   }
 }
 
-.modal {
+/* Modal Background */
+.modern-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(6px); /* Adds a blurred glass-like effect */
 }
 
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
+/* Modal Container */
+.modern-modal-content {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3); /* More prominent shadow */
   text-align: center;
+  width: 90%;
+  max-width: 500px; /* Ensures consistent size on larger screens */
+  position: relative;
+  animation: fadeIn 0.4s ease-out; /* Smooth fade-in animation */
 }
 
-.modal-content h2 {
-  margin-bottom: 10px;
-}
-
-.modal-content p {
+/* Title Styling */
+.modern-modal-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #222831;
   margin-bottom: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase; /* Gives the title a bold statement look */
 }
 
-.modal-content button {
-  background: #007bff;
-  color: white;
-  padding: 10px 20px;
+/* Description Styling */
+.modern-modal-description {
+  font-size: 1.1rem;
+  color: #555555;
+  margin-bottom: 30px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Button Styling */
+.modern-modal-button {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  color: #ffffff;
+  padding: 15px 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
   border: none;
-  border-radius: 5px;
+  border-radius: 50px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 6px 12px rgba(0, 123, 255, 0.4); /* Adds a glowing effect */
 }
 
-.modal-content button:hover {
-  background: #0056b3;
+.modern-modal-button:hover {
+  background: linear-gradient(90deg, #0056b3, #003f82);
+  box-shadow: 0px 8px 16px rgba(0, 123, 255, 0.6);
+  transform: translateY(-3px); /* Slight floating effect */
 }
+
+.modern-modal-button:active {
+  transform: translateY(0); /* Reset button position */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
