@@ -54,50 +54,74 @@ const RiskAnalysisPQ = () => {
 
   const COLORS = ['#008000', '#FFA500', '#FF0000']; // Green for Low, Orange for Medium, Red for High
 
+  // const handleDownloadPDF = async () => {
+  //   const element1 = document.querySelector("#page1");
+  //   const element2 = document.querySelector("#page2");
+  //   const element3 = document.querySelector("#page3");
+  //   const element4 = document.querySelector("#page4");
+  //   const element5 = document.querySelector("#page5");
+  
+  //   const pdf = new jsPDF('p', 'mm', 'a4');  // Create a new PDF
+  
+  //   // Capture Page 1 and add to PDF
+  //   const canvas1 = await html2canvas(element1, { scale: 2 });
+  //   const imgData1 = canvas1.toDataURL('image/png');
+  //   const pdfWidth = pdf.internal.pageSize.getWidth();
+  //   const pdfHeight = pdf.internal.pageSize.getHeight();
+  //   pdf.addImage(imgData1, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  
+  //   // Add new page for Page 2
+  //   pdf.addPage();
+  //   const canvas2 = await html2canvas(element2, { scale: 2 });
+  //   const imgData2 = canvas2.toDataURL('image/png');
+  //   pdf.addImage(imgData2, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  
+  //   // Add new page for Page 3
+  //   pdf.addPage();
+  //   const canvas3 = await html2canvas(element3, { scale: 2 });
+  //   const imgData3 = canvas3.toDataURL('image/png');
+  //   pdf.addImage(imgData3, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  
+  //   // Add new page for Page 4
+  //   pdf.addPage();
+  //   const canvas4 = await html2canvas(element4, { scale: 2 });
+  //   const imgData4 = canvas4.toDataURL('image/png');
+  //   pdf.addImage(imgData4, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  
+  //   // Add new page for Page 5
+  //   pdf.addPage();
+  //   const canvas5 = await html2canvas(element5, { scale: 2 });
+  //   const imgData5 = canvas5.toDataURL('image/png');
+  //   pdf.addImage(imgData5, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  
+  //   // Save the PDF
+  //   pdf.save('MultiPageRiskReport.pdf');
+  // };
+  
+  
+
+
   const handleDownloadPDF = async () => {
-    const element1 = document.querySelector("#page1");
-    const element2 = document.querySelector("#page2");
-    const element3 = document.querySelector("#page3");
-    const element4 = document.querySelector("#page4");
-    const element5 = document.querySelector("#page5");
+    const pdf = new jsPDF('p', 'mm', 'a4');
   
-    const pdf = new jsPDF('p', 'mm', 'a4');  // Create a new PDF
+    const capturePage = async (element) => {
+      const canvas = await html2canvas(element, { scale: 1.5 }); // Reduce scale
+      const imgData = canvas.toDataURL('image/jpeg', 0.7); // Use JPEG with quality 0.7
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+    };
   
-    // Capture Page 1 and add to PDF
-    const canvas1 = await html2canvas(element1, { scale: 2 });
-    const imgData1 = canvas1.toDataURL('image/png');
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
-    pdf.addImage(imgData1, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    const pages = ['#page1', '#page2', '#page3', '#page4', '#page5'];
   
-    // Add new page for Page 2
-    pdf.addPage();
-    const canvas2 = await html2canvas(element2, { scale: 2 });
-    const imgData2 = canvas2.toDataURL('image/png');
-    pdf.addImage(imgData2, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    for (let i = 0; i < pages.length; i++) {
+      if (i > 0) pdf.addPage();
+      const element = document.querySelector(pages[i]);
+      await capturePage(element);
+    }
   
-    // Add new page for Page 3
-    pdf.addPage();
-    const canvas3 = await html2canvas(element3, { scale: 2 });
-    const imgData3 = canvas3.toDataURL('image/png');
-    pdf.addImage(imgData3, 'PNG', 0, 0, pdfWidth, pdfHeight);
-  
-    // Add new page for Page 4
-    pdf.addPage();
-    const canvas4 = await html2canvas(element4, { scale: 2 });
-    const imgData4 = canvas4.toDataURL('image/png');
-    pdf.addImage(imgData4, 'PNG', 0, 0, pdfWidth, pdfHeight);
-  
-    // Add new page for Page 5
-    pdf.addPage();
-    const canvas5 = await html2canvas(element5, { scale: 2 });
-    const imgData5 = canvas5.toDataURL('image/png');
-    pdf.addImage(imgData5, 'PNG', 0, 0, pdfWidth, pdfHeight);
-  
-    // Save the PDF
     pdf.save('MultiPageRiskReport.pdf');
   };
-  
   
 
 
