@@ -170,21 +170,62 @@ export const getRiskAnalysis = async (req, res) => {
       return res.status(404).json({ message: 'No risk analysis data found' });
     }
 
+    // Define highlights and recommendations based on risk level
+    const riskHighlights = {
+      Low: [
+        "Most required fields are completed.",
+        "No significant risk indicators detected.",
+        "Compliance measures are in place but may need minor improvements."
+      ],
+      Medium: [
+        "Some fields are incomplete or contain insufficient data.",
+        "Potential risks identified in specific areas.",
+        "Compliance measures are present but require enhancement."
+      ],
+      High: [
+        "Several critical data fields are missing or incomplete.",
+        "High-risk indicators detected in multiple areas.",
+        "Gaps in compliance and security protocols."
+      ],
+      Critical: [
+        "Major security and compliance gaps identified.",
+        "Significant data exposure risks present.",
+        "High probability of regulatory non-compliance or data breaches."
+      ]
+    };
+
+    const riskRecommendations = {
+      Low: [
+        "Regularly review and update data records.",
+        "Conduct periodic internal audits to maintain compliance.",
+        "Ensure continuous monitoring to prevent emerging risks."
+      ],
+      Medium: [
+        "Address missing or incomplete data fields.",
+        "Strengthen internal controls and risk assessments.",
+        "Implement additional security measures for medium-risk areas."
+      ],
+      High: [
+        "Perform a Data Protection Impact Assessment (DPIA).",
+        "Increase the frequency of internal audits and monitoring.",
+        "Implement stronger security controls for high-risk areas.",
+        "Ensure compliance with regulatory requirements."
+      ],
+      Critical: [
+        "Immediate remediation of critical vulnerabilities.",
+        "Conduct a full-scale security audit and compliance review.",
+        "Strengthen data protection measures and enforce strict access controls.",
+        "Implement risk mitigation strategies and ensure urgent corrective actions."
+      ]
+    };
+
     // Prepare detailed response for the dashboard
     const response = {
       riskLevel: data.overallRiskLevel,
       riskScore: data.riskScore, // Default score if not calculated
       timestamp: data.createdAt || new Date(),
-      highlights: [
-        "Critical fields are empty.",
-        "Less than 50% of lists have data.",
-        "High potential risk in certain areas.",
-      ],
-      recommendations: [
-        "Conduct DPIA for missing critical fields.",
-        "Increase audits to ensure compliance.",
-        "Populate missing fields in data lists.",
-      ],
+      highlights: riskHighlights[data.overallRiskLevel] || [],
+      recommendations: riskRecommendations[data.overallRiskLevel] || [],
       inputs: [
         {
           name: "Process Personal Data",
@@ -206,7 +247,6 @@ export const getRiskAnalysis = async (req, res) => {
           value: data.isoStatus,
           riskStatus: data.isoStatus === 'Yes' ? 'Low' : 'Medium',
         },
-        
         ...[
           {
             list: data.selectedBackgroundChecks,

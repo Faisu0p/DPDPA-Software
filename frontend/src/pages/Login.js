@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import dpLogo from '../components/pdfPages/images/dp-logo.jpg';
 import {
   TextField,
   Button,
@@ -131,7 +132,7 @@ const Login = ({ setAuthToken }) => {
         {/* Logo */}
         <Box mb={4} sx={{ display: 'flex', justifyContent: 'center' }}>
           <img
-            src='/assets/DPDPA_logo.png'
+            src={dpLogo}
             alt='DPDPA Logo'
             style={{ width: '60%', maxWidth: '220px' }}
           />
