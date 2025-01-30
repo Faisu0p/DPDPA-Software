@@ -50,55 +50,10 @@ const RiskAnalysisPQ = () => {
     { name: 'Low Risk', value: riskLevel === 'Low' ? 100 : 0 },
     { name: 'Medium Risk', value: riskLevel === 'Medium' ? 100 : 0 },
     { name: 'High Risk', value: riskLevel === 'High' ? 100 : 0 },
+    { name: 'Critical Risk', value: riskLevel === 'Critical' ? 100 : 0 },
   ];
 
-  const COLORS = ['#008000', '#FFA500', '#FF0000']; // Green for Low, Orange for Medium, Red for High
-
-  // const handleDownloadPDF = async () => {
-  //   const element1 = document.querySelector("#page1");
-  //   const element2 = document.querySelector("#page2");
-  //   const element3 = document.querySelector("#page3");
-  //   const element4 = document.querySelector("#page4");
-  //   const element5 = document.querySelector("#page5");
-  
-  //   const pdf = new jsPDF('p', 'mm', 'a4');  // Create a new PDF
-  
-  //   // Capture Page 1 and add to PDF
-  //   const canvas1 = await html2canvas(element1, { scale: 2 });
-  //   const imgData1 = canvas1.toDataURL('image/png');
-  //   const pdfWidth = pdf.internal.pageSize.getWidth();
-  //   const pdfHeight = pdf.internal.pageSize.getHeight();
-  //   pdf.addImage(imgData1, 'PNG', 0, 0, pdfWidth, pdfHeight);
-  
-  //   // Add new page for Page 2
-  //   pdf.addPage();
-  //   const canvas2 = await html2canvas(element2, { scale: 2 });
-  //   const imgData2 = canvas2.toDataURL('image/png');
-  //   pdf.addImage(imgData2, 'PNG', 0, 0, pdfWidth, pdfHeight);
-  
-  //   // Add new page for Page 3
-  //   pdf.addPage();
-  //   const canvas3 = await html2canvas(element3, { scale: 2 });
-  //   const imgData3 = canvas3.toDataURL('image/png');
-  //   pdf.addImage(imgData3, 'PNG', 0, 0, pdfWidth, pdfHeight);
-  
-  //   // Add new page for Page 4
-  //   pdf.addPage();
-  //   const canvas4 = await html2canvas(element4, { scale: 2 });
-  //   const imgData4 = canvas4.toDataURL('image/png');
-  //   pdf.addImage(imgData4, 'PNG', 0, 0, pdfWidth, pdfHeight);
-  
-  //   // Add new page for Page 5
-  //   pdf.addPage();
-  //   const canvas5 = await html2canvas(element5, { scale: 2 });
-  //   const imgData5 = canvas5.toDataURL('image/png');
-  //   pdf.addImage(imgData5, 'PNG', 0, 0, pdfWidth, pdfHeight);
-  
-  //   // Save the PDF
-  //   pdf.save('MultiPageRiskReport.pdf');
-  // };
-  
-  
+  const COLORS = ['#008000', '#FFA500', '#FF0000', '#800080']; // Green for Low, Orange for Medium, Red for High
 
 
   const handleDownloadPDF = async () => {
@@ -120,7 +75,7 @@ const RiskAnalysisPQ = () => {
       await capturePage(element);
     }
   
-    pdf.save('MultiPageRiskReport.pdf');
+    pdf.save('Preliminary-Risk-Report.pdf');
   };
   
 
@@ -169,12 +124,14 @@ const RiskAnalysisPQ = () => {
                 {riskLevel === 'Low' && <CheckCircle color="success" fontSize="large" />}
                 {riskLevel === 'Medium' && <Warning color="warning" fontSize="large" />}
                 {riskLevel === 'High' && <Error color="error" fontSize="large" />}
+                {riskLevel === 'Critical' && <Error color="error" fontSize="large" />}
                 <Typography variant="h5" sx={{ marginTop: 2 }}>
                   Risk Level: {riskLevel}
                 </Typography>
                 {riskLevel === 'Low' && <Typography color="green">✅ Low Risk</Typography>}
                 {riskLevel === 'Medium' && <Typography color="orange">⚠️ Medium Risk</Typography>}
                 {riskLevel === 'High' && <Typography color="red">❗ High Risk</Typography>}
+                {riskLevel === 'Critical' && <Typography color="purple">⚠️ Critical Risk</Typography>}
               </Box>
             </Grid>
 
@@ -235,6 +192,17 @@ const RiskAnalysisPQ = () => {
                 </CardContent>
               </Card>
             </Grid>
+
+            <Grid item xs={12} md={3}>
+              <Card variant="outlined" sx={{ backgroundColor: '#F3E5F5' }}>
+                <CardContent>
+                  <Typography variant="h6">Critical Risk</Typography>
+                  <Typography variant="body1">Severe issues detected. Immediate action is critical!</Typography>
+                  <LinearProgress variant="determinate" value={riskLevel === 'Critical' ? 100 : 0} sx={{ marginTop: 2 }} />
+                </CardContent>
+              </Card>
+            </Grid>
+
           </Grid>
         </Box>
       </Paper>

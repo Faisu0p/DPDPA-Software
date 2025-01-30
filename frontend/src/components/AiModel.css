@@ -1,80 +1,139 @@
-/* ai-model.css */
-
-/* Container for the entire AI Model page */
+/* General Container Styling */
 .ai-model-container {
-    font-family: Arial, sans-serif;
+  background-color: #f4f7fc;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 700px;
+  margin: 30px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header and Description */
+.ai-model-header {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.ai-model-description {
+  font-size: 1.1rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Section Titles */
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* File Input Styling */
+.ai-model-file-input {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  margin: 20px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.ai-model-file-input:hover {
+  border-color: #28a745;
+}
+
+/* Button Styling */
+.ai-model-upload-button {
+  display: inline-block;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  width: 100%;
+  text-align: center;
+}
+
+.ai-model-upload-button:hover {
+  background-color: #218838;
+}
+
+.ai-model-upload-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Uploaded Files List Styling */
+.ai-model-uploaded-files {
+  margin-top: 30px;
+}
+
+.ai-model-uploaded-files ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.ai-model-uploaded-files li {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.ai-model-uploaded-files li:last-child {
+  margin-bottom: 0;
+}
+
+/* Prediction Result */
+.ai-model-prediction-result {
+  margin-top: 30px;
+  background-color: #e9ecef;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.ai-model-prediction-result p {
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Loading State */
+.ai-model-upload-button:disabled, .ai-model-file-input:disabled {
+  opacity: 0.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ai-model-container {
     padding: 20px;
-    background-color: #f9f9f9;
   }
-  
-  /* Heading styles */
+
   .ai-model-header {
     font-size: 2rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
   }
-  
-  /* Paragraph for introductory text */
+
   .ai-model-description {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 20px;
-  }
-  
-  /* File input styles */
-  .ai-model-file-input {
-    margin-bottom: 15px;
-    padding: 10px;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
   }
-  
-  .ai-model-file-input:focus {
-    outline: none;
-    border-color: #007bff;
-  }
-  
-  /* Button style for uploading files */
+
   .ai-model-upload-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
     font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
   }
-  
-  .ai-model-upload-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Uploaded files list */
-  .ai-model-uploaded-files {
-    margin-top: 30px;
-  }
-  
-  .ai-model-uploaded-files h2 {
-    font-size: 1.5rem;
-    color: #333;
-  }
-  
-  .ai-model-uploaded-files ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .ai-model-uploaded-files li {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 8px;
-  }
-  
-  .ai-model-uploaded-files p {
-    font-size: 1rem;
-    color: #777;
-  }
-  
+}

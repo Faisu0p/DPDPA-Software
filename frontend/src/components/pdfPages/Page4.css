@@ -61,6 +61,7 @@
 .pdf-page4-risk-level {
     font-size: 1.8rem;
     font-weight: bold;
+    text-align: left;
 }
 
 .pdf-page4-risk-score,

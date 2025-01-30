@@ -7,6 +7,9 @@ node_modules/
 # uploading folder
 /uploads
 
+# AI model files
+/Ai-Model-Files
+
 # Environment files
 .env
 .env.local
@@ -31,3 +34,5 @@ Thumbs.db
 
 # Coverage reports
 coverage/
+
+
