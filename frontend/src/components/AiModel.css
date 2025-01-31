@@ -1,4 +1,4 @@
-/* General Container Styling */
+/* General Styling */
 .ai-model-container {
   background-color: #f4f7fc;
   padding: 30px;
@@ -24,36 +24,30 @@
   margin-bottom: 30px;
 }
 
-/* Section Titles */
-h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 10px;
+/* Section Styling */
+.ai-model-section {
   text-align: center;
+  margin-bottom: 20px;
 }
 
-/* File Input Styling */
+/* File Input */
 .ai-model-file-input {
-  display: block;
   width: 100%;
   padding: 12px;
   font-size: 1rem;
-  margin: 20px 0;
+  margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #fff;
   cursor: pointer;
-  transition: 0.3s ease-in-out;
 }
 
 .ai-model-file-input:hover {
   border-color: #28a745;
 }
 
-/* Button Styling */
+/* Buttons */
 .ai-model-upload-button {
-  display: inline-block;
   padding: 12px 25px;
   font-size: 1.1rem;
   font-weight: bold;
@@ -62,9 +56,9 @@ h2 {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s;
   width: 100%;
-  text-align: center;
+  margin-top: 10px;
 }
 
 .ai-model-upload-button:hover {
@@ -76,9 +70,10 @@ h2 {
   cursor: not-allowed;
 }
 
-/* Uploaded Files List Styling */
+/* Uploaded Files */
 .ai-model-uploaded-files {
-  margin-top: 30px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .ai-model-uploaded-files ul {
@@ -92,11 +87,12 @@ h2 {
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 8px;
-  text-align: center;
 }
 
-.ai-model-uploaded-files li:last-child {
-  margin-bottom: 0;
+/* Placeholder Message */
+.ai-model-placeholder {
+  color: #777;
+  font-style: italic;
 }
 
 /* Prediction Result */
@@ -112,11 +108,6 @@ h2 {
   font-size: 1.2rem;
   color: #333;
   font-weight: bold;
-}
-
-/* Loading State */
-.ai-model-upload-button:disabled, .ai-model-file-input:disabled {
-  opacity: 0.6;
 }
 
 /* Responsive Design */
