@@ -1,84 +1,131 @@
-/* Policies Page Styles */
 .policy-page-container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f9fafb;
-    padding: 16px;
+  padding: 40px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.policy-page-title {
+  font-size: 2.5em;
+  margin-bottom: 30px; /* Increased margin to create more space */
+  font-weight: bold;
+  color: #333;
+}
+
+.policy-page-description {
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 40px;
+  line-height: 1.5;
+  max-width: 800px;
+}
+
+.policy-page-dropdown-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.policy-page-dropdown {
+  width: 45%;
+}
+
+.policy-page-select {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+.policy-page-select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.policy-page-list-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.policy-page-list {
+  width: 80%; /* Increased width to 80% for a wider layout */
+  padding: 25px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px; /* Increased gap for better separation */
+}
+
+.policy-page-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  text-align: left; /* Left-align text */
+}
+
+.policy-page-list-item:hover {
+  background-color: #eef2f7;
+  transform: translateY(-5px);
+}
+
+.policy-page-list-heading {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+  flex-grow: 1;
+  text-align: left; /* Ensure the heading is left-aligned */
+}
+
+.policy-page-view-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.policy-page-view-button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .policy-page-container {
+    padding: 20px;
   }
-  
-  .policy-page-card {
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 24px;
-    max-width: 600px;
+
+  .policy-page-title {
+    font-size: 2em;
+  }
+
+  .policy-page-dropdown-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .policy-page-dropdown {
     width: 100%;
   }
-  
-  .policy-page-title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #333333;
-    text-align: center;
-    margin-bottom: 24px;
-  }
-  
-  .policy-page-dropdown-section {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .policy-page-dropdown {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .policy-page-label {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #555555;
-    margin-bottom: 8px;
-  }
-  
-  .policy-page-select {
-    padding: 8px 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 1rem;
-    color: #333333;
-    outline: none;
-    transition: border-color 0.3s;
-  }
-  
-  .policy-page-select:focus {
-    border-color: #3b82f6;
-  }
-  
-  .policy-page-display {
-    margin-top: 24px;
-    background-color: #f3f4f6;
-    padding: 16px;
-    border-radius: 8px;
-  }
-  
-  .policy-page-display-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #333333;
-  }
-  
+
   .policy-page-list {
-    list-style-type: disc;
-    padding-left: 20px;
-    margin-top: 12px;
+    width: 100%;
   }
-  
-  .policy-page-list-item {
-    font-size: 1rem;
-    color: #555555;
-    margin-bottom: 8px;
-  }
-  
+}
