@@ -46,8 +46,7 @@ import preliminaryQuestionsRoutes from './routes/preliminaryQRoute.js'; // Impor
 import PdfPagesRoute from './routes/PdfPagesRoutes.js'; // Import the company form routes
 
 
-// Import the training routes
-import AitrainingRoutes from './routes/AitrainingRoutes.js';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -104,8 +103,7 @@ app.use('/api/v1/pdf-pages/', PdfPagesRoute); // Add this line to handle company
 
 
 
-// Use the training routes for training and prediction tasks
-app.use('/api/train', AitrainingRoutes);  // Add this line to use the training routes
+
 
 app.get('/:filename', async (req, res) => {
   const { filename } = req.params;

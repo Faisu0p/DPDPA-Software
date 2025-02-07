@@ -1,130 +1,105 @@
-/* General Styling */
+/* AI Model - Modern & Fancy Styling */
 .ai-model-container {
-  background-color: #f4f7fc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 30px;
-  border-radius: 10px;
-  max-width: 700px;
-  margin: 30px auto;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  margin: 50px auto;
+  color: #333;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
 }
 
-/* Header and Description */
-.ai-model-header {
-  font-size: 2.5rem;
+.ai-model-heading {
+  font-size: 28px;
   font-weight: bold;
-  color: #333;
-  text-align: center;
-  margin-bottom: 15px;
+  color: #007bff;
 }
 
 .ai-model-description {
-  font-size: 1.1rem;
+  font-size: 14px;
+  margin-top: 5px;
   color: #555;
-  text-align: center;
-  margin-bottom: 30px;
+  padding: 0 20px;
 }
 
-/* Section Styling */
-.ai-model-section {
-  text-align: center;
-  margin-bottom: 20px;
+.ai-model-feature-card {
+  background: #f4f9ff;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 15px 0;
+  box-shadow: 0px 4px 8px rgba(0, 123, 255, 0.2);
 }
 
-/* File Input */
+.ai-model-feature-card h3 {
+  font-size: 18px;
+  margin: 0;
+  color: #0056b3;
+}
+
+.ai-model-feature-card p {
+  font-size: 14px;
+  color: #444;
+}
+
+.ai-model-upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 15px;
+}
+
 .ai-model-file-input {
   width: 100%;
-  padding: 12px;
-  font-size: 1rem;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
+  padding: 10px;
+  border: 2px dashed #007bff;
+  border-radius: 8px;
+  background: #f9f9f9;
+  font-size: 14px;
+  outline: none;
   cursor: pointer;
+  transition: border-color 0.3s ease;
 }
 
 .ai-model-file-input:hover {
-  border-color: #28a745;
+  border-color: #0056b3;
 }
 
-/* Buttons */
-.ai-model-upload-button {
-  padding: 12px 25px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  background-color: #28a745;
+.ai-model-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #007bff;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  width: 100%;
-  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.ai-model-upload-button:hover {
-  background-color: #218838;
+.ai-model-button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
 }
 
-.ai-model-upload-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-/* Uploaded Files */
-.ai-model-uploaded-files {
-  text-align: center;
+.ai-model-result-box {
   margin-top: 20px;
-}
-
-.ai-model-uploaded-files ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.ai-model-uploaded-files li {
-  background-color: #f8f9fa;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 8px;
-}
-
-/* Placeholder Message */
-.ai-model-placeholder {
-  color: #777;
-  font-style: italic;
-}
-
-/* Prediction Result */
-.ai-model-prediction-result {
-  margin-top: 30px;
-  background-color: #e9ecef;
-  padding: 20px;
+  padding: 12px;
+  background: #e6f7ff;
   border-radius: 8px;
-  text-align: center;
+  box-shadow: 0px 3px 10px rgba(0, 123, 255, 0.2);
 }
 
-.ai-model-prediction-result p {
-  font-size: 1.2rem;
-  color: #333;
-  font-weight: bold;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .ai-model-container {
-    padding: 20px;
-  }
-
-  .ai-model-header {
-    font-size: 2rem;
-  }
-
-  .ai-model-description {
-    font-size: 1rem;
-  }
-
-  .ai-model-upload-button {
-    font-size: 1rem;
-  }
+.ai-model-result-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #007bff;
 }
