@@ -27,3 +27,6 @@ Thumbs.db
 
 # Coverage reports
 coverage/
+
+
+backend/ai_model/best_model.h5
