@@ -42,6 +42,8 @@ import RiskAnalysisPagePQ from './pages/RiskAnalysisPagePQ.js';
 
 import Policies from './pages/Policies.js';
 
+import MasterImages from './pages/MasterImages.js';
+
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem('token');
   return token ? children : <Navigate to='/login' />;
@@ -237,6 +239,29 @@ const App = () => {
             </MiscLayout>
           }
         />
+
+
+
+<Route
+          path='/master-images'
+          element={
+            <MiscLayout
+              authToken={authToken}
+              error={error}
+              handleLogout={handleLogout}
+              handleSidebarClick={handleSidebarClick}
+              selectedItem={selectedItem}
+              user={user}
+            >
+              <PrivateRoute>
+                <MasterImages />
+              </PrivateRoute>
+            </MiscLayout>
+          }
+        />
+
+
+
 
         <Route
           path='/risk-page-pq'

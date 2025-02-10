@@ -21,6 +21,14 @@ import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
 import PolicyIcon from '@mui/icons-material/Policy';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 
+
+//Settings 
+import SettingsIcon from "@mui/icons-material/Settings";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import Collapse from "@mui/material/Collapse";
+
+
 import {
   Box,
   Drawer,
@@ -54,6 +62,20 @@ const Sidebar = ({ onSelect }) => {
   const hasAccess = (rolesAllowed) => {
     return rolesAllowed.includes(user?.role);
   };
+
+
+
+
+//Settings 
+const [settingsOpen, setSettingsOpen] = useState(false);
+const toggleSettings = () => {
+  setSettingsOpen(!settingsOpen);
+};
+
+
+
+
+
 
   return (
     <Drawer
@@ -181,6 +203,10 @@ const Sidebar = ({ onSelect }) => {
   {open && <ListItemText primary='Policies' sx={{ color: 'white' }} />}
 </ListItem>
 )}
+
+
+
+
 
 
           {hasAccess(['Compliance Team', 'Executive', 'IT Team']) && (
@@ -361,6 +387,41 @@ const Sidebar = ({ onSelect }) => {
               )}
             </ListItem>
           )}
+
+
+
+
+          {/* Settings Page */}
+
+{hasAccess(["External Auditor"]) && (
+  <>
+    <ListItemButton onClick={toggleSettings}>
+      <ListItemIcon><SettingsIcon /></ListItemIcon>
+      {open && <ListItemText primary="Settings" />}
+      {settingsOpen ? <ExpandLess /> : <ExpandMore />}
+    </ListItemButton>
+
+    <Collapse in={settingsOpen} timeout="auto" unmountOnExit>
+      <List component="div" disablePadding>
+        <ListItemButton component={Link} to="/master-images" sx={{ pl: 4 }}>
+          
+
+        <ListItemIcon>
+    <PolicyIcon sx={{ color: 'white' }} /> 
+  </ListItemIcon>
+
+
+          {open && <ListItemText primary="Master Images" />}
+        </ListItemButton>
+      </List>
+    </Collapse>
+  </>
+)}
+
+
+
+
+
 
           {hasAccess(['Admin', 'Compliance Team']) && (
             <>
