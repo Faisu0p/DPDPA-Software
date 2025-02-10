@@ -529,6 +529,12 @@ const CompletionStatusPage = ({
 
                   {role === 'IT Team' && <TableCell>Upload Evidence</TableCell>}
 
+                  {/* <TableCell>Ai</TableCell>
+                  <TableCell>Master</TableCell> */}
+                  <TableCell>AI Status</TableCell>
+                  {role === 'External Auditor' && <TableCell>Master Image</TableCell>} 
+
+
                   <TableCell>View Evidence </TableCell>
 
                   <TableCell>Actions</TableCell>
@@ -650,6 +656,39 @@ const CompletionStatusPage = ({
                                   checkAssetSelection={checkAssetSelection}
                                 />
                               )}
+
+
+<TableCell>
+  <span
+    style={{
+      display: 'inline-block',
+      width: '12px',
+      height: '12px',
+      backgroundColor: 'red',
+      borderRadius: '50%',
+    }}
+  ></span>
+</TableCell>
+
+
+
+
+{role === 'External Auditor' && (
+  <TableCell>
+    {status.masterImageUrl ? (
+      <img
+        src={status.masterImageUrl}
+        alt="Master Image"
+        style={{ width: '50px', height: '50px', objectFit: 'cover' }}
+      />
+    ) : (
+      'N/A'
+    )}
+  </TableCell>
+)}
+
+
+
 
                               {/* View Evidence Button for IT Team, Auditor, or External Auditor */}
                               {(role === 'IT Team' ||
