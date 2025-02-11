@@ -39,13 +39,10 @@ import assignmentRoutes from './routes/assignmentRoutes.js'; // Import assignmen
 import userAnswerRoutes from './routes/userAnswerRoutes.js'; // Import user answer routes
 
 import swaggerDocs from './swagger.js'; // Import the Swagger setup
-
-
 import preliminaryQuestionsRoutes from './routes/preliminaryQRoute.js'; // Import the preliminary questions route
-
 import PdfPagesRoute from './routes/PdfPagesRoutes.js'; // Import the company form routes
 
-
+import imageRoutes from './routes/imageRoutes.js';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -97,11 +94,11 @@ app.use('/api/assignments', userAnswerRoutes); // Assignment routes
 app.use('/api/user-responses', userResponseRoutes);
 app.use('/api/users', userRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
 app.use('/api/v1/preliminary-questions', preliminaryQuestionsRoutes); // Add this line to handle preliminary questions form submission
 app.use('/api/v1/pdf-pages/', PdfPagesRoute); // Add this line to handle company form data
 
 
+app.use('/api/v1/images', imageRoutes);
 
 
 
