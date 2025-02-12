@@ -43,6 +43,8 @@ import preliminaryQuestionsRoutes from './routes/preliminaryQRoute.js'; // Impor
 import PdfPagesRoute from './routes/PdfPagesRoutes.js'; // Import the company form routes
 
 import imageRoutes from './routes/imageRoutes.js';
+import masterImageRoutes from './routes/masterImageRoutes.js';
+
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -99,6 +101,7 @@ app.use('/api/v1/pdf-pages/', PdfPagesRoute); // Add this line to handle company
 
 
 app.use('/api/v1/images', imageRoutes);
+app.use('/api/v1/master-image', masterImageRoutes);
 
 
 

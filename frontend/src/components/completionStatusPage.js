@@ -46,6 +46,8 @@ import { Button, Tooltip } from '@mui/material';
 import EvidenceUpload from './EvidenceUpload';
 import QueryModal from './EvidenceFeedbackModal';
 
+import MasterImageUpload from './MasterImageUpload';
+
 const CompletionStatusPage = ({
   expandedFamilyId,
   selectedAssetId,
@@ -79,10 +81,19 @@ const CompletionStatusPage = ({
 
   const [showOnlyTasks, setShowOnlyTasks] = useState(false);
 
+
+
+  const [uploadedImages, setUploadedImages] = useState({});
+  const [statuses, setStatuses] = useState([]);
+
+
+  
+
   // Toggle function
   const handleToggleTaskView = () => {
     setShowOnlyTasks(!showOnlyTasks);
   };
+
 
   // Memoize query object to prevent unnecessary re-renders
   const query = useMemo(
@@ -430,6 +441,62 @@ const CompletionStatusPage = ({
     }
   };
 
+ 
+
+
+  const handleMasterImageUpload = async (file, rowId, assetId, actionId, controlId, scopeId, familyId) => {
+    if (!file) return alert("No file selected.");
+  
+    const formData = new FormData();
+    formData.append("masterImage", file);
+    formData.append("rowId", rowId || "");
+    formData.append("assetId", assetId?._id || assetId || "");
+    formData.append("actionId", actionId?._id || actionId || "");
+    formData.append("controlId", controlId?._id || controlId || "");
+    formData.append("scopeId", scopeId?._id || scopeId || "");
+    formData.append("familyId", familyId?._id || familyId || "");
+  
+    console.log("🔍 Uploading FormData:", Object.fromEntries(formData));
+  
+    try {
+      const response = await fetch("http://localhost:8021/api/v1/master-image/upload-master-image", {
+        method: "POST",
+        body: formData,
+      });
+  
+      const responseData = await response.json();
+      console.log("📩 Upload Response:", responseData);
+  
+      if (response.ok) {
+        alert("✅ Master Image uploaded successfully!");
+  
+        const masterImage = responseData.masterImage;
+        if (masterImage && masterImage._id) {
+          const imageUrl = `http://localhost:8021${masterImage.fileUrl}`;
+          
+          // ✅ Store in localStorage so it persists after refresh
+          localStorage.setItem(`masterImage-${rowId}`, imageUrl);
+  
+          // ✅ Update state
+          setUploadedImages((prevImages) => ({
+            ...prevImages,
+            [rowId]: imageUrl,
+          }));
+        } else {
+          console.warn("⚠️ No master image ID returned.");
+        }
+      } else {
+        alert(`❌ Upload failed: ${responseData.error || "Unknown error"}`);
+      }
+    } catch (error) {
+      console.error("❌ Upload Error:", error);
+      alert("❌ Error uploading file.");
+    }
+  };
+  
+  
+  
+  
   return (
     <div style={{ padding: '20px' }}>
       <Button
@@ -533,6 +600,7 @@ const CompletionStatusPage = ({
                   <TableCell>Master</TableCell> */}
                   <TableCell>AI Status</TableCell>
                   {role === 'External Auditor' && <TableCell>Master Image</TableCell>} 
+                  {role === 'External Auditor' && <TableCell>View Master Image</TableCell>}
 
 
                   <TableCell>View Evidence </TableCell>
@@ -671,23 +739,51 @@ const CompletionStatusPage = ({
 </TableCell>
 
 
-
-
 {role === 'External Auditor' && (
   <TableCell>
-    {status.masterImageUrl ? (
-      <img
-        src={status.masterImageUrl}
-        alt="Master Image"
-        style={{ width: '50px', height: '50px', objectFit: 'cover' }}
-      />
-    ) : (
-      'N/A'
-    )}
+    <input
+      type="file"
+      id={`master-image-${status._id}`}
+      accept="image/*"
+      style={{ display: "none" }}
+      onChange={(event) =>
+        handleMasterImageUpload(
+          event.target.files[0],
+          status._id,
+          status.assetId,
+          status.actionId,
+          status.controlId,
+          status.scopeId,
+          status.familyId
+        )
+      }
+      disabled={!!uploadedImages[status._id]} // Disable input if image is uploaded
+    />
+    <label htmlFor={`master-image-${status._id}`}>
+      <Button
+        variant="contained"
+        component="span"
+        color="primary"
+        disabled={!!uploadedImages[status._id]} // Grey out if image exists
+      >
+        {uploadedImages[status._id] ? "Uploaded" : "Upload Master Image"}
+      </Button>
+    </label>
   </TableCell>
 )}
 
 
+{role === 'External Auditor' && (
+  <TableCell>
+    {uploadedImages[status._id] ? (
+      <a href={uploadedImages[status._id]} target="_blank" rel="noopener noreferrer">
+        <i className="fas fa-eye" style={{ cursor: "pointer", color: "#007bff", fontSize: "18px" }}></i>
+      </a>
+    ) : (
+      <i className="fas fa-eye-slash" style={{ color: "#ccc", fontSize: "18px" }}></i>
+    )}
+  </TableCell>
+)}
 
 
                               {/* View Evidence Button for IT Team, Auditor, or External Auditor */}
@@ -713,6 +809,10 @@ const CompletionStatusPage = ({
                                   </Tooltip>{' '}
                                 </TableCell>
                               )}
+
+
+
+
                               {(role === 'Compliance Team' ||
                                 role === 'Admin') && (
                                 <Tooltip title='Delegate to IT'>
