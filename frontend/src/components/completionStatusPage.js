@@ -494,6 +494,34 @@ const CompletionStatusPage = ({
       alert("❌ Error uploading file.");
     }
   };
+
+
+  //AI
+  const handleCompareImages = async (actionId, controlId) => {
+    try {
+      const response = await fetch(`/api/compare-images/${actionId}/${controlId}`, {
+        method: 'POST',
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        alert(`AI Comparison Completed! Similarity Score: ${data.aiResponse.similarityScore}`);
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      console.error('Error comparing images:', error);
+    }
+  };
+  
+
+  const getColor = (score) => {
+    if (score >= 95) return 'darkgreen'; // 🟢🟢 95%+
+    if (score >= 81) return 'green'; // 🟢 81-95%
+    if (score >= 61) return 'orange'; // 🟠 61-80%
+    return 'red'; // 🔴 <60%
+  };
+  
   
   
   
@@ -727,7 +755,7 @@ const CompletionStatusPage = ({
                               )}
 
 
-<TableCell>
+{/* <TableCell>
   <span
     style={{
       display: 'inline-block',
@@ -737,7 +765,28 @@ const CompletionStatusPage = ({
       borderRadius: '50%',
     }}
   ></span>
+</TableCell> */}
+
+<TableCell>
+  <Button 
+    variant="contained" 
+    color="primary" 
+    onClick={() => handleCompareImages(status.actionId, status.controlId)}
+  >
+    Compare Images
+  </Button>
+
+  <span
+    style={{
+      display: 'inline-block',
+      width: '12px',
+      height: '12px',
+      backgroundColor: getColor(status.aiStatus), // Color based on similarity score
+      borderRadius: '50%',
+    }}
+  ></span>
 </TableCell>
+
 
 
 {role === 'External Auditor' && (

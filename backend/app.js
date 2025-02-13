@@ -45,6 +45,8 @@ import PdfPagesRoute from './routes/PdfPagesRoutes.js'; // Import the company fo
 import imageRoutes from './routes/imageRoutes.js';
 import masterImageRoutes from './routes/masterImageRoutes.js';
 
+import compareImagesRoute from './routes/compareImages.js';
+
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -102,6 +104,8 @@ app.use('/api/v1/pdf-pages/', PdfPagesRoute); // Add this line to handle company
 
 app.use('/api/v1/images', imageRoutes);
 app.use('/api/v1/master-image', masterImageRoutes);
+
+app.use('/api', compareImagesRoute); 
 
 
 
