@@ -36,19 +36,28 @@ const MasterImageSearch = ({ rowId }) => {
 
   return (
     <div className="p-2">
-      <button
-        onClick={handleSearch}
+
+        <button
+        onClick={() => {
+            if (masterImage) {
+
+            const fullImageUrl = `http://localhost:8021${masterImage.fileUrl}`; // 🔥 Fix Here
+      window.open(fullImageUrl, "_blank");
+
+            }
+        }}
         className={`w-full p-2 text-white rounded-md ${
-          loading
+            loading
             ? "bg-gray-400 cursor-not-allowed"
             : masterImage
             ? "bg-blue-500 hover:bg-blue-600"
             : "bg-gray-300 cursor-not-allowed"
         }`}
         disabled={!masterImage || loading}
-      >
+        >
         {loading ? "Searching..." : "View Image"}
-      </button>
+        </button>
+
 
       {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
 
