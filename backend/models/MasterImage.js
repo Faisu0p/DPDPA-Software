@@ -13,6 +13,7 @@ const MasterImageSchema = new mongoose.Schema({
   username: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
+  statusId: { type: mongoose.Schema.Types.ObjectId, ref: "Status" },
 });
 
 const MasterImage = mongoose.model("MasterImage", MasterImageSchema);

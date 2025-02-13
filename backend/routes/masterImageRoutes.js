@@ -44,6 +44,7 @@ router.post("/upload-master-image", upload.single("masterImage"), async (req, re
     const familyId = req.body.familyId?.toString();
     const scopeId = req.body.scopeId?.toString() || null; // ✅ Now optional
     const username = req.body.username?.toString() || "Unknown";
+    const statusId = req.body.rowId?.toString() || null;
 
     console.log("🔍 Parsed Fields:");
     console.log("Asset ID:", assetId);
@@ -51,6 +52,7 @@ router.post("/upload-master-image", upload.single("masterImage"), async (req, re
     console.log("Control ID:", controlId);
     console.log("Family ID:", familyId);
     console.log("Scope ID (Optional):", scopeId);
+    console.log("Status ID:", statusId);
 
     // ✅ Allow scopeId to be null, but others must be present
     if (!req.file || !assetId || !actionId || !controlId || !familyId) {
@@ -64,6 +66,7 @@ router.post("/upload-master-image", upload.single("masterImage"), async (req, re
       fileSize: req.file.size,
       fileUrl: `/uploads/master-images/${req.file.filename}`,
       assetId,
+      statusId,
       actionId,
       controlId,
       familyId,
@@ -83,25 +86,49 @@ router.post("/upload-master-image", upload.single("masterImage"), async (req, re
 
 
 // Get master image by rowId
-router.get("/get-master-image/:rowId", async (req, res) => {
-  try {
-    const { rowId } = req.params;
+// router.get("/get-master-image/:rowId", async (req, res) => {
+//   try {
+//     const { rowId } = req.params;
 
-    // Validate if rowId is a valid ObjectId
-    if (!mongoose.Types.ObjectId.isValid(rowId)) {
-      return res.status(400).json({ error: "Invalid Row ID format" });
+//     // Validate if rowId is a valid ObjectId
+//     if (!mongoose.Types.ObjectId.isValid(rowId)) {
+//       return res.status(400).json({ error: "Invalid Row ID format" });
+//     }
+
+//     // Find by MongoDB _id field
+//     const statusId = mongoose.Types.ObjectId(rowId);
+//     const masterImage = await MasterImage.findById(statusId);
+
+//     if (!masterImage) {
+//       return res.status(404).json({ error: "Master Image not found" });
+//     }
+
+//     res.status(200).json({ masterImage });
+//   } catch (error) {
+//     console.error("Error fetching master image:", error);
+//     res.status(500).json({ error: "Failed to retrieve master image" });
+//   }
+// });
+
+router.get("/get-by-status/:statusId", async (req, res) => {
+  try {
+    const { statusId } = req.params;
+
+    // Validate if statusId is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(statusId)) {
+      return res.status(400).json({ error: "Invalid Status ID format" });
     }
 
-    // Find by MongoDB _id field
-    const masterImage = await MasterImage.findById(rowId);
+    // Find MasterImage by statusId
+    const masterImage = await MasterImage.findOne({ statusId });
 
     if (!masterImage) {
-      return res.status(404).json({ error: "Master Image not found" });
+      return res.status(404).json({ error: "No Master Image found for this Status ID" });
     }
 
     res.status(200).json({ masterImage });
   } catch (error) {
-    console.error("Error fetching master image:", error);
+    console.error("❌ Error fetching master image:", error);
     res.status(500).json({ error: "Failed to retrieve master image" });
   }
 });

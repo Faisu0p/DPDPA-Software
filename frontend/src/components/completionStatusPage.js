@@ -47,6 +47,7 @@ import EvidenceUpload from './EvidenceUpload';
 import QueryModal from './EvidenceFeedbackModal';
 
 import MasterImageUpload from './MasterImageUpload';
+import MasterImageSearch from './MasterImageSearch';
 
 const CompletionStatusPage = ({
   expandedFamilyId,
@@ -766,7 +767,7 @@ const CompletionStatusPage = ({
         color="primary"
         disabled={!!uploadedImages[status._id]} // Grey out if image exists
       >
-        {uploadedImages[status._id] ? "Uploaded" : "Upload Master Image"}
+        {uploadedImages[status._id] ? "Uploaded" : "Upload"}
       </Button>
     </label>
   </TableCell>
@@ -775,13 +776,8 @@ const CompletionStatusPage = ({
 
 {role === 'External Auditor' && (
   <TableCell>
-    {uploadedImages[status._id] ? (
-      <a href={uploadedImages[status._id]} target="_blank" rel="noopener noreferrer">
-        <i className="fas fa-eye" style={{ cursor: "pointer", color: "#007bff", fontSize: "18px" }}></i>
-      </a>
-    ) : (
-      <i className="fas fa-eye-slash" style={{ color: "#ccc", fontSize: "18px" }}></i>
-    )}
+    {status._id}
+    <MasterImageSearch rowId={status._id} />
   </TableCell>
 )}
 
