@@ -40,10 +40,8 @@ const MasterImageSearch = ({ rowId }) => {
         <button
         onClick={() => {
             if (masterImage) {
-
             const fullImageUrl = `http://localhost:8021${masterImage.fileUrl}`; // 🔥 Fix Here
-      window.open(fullImageUrl, "_blank");
-
+            window.open(fullImageUrl, "_blank");
             }
         }}
         className={`w-full p-2 text-white rounded-md ${
