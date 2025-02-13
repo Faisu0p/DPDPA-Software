@@ -85,31 +85,8 @@ router.post("/upload-master-image", upload.single("masterImage"), async (req, re
 });
 
 
-// Get master image by rowId
-// router.get("/get-master-image/:rowId", async (req, res) => {
-//   try {
-//     const { rowId } = req.params;
 
-//     // Validate if rowId is a valid ObjectId
-//     if (!mongoose.Types.ObjectId.isValid(rowId)) {
-//       return res.status(400).json({ error: "Invalid Row ID format" });
-//     }
-
-//     // Find by MongoDB _id field
-//     const statusId = mongoose.Types.ObjectId(rowId);
-//     const masterImage = await MasterImage.findById(statusId);
-
-//     if (!masterImage) {
-//       return res.status(404).json({ error: "Master Image not found" });
-//     }
-
-//     res.status(200).json({ masterImage });
-//   } catch (error) {
-//     console.error("Error fetching master image:", error);
-//     res.status(500).json({ error: "Failed to retrieve master image" });
-//   }
-// });
-
+// Get master image by statusId
 router.get("/get-by-status/:statusId", async (req, res) => {
   try {
     const { statusId } = req.params;
