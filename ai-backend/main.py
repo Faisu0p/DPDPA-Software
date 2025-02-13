@@ -29,7 +29,7 @@ async def process_image(master_files: list[UploadFile], user_file: UploadFile):
             best_match = i
 
     if best_score < 50:
-        return JSONResponse(content={"message": "❌ No matching master image found!"}, status_code=400)
+        return JSONResponse(content={"message": "❌ No matching master image found!", "color": "🔴 Red"}, status_code=200)
 
     # Text similarity check
     text_similarity = match_text(master_texts[best_match], user_text)
