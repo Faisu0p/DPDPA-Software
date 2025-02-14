@@ -49,6 +49,8 @@ import QueryModal from './EvidenceFeedbackModal';
 import MasterImageUpload from './MasterImageUpload';
 import MasterImageSearch from './MasterImageSearch';
 
+import ImageUpload from './ImageUpload';
+
 const CompletionStatusPage = ({
   expandedFamilyId,
   selectedAssetId,
@@ -768,13 +770,14 @@ const CompletionStatusPage = ({
 </TableCell> */}
 
 <TableCell>
-  <Button 
+  {/* <Button 
     variant="contained" 
     color="primary" 
     onClick={() => handleCompareImages(status.actionId, status.controlId)}
   >
     Compare Images
-  </Button>
+  </Button> */}
+<ImageUpload onUpload={(data) => console.log("AI Response:", data)} />
 
   <span
     style={{
@@ -785,6 +788,10 @@ const CompletionStatusPage = ({
       borderRadius: '50%',
     }}
   ></span>
+
+ actionid -{status.actionId?._id} & controlid -{status.controlId?._id}
+
+
 </TableCell>
 
 
