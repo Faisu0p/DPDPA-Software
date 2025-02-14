@@ -757,20 +757,26 @@ const CompletionStatusPage = ({
 
 
 <TableCell>
+  <ImageUpload
+    statusId={status._id}
+    actionId={status.actionId?._id}
+    controlId={status.controlId?._id}
+    assetId={status.assetId?._id}
+    onUpload={(data) => console.log("AI Response:", data)}
+  />
 
-  <ImageUpload onUpload={(data) => console.log("AI Response:", data)} />
   <span
     style={{
-      display: 'inline-block',
-      width: '12px',
-      height: '12px',
-      backgroundColor: getColor(status.aiStatus), // Color based on similarity score
-      borderRadius: '50%',
+      display: "inline-block",
+      width: "12px",
+      height: "12px",
+      backgroundColor: getColor(status.aiStatus), // AI status color
+      borderRadius: "50%",
     }}
   ></span>
-  statusId -{status._id} actionid -{status.actionId?._id} & controlid -{status.controlId?._id} & assetid -{status.assetId._id}
-
 </TableCell>
+
+
 
 
 
