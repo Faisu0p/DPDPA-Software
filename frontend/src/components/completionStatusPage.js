@@ -764,16 +764,6 @@ const CompletionStatusPage = ({
     assetId={status.assetId?._id}
     onUpload={(data) => console.log("AI Response:", data)}
   />
-
-  <span
-    style={{
-      display: "inline-block",
-      width: "12px",
-      height: "12px",
-      backgroundColor: getColor(status.aiStatus), // AI status color
-      borderRadius: "50%",
-    }}
-  ></span>
 </TableCell>
 
 
