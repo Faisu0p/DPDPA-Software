@@ -523,9 +523,7 @@ const CompletionStatusPage = ({
     if (score >= 61) return 'orange'; // 🟠 61-80%
     return 'red'; // 🔴 <60%
   };
-  
-  
-  
+
   
   
   return (
@@ -757,28 +755,10 @@ const CompletionStatusPage = ({
                               )}
 
 
-{/* <TableCell>
-  <span
-    style={{
-      display: 'inline-block',
-      width: '12px',
-      height: '12px',
-      backgroundColor: 'red',
-      borderRadius: '50%',
-    }}
-  ></span>
-</TableCell> */}
 
 <TableCell>
-  {/* <Button 
-    variant="contained" 
-    color="primary" 
-    onClick={() => handleCompareImages(status.actionId, status.controlId)}
-  >
-    Compare Images
-  </Button> */}
-<ImageUpload onUpload={(data) => console.log("AI Response:", data)} />
 
+  <ImageUpload onUpload={(data) => console.log("AI Response:", data)} />
   <span
     style={{
       display: 'inline-block',
@@ -788,9 +768,7 @@ const CompletionStatusPage = ({
       borderRadius: '50%',
     }}
   ></span>
-
- actionid -{status.actionId?._id} & controlid -{status.controlId?._id}
-
+  statusId -{status._id} actionid -{status.actionId?._id} & controlid -{status.controlId?._id} & assetid -{status.assetId._id}
 
 </TableCell>
 
