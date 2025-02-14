@@ -89,6 +89,8 @@ const CompletionStatusPage = ({
   const [uploadedImages, setUploadedImages] = useState({});
   const [statuses, setStatuses] = useState([]);
 
+  const [usernames, setUsernames] = useState({});
+
 
   
 
@@ -524,6 +526,28 @@ const CompletionStatusPage = ({
     return 'red'; // 🔴 <60%
   };
 
+
+
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch('http://localhost:8021/api/users/all');
+        const users = await response.json();
+  
+        const userMap = users.reduce((acc, user) => {
+          acc[user._id] = user.username;
+          return acc;
+        }, {});
+  
+        setUsernames(userMap);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
+  
+    fetchUsers();
+  }, []);
   
   
   return (
@@ -1075,7 +1099,7 @@ const CompletionStatusPage = ({
                                             <TableCell>
                                               {change.modifiedBy?.username}
                                             </TableCell>
-                                            <TableCell>
+                                            {/* <TableCell>
                                               <ul>
                                                 {Object.entries(
                                                   change.changes
@@ -1088,7 +1112,24 @@ const CompletionStatusPage = ({
                                                   </li>
                                                 ))}
                                               </ul>
-                                            </TableCell>
+                                            </TableCell> */}
+
+<TableCell>
+  <ul>
+    {Object.entries(change.changes).map(([key, value]) => {
+      // Check if value is an ID (e.g., assignedTo or assignedBy)
+      const updatedValue = usernames[value] || value; // Replace ID with username if exists, otherwise keep the value
+      return (
+        <li key={key}>
+          <strong>{toCamelCase(key)}:</strong> {updatedValue}
+        </li>
+      );
+    })}
+  </ul>
+</TableCell>
+
+
+
                                           </TableRow>
                                         ))}
                                     </TableBody>
