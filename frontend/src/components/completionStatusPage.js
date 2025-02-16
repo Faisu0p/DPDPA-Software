@@ -795,7 +795,57 @@ const CompletionStatusPage = ({
 
 
 {role === 'External Auditor' && (
-  <TableCell>
+  // <TableCell>
+  //   <input
+  //     type="file"
+  //     id={`master-image-${status._id}`}
+  //     accept="image/*"
+  //     style={{ display: "none" }}
+  //     onChange={(event) =>
+  //       handleMasterImageUpload(
+  //         event.target.files[0],
+  //         status._id,
+  //         status.assetId,
+  //         status.actionId,
+  //         status.controlId,
+  //         status.scopeId,
+  //         status.familyId
+  //       )
+  //     }
+  //     disabled={!!uploadedImages[status._id]} // Disable input if image is uploaded
+  //   />
+  //   <label htmlFor={`master-image-${status._id}`}>
+  //     <Button
+  //       variant="contained"
+  //       component="span"
+  //       color="primary"
+  //       disabled={!!uploadedImages[status._id]} // Grey out if image exists
+  //     >
+  //       {uploadedImages[status._id] ? "Uploaded" : "Upload"}
+  //     </Button>
+  //   </label>
+  // </TableCell>
+
+
+<TableCell>
+  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+    {/* Dropdown */}
+    <select
+      id={`dropdown-${status._id}`}
+      onChange={(event) => console.log(`Selected: ${event.target.value}`)}
+      style={{ padding: "5px", borderRadius: "4px", border: "1px solid #ccc" }}
+    >
+      <option value="">Select Software</option>
+      <option value="IBM QRadar">IBM QRadar</option>
+      <option value="McAfee">McAfee</option>
+      <option value="BigID">BigID</option>
+      <option value="Didomi">Didomi</option>
+      <option value="Symantec DLP">Symantec DLP</option>
+      <option value="Usercentrics">Usercentrics</option>
+      <option value="RiskRecon">RiskRecon</option>
+    </select>
+
+    {/* File Upload */}
     <input
       type="file"
       id={`master-image-${status._id}`}
@@ -824,7 +874,10 @@ const CompletionStatusPage = ({
         {uploadedImages[status._id] ? "Uploaded" : "Upload"}
       </Button>
     </label>
-  </TableCell>
+  </div>
+</TableCell>
+
+
 )}
 
 
