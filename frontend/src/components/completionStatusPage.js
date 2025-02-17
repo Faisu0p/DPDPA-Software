@@ -883,7 +883,7 @@ const CompletionStatusPage = ({
 
 {role === 'External Auditor' && (
   <TableCell>
-    {status._id}
+    {/* {status._id} */}
     <MasterImageSearch rowId={status._id} />
   </TableCell>
 )}
