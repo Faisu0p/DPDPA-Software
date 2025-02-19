@@ -14,7 +14,8 @@ const userResponseSchema = new mongoose.Schema(
       ref: 'ProductFamily',
     },
     selectedSoftware: {
-      type: mongoose.Schema.Types.Mixed, // Reference to the Software model
+      type: mongoose.Schema.Types.Mixed, // Reference to the Software mode
+      // l
       ref: 'Software',
       default: null, // Can be null if no software is selected
     },

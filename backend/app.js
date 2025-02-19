@@ -51,6 +51,8 @@ import fileRoutes from './routes/files.js';
 
 
 
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -110,7 +112,7 @@ app.use("/api/abc", fileRoutes);
 
 app.use('/api', compareImagesRoute); 
 
-
+// app.use('/api/user-responses', selectedSoftwares); 
 
 
 
